@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Downloads — Creator Cash Blueprint</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Onest:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body { min-height: 100vh; display: flex; flex-direction: column; }
+    .dl-page {
+      flex: 1;
+      padding: 100px 24px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    .dl-orb {
+      position: absolute;
+      top: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 600px; height: 400px;
+      background: radial-gradient(ellipse, rgba(0,245,196,0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .dl-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 660px;
+      margin: 0 auto;
+    }
+    .dl-success-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(0,245,196,0.08);
+      border: 1px solid rgba(0,245,196,0.25);
+      border-radius: 100px;
+      padding: 8px 18px;
+      font-family: var(--f-mono);
+      font-size: 11px;
+      letter-spacing: 2px;
+      color: var(--neon);
+      margin-bottom: 28px;
+    }
+    .dl-success-badge span { width: 8px; height: 8px; background: var(--neon); border-radius: 50%; box-shadow: 0 0 8px var(--neon); }
+    .dl-h1 {
+      font-family: var(--f-display);
+      font-size: clamp(40px, 6vw, 64px);
+      font-weight: 800;
+      letter-spacing: -2px;
+      line-height: 1.05;
+      margin-bottom: 16px;
+    }
+    .dl-sub { font-size: 16px; color: var(--white-50); margin-bottom: 48px; line-height: 1.7; }
+    .dl-cards { display: flex; flex-direction: column; gap: 12px; }
+    .dl-card {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      transition: var(--transition);
+    }
+    .dl-card:hover { border-color: rgba(0,245,196,0.3); }
+    .dl-card-icon {
+      width: 52px; height: 52px;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      flex-shrink: 0;
+    }
+    .dl-card-info { flex: 1; }
+    .dl-card-info .mono { font-family: var(--f-mono); font-size: 10px; letter-spacing: 2px; color: var(--neon); margin-bottom: 4px; }
+    .dl-card-info strong { display: block; font-size: 16px; font-family: var(--f-display); letter-spacing: -0.3px; margin-bottom: 4px; }
+    .dl-card-info span { font-size: 12px; color: var(--white-30); }
+    .btn-dl {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      background: var(--neon-dim);
+      border: 1px solid rgba(0,245,196,0.3);
+      color: var(--neon);
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      font-weight: 700;
+      font-family: var(--f-display);
+      letter-spacing: -0.2px;
+      transition: var(--transition-bounce);
+      flex-shrink: 0;
+    }
+    .btn-dl:hover { background: var(--neon-glow); transform: scale(1.05); }
+    .dl-note {
+      margin-top: 32px;
+      padding: 20px;
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      color: var(--white-30);
+      line-height: 1.7;
+    }
+    .dl-note strong { color: var(--white-80); }
+    .dl-back { margin-top: 32px; font-size: 14px; color: var(--white-30); }
+    .dl-back a { color: var(--neon); transition: var(--transition); }
+    .dl-back a:hover { opacity: 0.8; }
+  </style>
+</head>
+<body>
+  <div class="grain"></div>
+  <nav id="nav" class="scrolled">
+    <div class="nav-inner">
+      <a href="index.html" class="logo">
+        <span class="logo-mark">✦</span>
+        <span>Creator<strong>Cash</strong> Blueprint</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="login.html">My Account</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="dl-page">
+    <div class="dl-orb"></div>
+    <div class="container">
+      <div class="dl-inner">
+        <div class="dl-success-badge">
+          <span></span>
+          PURCHASE CONFIRMED
+        </div>
+        <h1 class="dl-h1">Your PDFs are<br/><span class="grad-text">ready to download.</span></h1>
+        <p class="dl-sub">A copy of your download links has been sent to your email. Click below to download your guides now — they're yours forever.</p>
+
+        <div class="dl-cards">
+
+          <div class="dl-card">
+            <div class="dl-card-icon" style="background:linear-gradient(135deg,#0a1628,#0d2341);">📄</div>
+            <div class="dl-card-info">
+              <div class="mono">PDF GUIDE 01</div>
+              <strong>Faceless Content Starter Blueprint</strong>
+              <span>24 pages · PDF · 3.2 MB</span>
+            </div>
+            <a href="#" class="btn-dl" onclick="simulateDownload(this)">↓ Download</a>
+          </div>
+
+          <div class="dl-card">
+            <div class="dl-card-icon" style="background:linear-gradient(135deg,#0d0a28,#1a0d41);">🚀</div>
+            <div class="dl-card-info">
+              <div class="mono">PDF GUIDE 02</div>
+              <strong>Faceless Growth System</strong>
+              <span>38 pages · PDF · 5.1 MB</span>
+            </div>
+            <a href="#" class="btn-dl" onclick="simulateDownload(this)">↓ Download</a>
+          </div>
+
+          <div class="dl-card">
+            <div class="dl-card-icon" style="background:linear-gradient(135deg,#0a1a0a,#0d2e0a);">💸</div>
+            <div class="dl-card-info">
+              <div class="mono">PDF GUIDE 03</div>
+              <strong>Faceless Automation & Profit Blueprint</strong>
+              <span>52 pages · PDF · 7.4 MB</span>
+            </div>
+            <a href="#" class="btn-dl" onclick="simulateDownload(this)">↓ Download</a>
+          </div>
+
+        </div>
+
+        <div class="dl-note">
+          <strong>Keep these safe.</strong> Your download links are active for 30 days. After that, you can always re-access them by <a href="login.html" style="color:var(--neon)">logging into your account</a>. If you have any issues, email us at <a href="/cdn-cgi/l/email-protection#a5d6d0d5d5cad7d1e5c6d7c0c4d1cad7c6c4d6cdc7c9d0c0d5d7cccbd18bc6cac8" style="color:var(--neon)"><span class="__cf_email__" data-cfemail="80f3f5f0f0eff2f4c0e3f2e5e1f4eff2e3e1f3e8e2ecf5e5f0f2e9eef4aee3efed">[email&#160;protected]</span></a>.
+        </div>
+
+        <p class="dl-back">← <a href="index.html">Back to Creator Cash Blueprint</a></p>
+      </div>
+    </div>
+  </div>
+
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    function simulateDownload(btn) {
+      const orig = btn.innerHTML;
+      btn.innerHTML = '⏳ Preparing...';
+      setTimeout(() => {
+        btn.innerHTML = '✓ Downloaded!';
+        btn.style.color = '#4ade80';
+        btn.style.borderColor = 'rgba(74,222,128,0.3)';
+        setTimeout(() => {
+          btn.innerHTML = orig;
+          btn.sty
