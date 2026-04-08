@@ -772,8 +772,9 @@ img { max-width: 100%; display: block; }
 
 .product-price-row {
   display: flex;
-  align-items: baseline;
-  gap: 10px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
   margin-bottom: 18px;
 }
 
@@ -2184,9 +2185,96 @@ h1, h2, h3, h4, h5 {
   background: rgba(255,255,255,0.04);
   border-radius: 6px;
   border-left: 2px solid var(--red);
+  word-break: break-word;
 }
 .pkg-includes strong {
   color: rgba(255,255,255,0.8);
+}
+
+
+/* ── Mobile fixes ── */
+@media (max-width: 480px) {
+  .modal-box {
+    padding: 24px 20px;
+    border-radius: 12px;
+  }
+  .modal-top h3 { font-size: 18px; }
+  .pay-tab { font-size: 12px; padding: 8px 6px; }
+  .mfield input { padding: 11px 12px; font-size: 14px; }
+  .btn-checkout { padding: 14px; font-size: 14px; }
+  .hero-h1 { letter-spacing: -1px; }
+  .product-card { border-radius: 12px; }
+  .product-cover { height: 180px; }
+  .product-price { font-size: 36px; }
+  .btn-product { font-size: 13px; padding: 11px; }
+  .pkg-includes { font-size: 11px; }
+  .testi-card { padding: 20px 18px; }
+  .why-card { padding: 22px 18px; }
+  .faq-q { padding: 15px 16px; font-size: 14px; }
+  .faq-a p { padding: 0 16px 16px; }
+  .section-h2 { letter-spacing: -0.5px; }
+  .hero-proof { flex-wrap: wrap; }
+  .proof-text { font-size: 13px; }
+  .step-num { font-size: 36px; }
+  .step-body h3 { font-size: 16px; }
+  .modal-wrap { padding: 16px 12px; }
+  .btn-neon { padding: 13px 22px; font-size: 14px; }
+  .btn-neon-xl { padding: 16px 28px; font-size: 15px; }
+  .cta-h2 { letter-spacing: -1px; }
+  .cta-p { font-size: 15px; }
+}
+
+/* ── Extra small (SE, old Android) ── */
+@media (max-width: 360px) {
+  .modal-box { padding: 20px 16px; }
+  .hero-h1 { font-size: 42px; }
+  .nav-inner { padding: 0 16px; }
+  .logo { font-size: 14px; }
+  .hero-tag { display: none; }
+}
+
+
+/* ── Discount / Was-price styling ── */
+.price-stack {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+  flex-wrap: wrap;
+}
+
+.price-was {
+  font-size: 15px;
+  color: rgba(255,255,255,0.3);
+  text-decoration: line-through;
+  font-family: var(--f-mono);
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+.price-badge {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  padding: 3px 9px;
+  border-radius: 100px;
+  background: rgba(255, 80, 80, 0.15);
+  color: #ff6666;
+  border: 1px solid rgba(255, 80, 80, 0.3);
+}
+
+.popular-badge-off {
+  background: rgba(200, 243, 62, 0.12) !important;
+  color: #c8f33e !important;
+  border-color: rgba(200, 243, 62, 0.3) !important;
+}
+
+/* Stack vertically on mobile */
+@media (max-width: 480px) {
+  .price-stack { gap: 6px; }
+  .price-was { font-size: 13px; }
+  .price-badge { font-size: 9px; padding: 2px 7px; }
 }
 
 </style>
@@ -2386,6 +2474,10 @@ h1, h2, h3, h4, h5 {
           </div>
           <div class="product-body">
             <div class="product-price-row">
+              <div class="price-stack">
+                <span class="price-was">$49</span>
+                <span class="price-badge">41% OFF</span>
+              </div>
               <span class="product-price">$29</span>
               <span class="product-pages">28 pages · PDF</span>
             </div>
@@ -2422,6 +2514,10 @@ h1, h2, h3, h4, h5 {
           </div>
           <div class="product-body">
             <div class="product-price-row">
+              <div class="price-stack">
+                <span class="price-was">$97</span>
+                <span class="price-badge">33% OFF</span>
+              </div>
               <span class="product-price">$65</span>
               <span class="product-pages">88 pages · PDF</span>
             </div>
@@ -2458,6 +2554,10 @@ h1, h2, h3, h4, h5 {
           </div>
           <div class="product-body">
             <div class="product-price-row">
+              <div class="price-stack">
+                <span class="price-was">$147</span>
+                <span class="price-badge popular-badge-off">35% OFF</span>
+              </div>
               <span class="product-price neon-price">$95</span>
               <span class="product-pages">188 pages · PDF</span>
             </div>

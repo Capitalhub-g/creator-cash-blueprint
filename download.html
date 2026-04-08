@@ -91,6 +91,51 @@
     .spinner { width: 40px; height: 40px; border: 3px solid rgba(255,0,0,0.2); border-top-color: var(--red); border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 20px; }
     @keyframes spin { to { transform: rotate(360deg); } }
     .loading p { color: var(--white-30); font-family: var(--f-mono); font-size: 12px; letter-spacing: 1px; }
+  
+/* ══════════════════════════════════════════
+   DOWNLOAD PAGE — MOBILE RESPONSIVE
+══════════════════════════════════════════ */
+@media (max-width: 768px) {
+  .dl-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 18px;
+  }
+  .btn-download {
+    width: 100%;
+    justify-content: center;
+    padding: 12px;
+  }
+  .dl-h1 { font-size: 32px; letter-spacing: -1px; }
+  .dl-sub { font-size: 15px; }
+  .package-banner { flex-direction: column; gap: 10px; }
+}
+
+@media (max-width: 480px) {
+  .dl-page { padding: 90px 16px 60px; }
+  .nav-inner { padding: 0 16px; }
+  .logo { font-size: 14px; }
+  .dl-h1 { font-size: 26px; letter-spacing: -0.5px; }
+  .dl-sub { font-size: 14px; }
+  .dl-card { padding: 16px; gap: 12px; }
+  .dl-cover { width: 44px; height: 44px; font-size: 18px; }
+  .dl-info strong { font-size: 14px; }
+  .btn-download { font-size: 12px; padding: 10px; }
+  .dl-note { font-size: 12px; padding: 14px 16px; }
+  .package-banner { padding: 14px 16px; }
+  .package-info strong { font-size: 15px; }
+  .expiry-bar { font-size: 11px; }
+  .success-badge { font-size: 10px; padding: 6px 14px; }
+  .denied-box h1 { font-size: 28px; }
+  .denied-box p { font-size: 14px; }
+}
+
+@media (max-width: 360px) {
+  .dl-h1 { font-size: 24px; }
+  .dl-cover { display: none; }
+}
+
   </style>
 </head>
 <body>
@@ -156,7 +201,7 @@
       <div class="dl-note">
         <strong>Keep these safe.</strong> Your files are available for 30 days via this link.
         If you have any issues, email us at
-        <a href="mailto:support@creatorcashblueprint.com">support@creatorcashblueprint.com</a>
+        <a href="/cdn-cgi/l/email-protection#ee9d9b9e9e819c9aae8d9c8b8f9a819c8d8f9d868c829b8b9e9c87809ac08d8183"><span class="__cf_email__" data-cfemail="f3808683839c8187b390819692879c819092809b919f869683819a9d87dd909c9e">[email&#160;protected]</span></a>
         with your order confirmation.
       </div>
 
@@ -165,7 +210,7 @@
     </div>
   </div>
 
-  <script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
     // ─────────────────────────────────────────────
     // PACKAGE → PDF MAPPING
     // Basic    = PDF 1
@@ -310,18 +355,4 @@
         // TOKEN MODE — production
         if (token && pkg && PACKAGES[pkg]) {
           if (validateToken(token, pkg)) {
-            renderDownloads(pkg);
-          } else {
-            showState('stateDenied');
-          }
-          return;
-        }
-
-        // No valid params
-        showState('stateDenied');
-
-      }, 1200); // brief loading animation
-    });
-  </script>
-</body>
-</html>
+    
