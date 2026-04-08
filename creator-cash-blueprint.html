@@ -2994,24 +2994,40 @@ function switchTab(type, btn) {
   document.getElementById('paypalPane').style.display = type === 'paypal' ? 'block' : 'none';
 }
 
+// Package name → package key mapping
+const PACKAGE_MAP = {
+  'Starter Blueprint':              'basic',
+  'Growth System':                  'medium',
+  'Automation & Profit Blueprint':  'premium',
+  'All 3 Guides Bundle':            'bundle'
+};
+
+// Generate secure download token
+function generateDownloadToken(pkgKey) {
+  const payload = pkgKey + ':' + Date.now() + ':ccb2026';
+  return btoa(payload).replace(/=/g, '');
+}
+
 function processCheckout() {
   const btn = event.currentTarget;
   const orig = btn.innerHTML;
   btn.innerHTML = '<span style="opacity:.6">Processing...</span>';
   btn.disabled = true;
 
+  // Get package from modal subtitle
+  const subtitle = document.getElementById('modal-subtitle');
+  const pkgName = subtitle ? subtitle.textContent.split(' — ')[0].trim() : '';
+  const pkgKey = PACKAGE_MAP[pkgName] || 'basic';
+
   setTimeout(() => {
-    closeCheckout();
     btn.innerHTML = orig;
     btn.disabled = false;
+    closeCheckout();
 
-    const toast = document.getElementById('toast');
-    toast.classList.add('show');
-    setTimeout(() => toast.classList.remove('show'), 4500);
-
-    // Production: redirect to download page
-    // window.location.href = 'download.html';
-  }, 1800);
+    // Generate token and redirect to download page
+    const token = generateDownloadToken(pkgKey);
+    window.location.href = 'download.html?token=' + token + '&pkg=' + pkgKey;
+  }, 2000);
 }
 
 // ── Input formatting ─────────────────────

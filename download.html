@@ -5,189 +5,333 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Your Downloads — Creator Cash Blueprint</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Onest:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
   <style>
-    body { min-height: 100vh; display: flex; flex-direction: column; }
-    .dl-page {
-      flex: 1;
-      padding: 100px 24px 80px;
-      position: relative;
-      overflow: hidden;
+    :root {
+      --bg: #080810; --bg-2: #0e0e1a; --bg-3: #13131f;
+      --red: #ff0000; --red-dim: rgba(255,0,0,0.1); --red-glow: rgba(255,0,0,0.25);
+      --border: rgba(255,255,255,0.08); --border-bright: rgba(255,255,255,0.15);
+      --white: #fff; --white-50: rgba(255,255,255,0.5); --white-30: rgba(255,255,255,0.3);
+      --f-display: 'Nunito', sans-serif; --f-body: 'Plus Jakarta Sans', sans-serif; --f-mono: 'Space Mono', monospace;
+      --radius: 14px; --radius-sm: 10px;
     }
-    .dl-orb {
-      position: absolute;
-      top: 0; left: 50%;
-      transform: translateX(-50%);
-      width: 600px; height: 400px;
-      background: radial-gradient(ellipse, rgba(0,245,196,0.07) 0%, transparent 70%);
-      pointer-events: none;
-    }
-    .dl-inner {
-      position: relative;
-      z-index: 1;
-      max-width: 660px;
-      margin: 0 auto;
-    }
-    .dl-success-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(0,245,196,0.08);
-      border: 1px solid rgba(0,245,196,0.25);
-      border-radius: 100px;
-      padding: 8px 18px;
-      font-family: var(--f-mono);
-      font-size: 11px;
-      letter-spacing: 2px;
-      color: var(--neon);
-      margin-bottom: 28px;
-    }
-    .dl-success-badge span { width: 8px; height: 8px; background: var(--neon); border-radius: 50%; box-shadow: 0 0 8px var(--neon); }
-    .dl-h1 {
-      font-family: var(--f-display);
-      font-size: clamp(40px, 6vw, 64px);
-      font-weight: 800;
-      letter-spacing: -2px;
-      line-height: 1.05;
-      margin-bottom: 16px;
-    }
-    .dl-sub { font-size: 16px; color: var(--white-50); margin-bottom: 48px; line-height: 1.7; }
-    .dl-cards { display: flex; flex-direction: column; gap: 12px; }
-    .dl-card {
-      background: var(--bg-2);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 20px 24px;
-      display: flex;
-      align-items: center;
-      gap: 18px;
-      transition: var(--transition);
-    }
-    .dl-card:hover { border-color: rgba(0,245,196,0.3); }
-    .dl-card-icon {
-      width: 52px; height: 52px;
-      border-radius: var(--radius-sm);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 22px;
-      flex-shrink: 0;
-    }
-    .dl-card-info { flex: 1; }
-    .dl-card-info .mono { font-family: var(--f-mono); font-size: 10px; letter-spacing: 2px; color: var(--neon); margin-bottom: 4px; }
-    .dl-card-info strong { display: block; font-size: 16px; font-family: var(--f-display); letter-spacing: -0.3px; margin-bottom: 4px; }
-    .dl-card-info span { font-size: 12px; color: var(--white-30); }
-    .btn-dl {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 20px;
-      background: var(--neon-dim);
-      border: 1px solid rgba(0,245,196,0.3);
-      color: var(--neon);
-      border-radius: var(--radius-sm);
-      font-size: 13px;
-      font-weight: 700;
-      font-family: var(--f-display);
-      letter-spacing: -0.2px;
-      transition: var(--transition-bounce);
-      flex-shrink: 0;
-    }
-    .btn-dl:hover { background: var(--neon-glow); transform: scale(1.05); }
-    .dl-note {
-      margin-top: 32px;
-      padding: 20px;
-      background: var(--bg-2);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      font-size: 13px;
-      color: var(--white-30);
-      line-height: 1.7;
-    }
-    .dl-note strong { color: var(--white-80); }
-    .dl-back { margin-top: 32px; font-size: 14px; color: var(--white-30); }
-    .dl-back a { color: var(--neon); transition: var(--transition); }
-    .dl-back a:hover { opacity: 0.8; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: var(--f-body); background: var(--bg); color: var(--white); min-height: 100vh; font-weight: 500; }
+
+    /* NAV */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(8,8,16,0.95); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); }
+    .nav-inner { max-width: 900px; margin: 0 auto; padding: 0 24px; height: 60px; display: flex; align-items: center; justify-content: space-between; }
+    .logo { display: flex; align-items: center; gap: 8px; font-family: var(--f-display); font-size: 16px; font-weight: 800; text-decoration: none; color: var(--white); }
+    .logo-mark { color: var(--red); font-size: 18px; }
+    .logo strong { color: var(--red); }
+    .nav-badge { font-family: var(--f-mono); font-size: 10px; letter-spacing: 1.5px; background: rgba(255,0,0,0.1); color: #ff6666; border: 1px solid rgba(255,0,0,0.25); padding: 4px 10px; border-radius: 100px; }
+
+    /* PAGE */
+    .page { max-width: 760px; margin: 0 auto; padding: 100px 24px 80px; }
+
+    /* STATES */
+    .state { display: none; }
+    .state.active { display: block; }
+
+    /* ACCESS DENIED */
+    .denied-box { text-align: center; padding: 80px 24px; }
+    .denied-icon { font-size: 56px; margin-bottom: 20px; }
+    .denied-box h1 { font-family: var(--f-display); font-size: 36px; font-weight: 900; margin-bottom: 12px; }
+    .denied-box p { color: var(--white-50); font-size: 16px; margin-bottom: 32px; line-height: 1.7; }
+    .btn-red { display: inline-flex; align-items: center; gap: 8px; background: var(--red); color: var(--white); padding: 14px 28px; border-radius: var(--radius-sm); font-weight: 800; font-size: 15px; font-family: var(--f-display); text-decoration: none; transition: 0.2s; }
+    .btn-red:hover { background: #cc0000; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(255,0,0,0.3); }
+
+    /* SUCCESS HEADER */
+    .success-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(0,200,100,0.08); border: 1px solid rgba(0,200,100,0.2); border-radius: 100px; padding: 8px 16px; margin-bottom: 24px; }
+    .success-dot { width: 8px; height: 8px; background: #00c864; border-radius: 50%; box-shadow: 0 0 8px #00c864; animation: pulse 2s ease-in-out infinite; }
+    @keyframes pulse { 0%,100%{opacity:1}50%{opacity:0.4} }
+    .success-badge span { font-family: var(--f-mono); font-size: 11px; letter-spacing: 1.5px; color: #00c864; }
+    .dl-h1 { font-family: var(--f-display); font-size: clamp(32px, 5vw, 48px); font-weight: 900; letter-spacing: -1px; line-height: 1.1; margin-bottom: 12px; }
+    .dl-h1 span { background: linear-gradient(135deg, #ff0000, #ff6b35); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .dl-sub { color: var(--white-50); font-size: 16px; line-height: 1.7; margin-bottom: 40px; }
+
+    /* PACKAGE BADGE */
+    .package-banner { display: flex; align-items: center; gap: 14px; background: linear-gradient(135deg, rgba(255,0,0,0.06), rgba(255,68,0,0.04)); border: 1px solid rgba(255,0,0,0.2); border-radius: var(--radius); padding: 16px 20px; margin-bottom: 32px; }
+    .package-icon { font-size: 28px; flex-shrink: 0; }
+    .package-info strong { display: block; font-family: var(--f-display); font-size: 17px; font-weight: 900; margin-bottom: 3px; }
+    .package-info span { font-size: 12px; color: var(--white-30); font-family: var(--f-mono); letter-spacing: 0.5px; }
+
+    /* DOWNLOAD CARDS */
+    .dl-cards { display: flex; flex-direction: column; gap: 12px; margin-bottom: 32px; }
+    .dl-card { background: var(--bg-2); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px 24px; display: flex; align-items: center; gap: 18px; transition: 0.25s; }
+    .dl-card:hover { border-color: rgba(255,0,0,0.3); transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,0,0,0.4); }
+    .dl-cover { width: 54px; height: 54px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; }
+    .cover-basic { background: linear-gradient(135deg, #0a1628, #0d2341); }
+    .cover-medium { background: linear-gradient(135deg, #0d0a28, #1a0d41); }
+    .cover-premium { background: linear-gradient(135deg, #0a1a0a, #0d2e0a); }
+    .dl-info { flex: 1; }
+    .dl-num { font-family: var(--f-mono); font-size: 10px; letter-spacing: 2px; color: var(--red); margin-bottom: 4px; }
+    .dl-info strong { display: block; font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+    .dl-info span { font-size: 12px; color: var(--white-30); font-family: var(--f-mono); }
+    .btn-download { display: flex; align-items: center; gap: 8px; padding: 10px 20px; background: var(--red-dim); border: 1px solid rgba(255,0,0,0.25); color: #ff6666; border-radius: var(--radius-sm); font-size: 13px; font-weight: 700; font-family: var(--f-display); cursor: pointer; transition: 0.2s; text-decoration: none; white-space: nowrap; flex-shrink: 0; }
+    .btn-download:hover { background: rgba(255,0,0,0.2); transform: scale(1.04); box-shadow: 0 4px 16px rgba(255,0,0,0.2); }
+    .btn-download.downloaded { background: rgba(0,200,100,0.1); border-color: rgba(0,200,100,0.3); color: #00c864; }
+
+    /* NOTE */
+    .dl-note { background: var(--bg-2); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 18px 20px; font-size: 13px; color: var(--white-30); line-height: 1.7; margin-bottom: 24px; }
+    .dl-note strong { color: var(--white-50); }
+    .dl-note a { color: #ff6666; text-decoration: none; }
+    .dl-note a:hover { text-decoration: underline; }
+
+    /* EXPIRY */
+    .expiry-bar { display: flex; align-items: center; gap: 10px; font-size: 12px; color: var(--white-30); font-family: var(--f-mono); margin-bottom: 32px; }
+    .expiry-dot { width: 6px; height: 6px; background: #fbbf24; border-radius: 50%; }
+
+    /* BACK LINK */
+    .back-link { font-size: 14px; color: var(--white-30); text-decoration: none; display: inline-flex; align-items: center; gap: 6px; transition: 0.2s; }
+    .back-link:hover { color: var(--white); }
+
+    /* LOADING */
+    .loading { text-align: center; padding: 100px 24px; }
+    .spinner { width: 40px; height: 40px; border: 3px solid rgba(255,0,0,0.2); border-top-color: var(--red); border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 20px; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .loading p { color: var(--white-30); font-family: var(--f-mono); font-size: 12px; letter-spacing: 1px; }
   </style>
 </head>
 <body>
-  <div class="grain"></div>
-  <nav id="nav" class="scrolled">
+
+  <nav>
     <div class="nav-inner">
       <a href="index.html" class="logo">
-        <span class="logo-mark">✦</span>
+        <span class="logo-mark">▶</span>
         <span>Creator<strong>Cash</strong> Blueprint</span>
       </a>
-      <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="login.html">My Account</a></li>
-      </ul>
+      <div class="nav-badge">DOWNLOAD CENTER</div>
     </div>
   </nav>
 
-  <div class="dl-page">
-    <div class="dl-orb"></div>
-    <div class="container">
-      <div class="dl-inner">
-        <div class="dl-success-badge">
-          <span></span>
-          PURCHASE CONFIRMED
-        </div>
-        <h1 class="dl-h1">Your PDFs are<br/><span class="grad-text">ready to download.</span></h1>
-        <p class="dl-sub">A copy of your download links has been sent to your email. Click below to download your guides now — they're yours forever.</p>
+  <div class="page">
 
-        <div class="dl-cards">
-
-          <div class="dl-card">
-            <div class="dl-card-icon" style="background:linear-gradient(135deg,#0a1628,#0d2341);">📄</div>
-            <div class="dl-card-info">
-              <div class="mono">PDF GUIDE 01</div>
-              <strong>Faceless Content Starter Blueprint</strong>
-              <span>24 pages · PDF · 3.2 MB</span>
-            </div>
-            <a href="#" class="btn-dl" onclick="simulateDownload(this)">↓ Download</a>
-          </div>
-
-          <div class="dl-card">
-            <div class="dl-card-icon" style="background:linear-gradient(135deg,#0d0a28,#1a0d41);">🚀</div>
-            <div class="dl-card-info">
-              <div class="mono">PDF GUIDE 02</div>
-              <strong>Faceless Growth System</strong>
-              <span>38 pages · PDF · 5.1 MB</span>
-            </div>
-            <a href="#" class="btn-dl" onclick="simulateDownload(this)">↓ Download</a>
-          </div>
-
-          <div class="dl-card">
-            <div class="dl-card-icon" style="background:linear-gradient(135deg,#0a1a0a,#0d2e0a);">💸</div>
-            <div class="dl-card-info">
-              <div class="mono">PDF GUIDE 03</div>
-              <strong>Faceless Automation & Profit Blueprint</strong>
-              <span>52 pages · PDF · 7.4 MB</span>
-            </div>
-            <a href="#" class="btn-dl" onclick="simulateDownload(this)">↓ Download</a>
-          </div>
-
-        </div>
-
-        <div class="dl-note">
-          <strong>Keep these safe.</strong> Your download links are active for 30 days. After that, you can always re-access them by <a href="login.html" style="color:var(--neon)">logging into your account</a>. If you have any issues, email us at <a href="/cdn-cgi/l/email-protection#a5d6d0d5d5cad7d1e5c6d7c0c4d1cad7c6c4d6cdc7c9d0c0d5d7cccbd18bc6cac8" style="color:var(--neon)"><span class="__cf_email__" data-cfemail="80f3f5f0f0eff2f4c0e3f2e5e1f4eff2e3e1f3e8e2ecf5e5f0f2e9eef4aee3efed">[email&#160;protected]</span></a>.
-        </div>
-
-        <p class="dl-back">← <a href="index.html">Back to Creator Cash Blueprint</a></p>
+    <!-- LOADING STATE -->
+    <div id="stateLoading" class="state active">
+      <div class="loading">
+        <div class="spinner"></div>
+        <p>VERIFYING YOUR ACCESS...</p>
       </div>
+    </div>
+
+    <!-- ACCESS DENIED STATE -->
+    <div id="stateDenied" class="state">
+      <div class="denied-box">
+        <div class="denied-icon">🔒</div>
+        <h1>Access Denied</h1>
+        <p>This download page requires a valid purchase token.<br />Please complete your purchase to access your PDFs.</p>
+        <a href="index.html#products" class="btn-red">▶ View Packages</a>
+      </div>
+    </div>
+
+    <!-- DOWNLOADS STATE -->
+    <div id="stateDownloads" class="state">
+
+      <div class="success-badge">
+        <span class="success-dot"></span>
+        <span>PAYMENT CONFIRMED</span>
+      </div>
+
+      <h1 class="dl-h1">Your PDFs are ready<br /><span>to download.</span></h1>
+      <p class="dl-sub">A copy of your download links has been sent to your email. Click below to download — they're yours forever.</p>
+
+      <div id="packageBanner" class="package-banner">
+        <div class="package-icon">📦</div>
+        <div class="package-info">
+          <strong id="packageName">Loading...</strong>
+          <span id="packageDetails">Loading package details...</span>
+        </div>
+      </div>
+
+      <div id="dlCards" class="dl-cards">
+        <!-- Dynamically filled by JS -->
+      </div>
+
+      <div class="expiry-bar">
+        <span class="expiry-dot"></span>
+        <span>Download links expire in 30 days. Re-login anytime to re-access.</span>
+      </div>
+
+      <div class="dl-note">
+        <strong>Keep these safe.</strong> Your files are available for 30 days via this link.
+        If you have any issues, email us at
+        <a href="mailto:support@creatorcashblueprint.com">support@creatorcashblueprint.com</a>
+        with your order confirmation.
+      </div>
+
+      <a href="index.html" class="back-link">← Back to Creator Cash Blueprint</a>
+
     </div>
   </div>
 
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-    function simulateDownload(btn) {
-      const orig = btn.innerHTML;
-      btn.innerHTML = '⏳ Preparing...';
+  <script>
+    // ─────────────────────────────────────────────
+    // PACKAGE → PDF MAPPING
+    // Basic    = PDF 1
+    // Medium   = PDF 1 + PDF 2
+    // Premium  = PDF 1 + PDF 2 + PDF 3
+    // Bundle   = PDF 1 + PDF 2 + PDF 3
+    // ─────────────────────────────────────────────
+    const PACKAGES = {
+      'basic': {
+        name: 'Basic Package',
+        price: '$29',
+        icon: '📄',
+        details: 'Basic Package · $29 · 1 PDF guide',
+        pdfs: [
+          { num: 'PDF 01', title: 'Faceless Content Starter Blueprint', pages: '28 pages · PDF · 57 KB', cover: 'cover-basic', icon: '📄', file: 'pdfs/Faceless_YouTube_Basic.pdf', filename: 'Faceless_YouTube_Basic.pdf' }
+        ]
+      },
+      'medium': {
+        name: 'Medium Package',
+        price: '$65',
+        icon: '🚀',
+        details: 'Medium Package · $65 · 2 PDF guides',
+        pdfs: [
+          { num: 'PDF 01', title: 'Faceless Content Starter Blueprint', pages: '28 pages · PDF · 57 KB', cover: 'cover-basic', icon: '📄', file: 'pdfs/Faceless_YouTube_Basic.pdf', filename: 'Faceless_YouTube_Basic.pdf' },
+          { num: 'PDF 02', title: 'Faceless Growth & Monetization System', pages: '60 pages · PDF · 116 KB', cover: 'cover-medium', icon: '🚀', file: 'pdfs/Faceless_YouTube_Medium.pdf', filename: 'Faceless_YouTube_Medium.pdf' }
+        ]
+      },
+      'premium': {
+        name: 'Premium Package',
+        price: '$95',
+        icon: '💸',
+        details: 'Premium Package · $95 · 3 PDF guides',
+        pdfs: [
+          { num: 'PDF 01', title: 'Faceless Content Starter Blueprint', pages: '28 pages · PDF · 57 KB', cover: 'cover-basic', icon: '📄', file: 'pdfs/Faceless_YouTube_Basic.pdf', filename: 'Faceless_YouTube_Basic.pdf' },
+          { num: 'PDF 02', title: 'Faceless Growth & Monetization System', pages: '60 pages · PDF · 116 KB', cover: 'cover-medium', icon: '🚀', file: 'pdfs/Faceless_YouTube_Medium.pdf', filename: 'Faceless_YouTube_Medium.pdf' },
+          { num: 'PDF 03', title: 'Faceless Automation & Profit Blueprint', pages: '100 pages · PDF · 200 KB', cover: 'cover-premium', icon: '💸', file: 'pdfs/Faceless_YouTube_Premium.pdf', filename: 'Faceless_YouTube_Premium.pdf' }
+        ]
+      },
+      'bundle': {
+        name: 'Complete Bundle',
+        price: '$149',
+        icon: '🎯',
+        details: 'Complete Bundle · $149 · All 3 PDF guides',
+        pdfs: [
+          { num: 'PDF 01', title: 'Faceless Content Starter Blueprint', pages: '28 pages · PDF · 57 KB', cover: 'cover-basic', icon: '📄', file: 'pdfs/Faceless_YouTube_Basic.pdf', filename: 'Faceless_YouTube_Basic.pdf' },
+          { num: 'PDF 02', title: 'Faceless Growth & Monetization System', pages: '60 pages · PDF · 116 KB', cover: 'cover-medium', icon: '🚀', file: 'pdfs/Faceless_YouTube_Medium.pdf', filename: 'Faceless_YouTube_Medium.pdf' },
+          { num: 'PDF 03', title: 'Faceless Automation & Profit Blueprint', pages: '100 pages · PDF · 200 KB', cover: 'cover-premium', icon: '💸', file: 'pdfs/Faceless_YouTube_Premium.pdf', filename: 'Faceless_YouTube_Premium.pdf' }
+        ]
+      }
+    };
+
+    // ─────────────────────────────────────────────
+    // TOKEN SYSTEM
+    // Tokens are generated by the payment processor
+    // and passed as URL params: ?token=XXX&pkg=basic
+    // For demo/testing: ?demo=basic|medium|premium|bundle
+    // ─────────────────────────────────────────────
+    function generateToken(pkg, secret) {
+      // Simple token: base64(pkg + timestamp + secret)
+      const payload = pkg + ':' + Date.now() + ':' + secret;
+      return btoa(payload).replace(/=/g, '');
+    }
+
+    function validateToken(token, pkg) {
+      // In production: validate against your backend
+      // For now: check token is not expired (30 days) and matches package
+      try {
+        const decoded = atob(token + '==');
+        const parts = decoded.split(':');
+        if (parts.length < 3) return false;
+        const tokenPkg = parts[0];
+        const timestamp = parseInt(parts[1]);
+        const now = Date.now();
+        const thirtyDays = 30 * 24 * 60 * 60 * 1000;
+        if (tokenPkg !== pkg) return false;
+        if (now - timestamp > thirtyDays) return false;
+        return true;
+      } catch(e) {
+        return false;
+      }
+    }
+
+    function getUrlParams() {
+      const params = new URLSearchParams(window.location.search);
+      return {
+        token: params.get('token'),
+        pkg: params.get('pkg'),
+        demo: params.get('demo')  // for testing
+      };
+    }
+
+    function showState(id) {
+      document.querySelectorAll('.state').forEach(s => s.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+    }
+
+    function renderDownloads(pkgKey) {
+      const pkg = PACKAGES[pkgKey];
+      if (!pkg) { showState('stateDenied'); return; }
+
+      document.getElementById('packageName').textContent = pkg.name + ' — ' + pkg.price;
+      document.getElementById('packageDetails').textContent = pkg.details;
+      document.getElementById('packageBanner').querySelector('.package-icon').textContent = pkg.icon;
+
+      const container = document.getElementById('dlCards');
+      container.innerHTML = '';
+
+      pkg.pdfs.forEach(pdf => {
+        const card = document.createElement('div');
+        card.className = 'dl-card';
+        card.innerHTML = `
+          <div class="dl-cover ${pdf.cover}">${pdf.icon}</div>
+          <div class="dl-info">
+            <div class="dl-num">${pdf.num}</div>
+            <strong>${pdf.title}</strong>
+            <span>${pdf.pages}</span>
+          </div>
+          <a href="${pdf.file}" download="${pdf.filename}" class="btn-download" onclick="markDownloaded(this)">
+            ↓ Download
+          </a>
+        `;
+        container.appendChild(card);
+      });
+
+      showState('stateDownloads');
+    }
+
+    function markDownloaded(btn) {
       setTimeout(() => {
-        btn.innerHTML = '✓ Downloaded!';
-        btn.style.color = '#4ade80';
-        btn.style.borderColor = 'rgba(74,222,128,0.3)';
+        btn.innerHTML = '✓ Downloaded';
+        btn.classList.add('downloaded');
         setTimeout(() => {
-          btn.innerHTML = orig;
-          btn.sty
+          btn.innerHTML = '↓ Download Again';
+          btn.classList.remove('downloaded');
+        }, 3000);
+      }, 800);
+    }
+
+    // ─────────────────────────────────────────────
+    // INIT — check access on page load
+    // ─────────────────────────────────────────────
+    window.addEventListener('DOMContentLoaded', () => {
+      setTimeout(() => {
+        const { token, pkg, demo } = getUrlParams();
+
+        // DEMO MODE — for testing (remove in production)
+        if (demo && PACKAGES[demo]) {
+          renderDownloads(demo);
+          return;
+        }
+
+        // TOKEN MODE — production
+        if (token && pkg && PACKAGES[pkg]) {
+          if (validateToken(token, pkg)) {
+            renderDownloads(pkg);
+          } else {
+            showState('stateDenied');
+          }
+          return;
+        }
+
+        // No valid params
+        showState('stateDenied');
+
+      }, 1200); // brief loading animation
+    });
+  </script>
+</body>
+</html>
