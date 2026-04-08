@@ -2172,6 +2172,23 @@ h1, h2, h3, h4, h5 {
 
 
 
+
+/* Package includes label */
+.pkg-includes {
+  font-size: 12px;
+  color: rgba(255,255,255,0.45);
+  font-family: var(--f-mono);
+  letter-spacing: 0.3px;
+  margin-bottom: 16px;
+  padding: 8px 12px;
+  background: rgba(255,255,255,0.04);
+  border-radius: 6px;
+  border-left: 2px solid var(--red);
+}
+.pkg-includes strong {
+  color: rgba(255,255,255,0.8);
+}
+
 </style>
 </head>
 <body>
@@ -2352,7 +2369,7 @@ h1, h2, h3, h4, h5 {
     <div class="container">
       <div class="section-eyebrow">WHAT YOU GET</div>
       <h2 class="section-h2">Three Guides. <span class="grad-text">One Mission.</span></h2>
-      <p class="section-sub">Pick the guide that matches where you are, or grab all three for the complete system.</p>
+      <p class="section-sub">Pick the guide that matches where you are. Each package builds on the previous one.</p>
 
       <div class="products-grid">
 
@@ -2372,6 +2389,7 @@ h1, h2, h3, h4, h5 {
               <span class="product-price">$29</span>
               <span class="product-pages">28 pages · PDF</span>
             </div>
+            <p class="pkg-includes">Includes: <strong>Basic PDF only</strong></p>
             <ul class="product-list">
               <li>What faceless channels are &amp; how they work</li>
               <li>Choosing a profitable niche (with checklist)</li>
@@ -2405,8 +2423,9 @@ h1, h2, h3, h4, h5 {
           <div class="product-body">
             <div class="product-price-row">
               <span class="product-price">$65</span>
-              <span class="product-pages">60 pages · PDF</span>
+              <span class="product-pages">88 pages · PDF</span>
             </div>
+            <p class="pkg-includes">Includes: <strong>Basic PDF + Medium PDF</strong></p>
             <ul class="product-list">
               <li>Niche research system &amp; competitor analysis</li>
               <li>Script writing &amp; retention frameworks</li>
@@ -2440,9 +2459,11 @@ h1, h2, h3, h4, h5 {
           <div class="product-body">
             <div class="product-price-row">
               <span class="product-price neon-price">$95</span>
-              <span class="product-pages">100 pages · PDF</span>
+              <span class="product-pages">188 pages · PDF</span>
             </div>
+            <p class="pkg-includes">Includes: <strong>All 3 PDFs — Basic, Medium &amp; Premium</strong></p>
             <ul class="product-list">
+              <li>Everything in Basic &amp; Medium included</li>
               <li>Advanced automation workflows</li>
               <li>Scaling strategies</li>
               <li>Monetization expansion methods</li>
@@ -2459,20 +2480,6 @@ h1, h2, h3, h4, h5 {
           </div>
         </div>
 
-      </div>
-
-      <div class="bundle-banner" onclick="openCheckout('All 3 Guides Bundle', 149)">
-        <div class="bundle-left">
-          <span class="bundle-tag">BEST DEAL</span>
-          <strong>Get All 3 Guides Together</strong>
-          <p>Complete stack · 188 pages total · Instant download</p>
-        </div>
-        <div class="bundle-price-area">
-          <span class="bundle-old">$189</span>
-          <span class="bundle-new">$149</span>
-          <span class="bundle-save">Save $40</span>
-        </div>
-        <button class="bundle-btn">Get the Bundle →</button>
       </div>
 
     </div>
@@ -2553,7 +2560,7 @@ h1, h2, h3, h4, h5 {
 
         <div class="testi-card testi-featured" data-aos>
           <div class="testi-stars">★★★★★</div>
-          <p>"Got all 3 guides. The automation blueprint alone made the bundle worth it. I set up a system where I'm posting 3x a week with like 2 hours of work. Making around $400/month from one channel now. Still growing."</p>
+          <p>"I went with the Premium package and it covered everything. I set up a system where I'm posting 3x a week with around 2 hours of work. Making around $400/month from one channel now. Still growing."</p>
           <div class="testi-author">
             <div class="testi-av" style="background:linear-gradient(135deg,#dc2626,#ea580c)">S</div>
             <div>
@@ -2731,7 +2738,7 @@ h1, h2, h3, h4, h5 {
     <div class="container cta-inner">
       <div class="section-eyebrow">START TODAY</div>
       <h2 class="cta-h2">Download Your Blueprint<br/><span class="grad-text">and Start Today.</span></h2>
-      <p class="cta-p">Join 2,400+ creators who already downloaded. No experience needed. No camera needed. Just the guides and the work.</p>
+      <p class="cta-p">Join 2,400+ creators who already downloaded. No experience needed. No camera. Just pick your package and start.</p>
       <a href="#products" class="btn-neon btn-neon-xl">
         Get My PDFs Now
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -2768,7 +2775,6 @@ h1, h2, h3, h4, h5 {
           <a href="#products">Starter Guide · $29</a>
           <a href="#products">Growth &amp; Monetization Guide · $65</a>
           <a href="#products">Automation &amp; Profit Blueprint · $95</a>
-          <a href="#products">Full Bundle · $149</a>
         </div>
         <div class="footer-col">
           <h4>Help</h4>
@@ -3003,8 +3009,7 @@ function switchTab(type, btn) {
 const PACKAGE_MAP = {
   'Starter Blueprint':              'basic',
   'Growth System':                  'medium',
-  'Automation & Profit Blueprint':  'premium',
-  'All 3 Guides Bundle':            'bundle'
+  'Automation & Profit Blueprint':  'premium'
 };
 
 // Generate secure download token
