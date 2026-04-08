@@ -9,7 +9,13 @@
   <meta property="og:title" content="Creator Cash Blueprint — Make Money With Faceless Content" />
   <meta property="og:description" content="3 PDF guides. Instant download. Start building faceless content channels that earn." />
   <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://creatorcashblueprint.com" />
+  <meta property="og:image" content="https://creatorcashblueprint.com/og-image.jpg" />
+  <meta name="twitter:image" content="https://creatorcashblueprint.com/og-image.jpg" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23ff0000'/><polygon points='12,8 26,16 12,24' fill='white'/></svg>" />
   <meta name="twitter:card" content="summary_large_image" />
+  <link rel="canonical" href="https://creatorcashblueprint.com" />
+  <meta name="robots" content="index, follow" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Nunito:wght@400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
@@ -2277,10 +2283,488 @@ h1, h2, h3, h4, h5 {
   .price-badge { font-size: 9px; padding: 2px 7px; }
 }
 
+
+/* ══ Comparison Table ══ */
+.compare-wrap {
+  margin-top: 56px;
+  padding-top: 56px;
+  border-top: 1px solid var(--border);
+}
+.compare-label {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: var(--red);
+  margin-bottom: 10px;
+}
+.compare-title {
+  font-family: var(--f-display);
+  font-size: 26px;
+  font-weight: 900;
+  letter-spacing: -0.5px;
+  margin-bottom: 28px;
+  color: var(--white);
+}
+.compare-table {
+  background: var(--bg-3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  overflow-x: auto;
+}
+.compare-head, .compare-row, .compare-ctas {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  min-width: 520px;
+}
+.compare-head {
+  background: rgba(255,255,255,0.04);
+  border-bottom: 1px solid var(--border);
+  padding: 14px 20px;
+}
+.compare-head .col-feat {
+  font-size: 13px;
+  color: var(--white-30);
+  font-family: var(--f-mono);
+}
+.compare-head .col-pkg {
+  text-align: center;
+  font-family: var(--f-display);
+  font-size: 15px;
+  font-weight: 900;
+  letter-spacing: -0.3px;
+}
+.compare-head .col-pkg span {
+  display: block;
+  font-family: var(--f-mono);
+  font-size: 11px;
+  color: var(--white-30);
+  font-weight: 400;
+  margin-top: 2px;
+}
+.popular-col { color: #c8f33e !important; }
+.compare-row {
+  padding: 12px 20px;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  align-items: center;
+}
+.compare-row:hover { background: rgba(255,255,255,0.02); }
+.col-feat {
+  font-size: 13px;
+  color: var(--white-50);
+  padding-right: 16px;
+}
+.col-pkg {
+  text-align: center;
+  font-size: 15px;
+  font-weight: 700;
+  color: #4ade80;
+}
+.col-pkg.muted { color: rgba(255,255,255,0.15); font-weight: 400; }
+.compare-total {
+  background: rgba(255,255,255,0.03);
+  border-top: 1px solid var(--border) !important;
+}
+.compare-total .col-feat { color: var(--white-80); font-weight: 700; }
+.compare-total .col-pkg { color: var(--white); font-weight: 800; font-family: var(--f-display); font-size: 17px; }
+.compare-ctas {
+  padding: 16px 20px;
+  background: rgba(255,255,255,0.02);
+  gap: 8px;
+}
+.btn-compare {
+  width: 100%;
+  padding: 9px 8px;
+  background: rgba(255,255,255,0.07);
+  color: var(--white);
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 800;
+  font-family: var(--f-display);
+  letter-spacing: -0.2px;
+  transition: var(--transition);
+  border: 1px solid var(--border);
+  cursor: pointer;
+}
+.btn-compare:hover { background: rgba(255,255,255,0.14); }
+.btn-compare-red {
+  background: rgba(255,0,0,0.12) !important;
+  color: #ff6666 !important;
+  border-color: rgba(255,0,0,0.3) !important;
+}
+.btn-compare-red:hover { background: rgba(255,0,0,0.25) !important; }
+@media (max-width: 600px) {
+  .compare-table { font-size: 12px; }
+  .col-feat { font-size: 12px; }
+  .compare-head .col-pkg { font-size: 13px; }
+}
+
+
+/* ══ Sticky CTA Bar ══ */
+.sticky-cta {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  z-index: 90;
+  background: rgba(8,8,16,0.97);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-top: 1px solid rgba(255,0,0,0.2);
+  padding: 12px 24px;
+  transform: translateY(100%);
+  transition: transform 0.4s cubic-bezier(0.4,0,0.2,1);
+}
+.sticky-cta.visible { transform: translateY(0); }
+.sticky-cta-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+.sticky-left { display: flex; flex-direction: column; gap: 2px; }
+.sticky-title { font-family: var(--f-display); font-size: 15px; font-weight: 900; letter-spacing: -0.3px; }
+.sticky-sub { font-size: 12px; color: var(--white-30); font-family: var(--f-mono); }
+.sticky-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--red);
+  color: var(--white);
+  padding: 11px 24px;
+  border-radius: var(--radius-sm);
+  font-weight: 800;
+  font-size: 14px;
+  font-family: var(--f-display);
+  letter-spacing: -0.2px;
+  text-decoration: none;
+  transition: var(--transition);
+  white-space: nowrap;
+}
+.sticky-btn:hover { background: #cc0000; box-shadow: 0 0 20px rgba(255,0,0,0.35); }
+
+/* ══ Back to top ══ */
+.back-top {
+  position: fixed;
+  bottom: 72px;
+  right: 24px;
+  z-index: 91;
+  width: 42px; height: 42px;
+  background: var(--bg-3);
+  border: 1px solid var(--border-bright);
+  border-radius: 50%;
+  color: var(--white-50);
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: scale(0.8);
+  transition: var(--transition);
+  font-family: var(--f-body);
+}
+.back-top.visible { opacity: 1; transform: scale(1); }
+.back-top:hover { background: var(--red); color: var(--white); border-color: var(--red); }
+
+@media (max-width: 480px) {
+  .sticky-cta { padding: 10px 16px; }
+  .sticky-title { font-size: 13px; }
+  .sticky-btn { padding: 9px 16px; font-size: 13px; }
+  .back-top { right: 16px; bottom: 70px; width: 38px; height: 38px; }
+}
+
+
+/* ══ Live activity ══ */
+.live-activity {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  padding: 7px 16px;
+  font-size: 12px;
+  color: var(--white-50);
+  font-family: var(--f-mono);
+  margin-bottom: 20px;
+  letter-spacing: 0.3px;
+}
+.live-dot {
+  width: 7px; height: 7px;
+  background: #4ade80;
+  border-radius: 50%;
+  box-shadow: 0 0 6px #4ade80;
+  animation: livePulse 2s ease-in-out infinite;
+  flex-shrink: 0;
+}
+@keyframes livePulse {
+  0%,100% { opacity:1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.8); }
+}
+
+
+/* ══ Payment trust logos ══ */
+.payment-trust-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+}
+.payment-trust-row svg { opacity: 0.7; border-radius: 3px; }
+.trust-ssl-badge {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  font-weight: 700;
+  color: #4ade80;
+  background: rgba(74,222,128,0.1);
+  border: 1px solid rgba(74,222,128,0.25);
+  padding: 3px 10px;
+  border-radius: 100px;
+  letter-spacing: 1px;
+}
+
+
+/* ══ Email Capture ══ */
+.section-email {
+  background: var(--bg-2);
+  position: relative;
+  text-align: center;
+  overflow: hidden;
+}
+.email-orb {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  width: 500px; height: 300px;
+  background: radial-gradient(ellipse, rgba(255,0,0,0.05) 0%, transparent 70%);
+  pointer-events: none;
+}
+.email-inner { position: relative; z-index: 1; max-width: 600px; margin: 0 auto; }
+.email-icon { font-size: 44px; margin-bottom: 16px; }
+.email-h2 {
+  font-family: var(--f-display);
+  font-size: clamp(28px, 4vw, 42px);
+  font-weight: 900;
+  letter-spacing: -1px;
+  margin-bottom: 12px;
+}
+.email-sub {
+  font-size: 16px;
+  color: var(--white-50);
+  line-height: 1.7;
+  margin-bottom: 32px;
+}
+.email-sub strong { color: var(--white-80); }
+.email-form { width: 100%; }
+.email-input-wrap {
+  display: flex;
+  gap: 10px;
+  max-width: 540px;
+  margin: 0 auto 12px;
+}
+.email-input {
+  flex: 1;
+  padding: 14px 18px;
+  background: var(--bg-3);
+  border: 1px solid var(--border-bright);
+  border-radius: var(--radius-sm);
+  color: var(--white);
+  font-size: 15px;
+  font-family: var(--f-body);
+  outline: none;
+  transition: var(--transition);
+}
+.email-input:focus { border-color: rgba(255,0,0,0.4); background: rgba(255,0,0,0.03); }
+.email-input::placeholder { color: var(--white-30); }
+.email-btn {
+  padding: 14px 22px;
+  background: var(--red);
+  color: var(--white);
+  border-radius: var(--radius-sm);
+  font-weight: 800;
+  font-size: 14px;
+  font-family: var(--f-display);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: var(--transition);
+  border: none;
+  letter-spacing: -0.2px;
+}
+.email-btn:hover { background: #cc0000; transform: translateY(-2px); }
+.email-fine { font-size: 12px; color: var(--white-30); font-family: var(--f-mono); }
+.email-success {
+  margin-top: 16px;
+  padding: 14px 24px;
+  background: rgba(74,222,128,0.1);
+  border: 1px solid rgba(74,222,128,0.3);
+  border-radius: var(--radius-sm);
+  color: #4ade80;
+  font-size: 15px;
+  font-weight: 600;
+  display: inline-block;
+}
+@media (max-width: 600px) {
+  .email-input-wrap { flex-direction: column; }
+  .email-btn { width: 100%; padding: 14px; text-align: center; }
+}
+
+
+/* ══ Cookie Banner ══ */
+.cookie-banner {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  z-index: 95;
+  background: var(--bg-2);
+  border-top: 1px solid var(--border);
+  padding: 14px 24px;
+  transform: translateY(100%);
+  transition: transform 0.5s cubic-bezier(0.4,0,0.2,1);
+}
+.cookie-banner.show { transform: translateY(0); }
+.cookie-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.cookie-inner p { font-size: 13px; color: var(--white-50); flex: 1; line-height: 1.6; }
+.cookie-inner a { color: var(--red); }
+.cookie-btns { display: flex; gap: 8px; flex-shrink: 0; }
+.cookie-decline {
+  padding: 8px 18px;
+  background: transparent;
+  border: 1px solid var(--border-bright);
+  color: var(--white-50);
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-family: var(--f-body);
+  cursor: pointer;
+  transition: var(--transition);
+}
+.cookie-decline:hover { color: var(--white); }
+.cookie-accept {
+  padding: 8px 18px;
+  background: var(--red);
+  color: var(--white);
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 700;
+  font-family: var(--f-body);
+  cursor: pointer;
+  transition: var(--transition);
+  border: none;
+}
+.cookie-accept:hover { background: #cc0000; }
+@media (max-width: 480px) {
+  .cookie-inner { flex-direction: column; gap: 12px; }
+  .cookie-btns { width: 100%; justify-content: flex-end; }
+}
+
+
+/* ══ Tools bar ══ */
+.tools-bar {
+  background: var(--bg-2);
+  padding: 16px 0;
+  border-bottom: 1px solid var(--border);
+}
+.tools-inner {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.tools-label {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 1px;
+  color: var(--white-30);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.tools-list {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.tool-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 12px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  font-size: 12px;
+  color: var(--white-50);
+  font-weight: 600;
+  transition: var(--transition);
+}
+.tool-badge:hover { color: var(--white); background: rgba(255,255,255,0.09); }
+@media (max-width: 480px) {
+  .tools-inner { gap: 12px; }
+  .tools-label { display: none; }
+  .tool-badge { font-size: 11px; padding: 4px 10px; }
+}
+
+
+/* ══ Scroll progress ══ */
+.scroll-progress {
+  position: fixed;
+  top: 0; left: 0;
+  height: 3px;
+  background: var(--red);
+  z-index: 200;
+  width: 0%;
+  transition: width 0.1s linear;
+  box-shadow: 0 0 8px rgba(255,0,0,0.5);
+}
+
 </style>
+
+  <!-- Schema.org structured data for Google rich results -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "Creator Cash Blueprint PDF Guides",
+    "description": "3 PDF guides teaching beginners how to create faceless content channels and monetize them.",
+    "url": "https://creatorcashblueprint.com",
+    "numberOfItems": 3,
+    "itemListElement": [
+      {
+        "@type": "Product",
+        "position": 1,
+        "name": "Faceless Content Starter Blueprint",
+        "description": "Beginner guide covering niche selection, channel setup, scripting, and a 30-day launch plan.",
+        "offers": { "@type": "Offer", "price": "29.00", "priceCurrency": "USD", "availability": "https://schema.org/InStock" }
+      },
+      {
+        "@type": "Product",
+        "position": 2,
+        "name": "Faceless Growth & Monetization Guide",
+        "description": "Advanced guide covering niche research, retention frameworks, YouTube SEO, and 5 monetization streams.",
+        "offers": { "@type": "Offer", "price": "65.00", "priceCurrency": "USD", "availability": "https://schema.org/InStock" }
+      },
+      {
+        "@type": "Product",
+        "position": 3,
+        "name": "Faceless Automation & Profit Blueprint",
+        "description": "Complete system for automation, scaling, and monetization. Includes all 3 PDFs.",
+        "offers": { "@type": "Offer", "price": "95.00", "priceCurrency": "USD", "availability": "https://schema.org/InStock" }
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
-  <div class="grain"></div>
+    <div id="scrollProgress" class="scroll-progress"></div>
+<div class="grain"></div>
 
 
   <!-- ═══════════════ NAV ═══════════════ -->
@@ -2436,25 +2920,47 @@ h1, h2, h3, h4, h5 {
   <!-- ═══════════════ TRUST BAR ═══════════════ -->
   <div class="trust-strip">
     <div class="trust-inner">
-      <span>✦ Instant PDF Download</span>
-      <span>✦ No Experience Needed</span>
-      <span>✦ Works Worldwide</span>
       <span>✦ Instant PDF Access</span>
       <span>✦ No Camera Required</span>
-      <span>✦ Beginner Friendly</span>
-      <!-- repeat for infinite scroll -->
-      <span>✦ Instant PDF Download</span>
-      <span>✦ No Experience Needed</span>
       <span>✦ Works Worldwide</span>
+      <span>✦ No Experience Needed</span>
+      <span>✦ Beginner Friendly</span>
+      <span>✦ 2026 Edition</span>
       <span>✦ Instant PDF Access</span>
       <span>✦ No Camera Required</span>
+      <span>✦ Works Worldwide</span>
+      <span>✦ No Experience Needed</span>
       <span>✦ Beginner Friendly</span>
+      <span>✦ 2026 Edition</span>
+    </div>
+  </div>
+
+  <!-- Tools used in the guides -->
+  <div class="tools-bar">
+    <div class="container tools-inner">
+      <span class="tools-label">Tools covered in the guides:</span>
+      <div class="tools-list">
+        <div class="tool-badge">📹 CapCut</div>
+        <div class="tool-badge">🎨 Canva</div>
+        <div class="tool-badge">🎙️ ElevenLabs</div>
+        <div class="tool-badge">🎬 DaVinci Resolve</div>
+        <div class="tool-badge">🔍 VidIQ</div>
+        <div class="tool-badge">📝 ChatGPT</div>
+        <div class="tool-badge">🖼️ Pexels</div>
+        <div class="tool-badge">📊 TubeBuddy</div>
+      </div>
     </div>
   </div>
 
   <!-- ═══════════════ PRODUCTS ═══════════════ -->
   <section id="products" class="section">
     <div class="container">
+
+      <!-- Live activity indicator -->
+      <div class="live-activity" id="liveActivity">
+        <span class="live-dot"></span>
+        <span id="liveText">12 people viewing this page right now</span>
+      </div>
       <div class="section-eyebrow">WHAT YOU GET</div>
       <h2 class="section-h2">Three Guides. <span class="grad-text">One Mission.</span></h2>
       <p class="section-sub">Pick the guide that matches where you are. Each package builds on the previous one.</p>
@@ -2582,6 +3088,91 @@ h1, h2, h3, h4, h5 {
 
       </div>
 
+      <!-- ══ Package Comparison Table ══ -->
+      <div class="compare-wrap" id="compare">
+        <div class="compare-label">QUICK COMPARISON</div>
+        <h3 class="compare-title">What's included in each package?</h3>
+        <div class="compare-table">
+          <div class="compare-head">
+            <div class="col-feat">Feature</div>
+            <div class="col-pkg basic-col">Basic<br/><span>$29</span></div>
+            <div class="col-pkg medium-col">Medium<br/><span>$65</span></div>
+            <div class="col-pkg premium-col popular-col">Premium<br/><span>$95</span></div>
+          </div>
+          <div class="compare-row">
+            <div class="col-feat">Starter Blueprint PDF (28 pages)</div>
+            <div class="col-pkg">✓</div>
+            <div class="col-pkg">✓</div>
+            <div class="col-pkg premium-col">✓</div>
+          </div>
+          <div class="compare-row">
+            <div class="col-feat">Growth &amp; Monetization PDF (60 pages)</div>
+            <div class="col-pkg muted">—</div>
+            <div class="col-pkg">✓</div>
+            <div class="col-pkg premium-col">✓</div>
+          </div>
+          <div class="compare-row">
+            <div class="col-feat">Automation &amp; Profit PDF (100 pages)</div>
+            <div class="col-pkg muted">—</div>
+            <div class="col-pkg muted">—</div>
+            <div class="col-pkg premium-col">✓</div>
+          </div>
+          <div class="compare-row">
+            <div class="col-feat">Channel setup &amp; branding guide</div>
+            <div class="col-pkg">✓</div>
+            <div class="col-pkg">✓</div>
+            <div class="col-pkg premium-col">✓</div>
+          </div>
+          <div class="compare-row">
+            <div class="col-feat">Niche research system</div>
+            <div class="col-pkg muted">—</div>
+            <div class="col-pkg">✓</div>
+            <div class="col-pkg premium-col">✓</div>
+          </div>
+          <div class="compare-row">
+            <div class="col-feat">YouTube SEO deep dive</div>
+            <div class="col-pkg muted">—</div>
+            <div class="col-pkg">✓</div>
+            <div class="col-pkg premium-col">✓</div>
+          </div>
+          <div class="compare-row">
+            <div class="col-feat">5 monetization revenue streams</div>
+            <div class="col-pkg muted">—</div>
+            <div class="col-pkg">✓</div>
+            <div class="col-pkg premium-col">✓</div>
+          </div>
+          <div class="compare-row">
+            <div class="col-feat">Advanced automation workflows</div>
+            <div class="col-pkg muted">—</div>
+            <div class="col-pkg muted">—</div>
+            <div class="col-pkg premium-col">✓</div>
+          </div>
+          <div class="compare-row">
+            <div class="col-feat">Done-for-you templates</div>
+            <div class="col-pkg muted">—</div>
+            <div class="col-pkg muted">—</div>
+            <div class="col-pkg premium-col">✓</div>
+          </div>
+          <div class="compare-row">
+            <div class="col-feat">Scaling &amp; productivity systems</div>
+            <div class="col-pkg muted">—</div>
+            <div class="col-pkg muted">—</div>
+            <div class="col-pkg premium-col">✓</div>
+          </div>
+          <div class="compare-row compare-total">
+            <div class="col-feat">Total pages</div>
+            <div class="col-pkg">28</div>
+            <div class="col-pkg">88</div>
+            <div class="col-pkg premium-col">188</div>
+          </div>
+          <div class="compare-ctas">
+            <div class="col-feat"></div>
+            <div class="col-pkg"><button class="btn-compare" onclick="openCheckout('Starter Blueprint', 29)">Buy $29</button></div>
+            <div class="col-pkg"><button class="btn-compare" onclick="openCheckout('Growth System', 65)">Buy $65</button></div>
+            <div class="col-pkg premium-col"><button class="btn-compare btn-compare-red" onclick="openCheckout('Automation &amp; Profit Blueprint', 95)">Buy $95</button></div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -2832,6 +3423,27 @@ h1, h2, h3, h4, h5 {
     </div>
   </section>
 
+
+  <!-- ═══════════════ EMAIL CAPTURE ═══════════════ -->
+  <section id="email-capture" class="section section-email">
+    <div class="email-orb"></div>
+    <div class="container email-inner">
+      <div class="email-icon">✉️</div>
+      <h2 class="email-h2">Not ready to buy yet?</h2>
+      <p class="email-sub">Get our free mini-guide: <strong>"5 Faceless Niches That Are Blowing Up Right Now"</strong> — delivered instantly to your inbox.</p>
+      <form class="email-form" onsubmit="handleEmailSignup(event)">
+        <div class="email-input-wrap">
+          <input type="email" class="email-input" placeholder="Enter your email address" required />
+          <button type="submit" class="email-btn">Send me the free guide →</button>
+        </div>
+        <p class="email-fine">No spam. Unsubscribe anytime. Takes 10 seconds.</p>
+      </form>
+      <div id="emailSuccess" class="email-success" style="display:none">
+        ✅ Check your inbox — your free guide is on its way!
+      </div>
+    </div>
+  </section>
+
   <!-- ═══════════════ FINAL CTA ═══════════════ -->
   <section id="final-cta" class="section section-cta">
     <div class="cta-orb"></div>
@@ -2857,13 +3469,13 @@ h1, h2, h3, h4, h5 {
         </a>
         <p>PDF guides for beginners who want to build faceless content channels and make money online. No camera, no experience needed.</p>
         <div class="footer-socials">
-          <a href="#" aria-label="Twitter/X" class="social-a">
+          <a href="https://x.com/creatorcashblueprint" aria-label="Twitter/X" class="social-a" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
           </a>
-          <a href="#" aria-label="Instagram" class="social-a">
+          <a href="https://instagram.com/creatorcashblueprint" aria-label="Instagram" class="social-a" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
           </a>
-          <a href="#" aria-label="TikTok" class="social-a">
+          <a href="https://tiktok.com/@creatorcashblueprint" aria-label="TikTok" class="social-a" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.76a4.85 4.85 0 01-1.01-.07z"/></svg>
           </a>
         </div>
@@ -2880,12 +3492,12 @@ h1, h2, h3, h4, h5 {
           <h4>Help</h4>
           <a href="#faq">FAQ</a>
           <a href="#">Login</a>
-          <a href="/cdn-cgi/l/email-protection#c4b7b1b4b4abb6b084a7b6a1a5b0abb6a7a5b7aca6a8b1a1b4b6adaab0eaa7aba9">Contact Us</a>
+          <a href="mailto:support@creatorcashblueprint.com">Contact Us</a>
         </div>
         <div class="footer-col">
           <h4>Legal</h4>
-          <a href="#">Privacy Policy</a>
-          <a href="#">Terms of Service</a>
+          <a href="#" onclick="openLegal('privacy'); return false;">Privacy Policy</a>
+          <a href="#" onclick="openLegal('terms'); return false;">Terms of Service</a>
         </div>
       </div>
     </div>
@@ -2893,7 +3505,7 @@ h1, h2, h3, h4, h5 {
     <div class="footer-base">
       <div class="container footer-base-inner">
         <p>© 2026 Creator Cash Blueprint. All rights reserved.</p>
-        <p>Results are not typical. Individual success depends on effort, skills, and market conditions.</p>
+        <p>Results are not typical. Individual success depends on effort, skills, and market conditions. Some tools mentioned in the guides may include affiliate links.</p>
       </div>
     </div>
   </footer>
@@ -2940,6 +3552,14 @@ h1, h2, h3, h4, h5 {
           🔒 Complete Purchase
         </button>
         <p class="secure-label">🔒 Secured by Stripe · 256-bit SSL · Instant access after payment</p>
+
+          <div class="payment-trust-row">
+            <svg height="20" viewBox="0 0 60 20" fill="none" xmlns="http://www.w3.org/2000/svg" title="Visa"><rect width="60" height="20" rx="3" fill="#1A1F71"/><text x="50%" y="14" text-anchor="middle" font-family="Arial" font-weight="bold" font-size="11" fill="white" letter-spacing="1">VISA</text></svg>
+            <svg height="20" viewBox="0 0 80 20" fill="none" xmlns="http://www.w3.org/2000/svg" title="Mastercard"><rect width="80" height="20" rx="3" fill="#252525"/><circle cx="27" cy="10" r="8" fill="#EB001B"/><circle cx="43" cy="10" r="8" fill="#F79E1B"/><path d="M35 4.8a8 8 0 010 10.4A8 8 0 0135 4.8z" fill="#FF5F00"/><text x="62" y="14" text-anchor="middle" font-family="Arial" font-size="8" fill="white">MC</text></svg>
+            <svg height="20" viewBox="0 0 80 20" fill="none" xmlns="http://www.w3.org/2000/svg" title="Stripe"><rect width="80" height="20" rx="3" fill="#635BFF"/><text x="50%" y="14" text-anchor="middle" font-family="Arial" font-weight="bold" font-size="10" fill="white">stripe</text></svg>
+            <svg height="20" viewBox="0 0 80 20" fill="none" xmlns="http://www.w3.org/2000/svg" title="PayPal"><rect width="80" height="20" rx="3" fill="#003087"/><text x="50%" y="14" text-anchor="middle" font-family="Arial" font-weight="bold" font-size="10" fill="white">PayPal</text></svg>
+            <div class="trust-ssl-badge">🔒 SSL</div>
+          </div>
       </div>
 
       <div id="paypalPane" style="display:none">
@@ -3187,6 +3807,147 @@ const secObserver = new IntersectionObserver((entries) => {
 
 sections.forEach(s => secObserver.observe(s));
 
+
+// ── Scroll progress bar ─────────────────────────
+window.addEventListener('scroll', () => {
+  const el = document.getElementById('scrollProgress');
+  if (el) {
+    const total = document.body.scrollHeight - window.innerHeight;
+    el.style.width = (window.scrollY / total * 100) + '%';
+  }
+}, { passive: true });
+
+// ── Sticky CTA + Back-to-top ─────────────────────
+const stickyCTA = document.getElementById('stickyCTA');
+const backTop = document.getElementById('backTop');
+const heroSection = document.getElementById('hero');
+
+window.addEventListener('scroll', () => {
+  const heroBottom = heroSection ? heroSection.offsetTop + heroSection.offsetHeight : 600;
+  const scrolled = window.scrollY > heroBottom;
+  if (stickyCTA) stickyCTA.classList.toggle('visible', scrolled);
+  if (backTop) backTop.classList.toggle('visible', window.scrollY > 500);
+}, { passive: true });
+
+// ── Live activity counter ────────────────────────
+(function() {
+  const base = 9;
+  const liveText = document.getElementById('liveText');
+  if (!liveText) return;
+  function update() {
+    const n = base + Math.floor(Math.random() * 8);
+    liveText.textContent = n + ' people viewing this page right now';
+  }
+  update();
+  setInterval(update, 14000);
+})();
+
+// ── Cookie banner ────────────────────────────────
+(function() {
+  if (localStorage.getItem('ccb_cookie')) return;
+  const banner = document.getElementById('cookieBanner');
+  if (!banner) return;
+  setTimeout(() => banner.classList.add('show'), 1500);
+})();
+
+function dismissCookie(accepted) {
+  localStorage.setItem('ccb_cookie', accepted ? '1' : '0');
+  const banner = document.getElementById('cookieBanner');
+  if (banner) { banner.classList.remove('show'); setTimeout(() => banner.remove(), 400); }
+}
+
+// ── Legal modal ──────────────────────────────────
+const LEGAL = {
+  privacy: {
+    title: 'Privacy Policy',
+    body: \`<p>Creator Cash Blueprint collects minimal data: your email (for order delivery) and payment info (processed securely by Stripe or PayPal — we never store card details).</p>
+<p style="margin-top:12px">We use Google Fonts, which may log your IP address on font load. By using this site you consent to this. We do not sell your data to third parties.</p>
+<p style="margin-top:12px">To request data deletion: <a href="mailto:support@creatorcashblueprint.com" style="color:#ff4444">support@creatorcashblueprint.com</a></p>\`
+  },
+  terms: {
+    title: 'Terms of Service',
+    body: \`<p>By purchasing from Creator Cash Blueprint you agree to the following:</p>
+<ul style="margin-top:12px;padding-left:16px;color:rgba(255,255,255,0.6);font-size:14px;line-height:2">
+<li>All sales are final. Digital products are delivered instantly and cannot be returned.</li>
+<li>You receive a personal, non-transferable license to use the PDFs.</li>
+<li>You may not resell, redistribute, or share the PDFs.</li>
+<li>Results mentioned are not typical and depend on your effort and execution.</li>
+<li>Contact: <a href="mailto:support@creatorcashblueprint.com" style="color:#ff4444">support@creatorcashblueprint.com</a></li>
+</ul>\`
+  }
+};
+
+function openLegal(type) {
+  const modal = document.getElementById('legalModal');
+  const content = document.getElementById('legalContent');
+  const data = LEGAL[type];
+  if (!modal || !content || !data) return;
+  content.innerHTML = \`<h3 style="font-family:var(--f-display);font-size:22px;font-weight:900;margin-bottom:16px;">\${data.title}</h3>\${data.body}\`;
+  modal.style.display = 'flex';
+  setTimeout(() => modal.style.opacity = '1', 10);
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLegal() {
+  const modal = document.getElementById('legalModal');
+  if (!modal) return;
+  modal.style.opacity = '0';
+  setTimeout(() => { modal.style.display = 'none'; document.body.style.overflow = ''; }, 300);
+}
+
+// Close legal modal on overlay click
+document.addEventListener('click', (e) => {
+  const modal = document.getElementById('legalModal');
+  if (modal && e.target === modal) closeLegal();
+});
+
+// ── Email signup ─────────────────────────────────
+function handleEmailSignup(e) {
+  e.preventDefault();
+  const form = e.target;
+  const success = document.getElementById('emailSuccess');
+  form.style.display = 'none';
+  if (success) success.style.display = 'inline-block';
+  // Production: send to your email provider (Mailchimp, ConvertKit, etc.)
+}
+
 </script>
+
+  <!-- Sticky bottom CTA bar -->
+  <div id="stickyCTA" class="sticky-cta">
+    <div class="sticky-cta-inner">
+      <div class="sticky-left">
+        <span class="sticky-title">Creator Cash Blueprint</span>
+        <span class="sticky-sub">3 PDF guides · From $29</span>
+      </div>
+      <div class="sticky-right">
+        <a href="#products" class="sticky-btn">Get Instant Access →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Back to top -->
+  <button id="backTop" class="back-top" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+  <!-- Cookie Banner -->
+  <div id="cookieBanner" class="cookie-banner">
+    <div class="cookie-inner">
+      <p>🍪 We use cookies to improve your experience and analyze traffic. By continuing, you agree to our <a href="#" onclick="openLegal('privacy'); return false;">Privacy Policy</a>.</p>
+      <div class="cookie-btns">
+        <button class="cookie-decline" onclick="dismissCookie(false)">Decline</button>
+        <button class="cookie-accept" onclick="dismissCookie(true)">Accept</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Legal Modal -->
+  <div id="legalModal" class="modal-overlay" style="display:none;opacity:0;">
+    <div class="modal-box" style="max-width:600px;">
+      <button class="modal-x" onclick="closeLegal()">✕</button>
+      <div id="legalContent">
+        <!-- Filled by JS -->
+      </div>
+    </div>
+  </div>
 </body>
 </html>
