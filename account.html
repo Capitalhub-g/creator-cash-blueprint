@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Account — Creator Cash Blueprint</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Nunito:wght@400;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23ff0000'/><polygon points='12,8 26,16 12,24' fill='white'/></svg>" />
+  <style>
+    /* ═══════════════════════════════════════════
+       DESIGN TOKENS — matcht creator-cash-blueprint
+    ═══════════════════════════════════════════ */
+    :root {
+      --bg:      #080810;
+      --bg-2:    #0e0e1a;
+      --bg-3:    #13131f;
+      --surface: rgba(255,255,255,0.04);
+      --surface-hover: rgba(255,255,255,0.07);
+      --border:  rgba(255,255,255,0.08);
+      --border-bright: rgba(255,255,255,0.15);
+      --red:     #ff0000;
+      --red-dark:#cc0000;
+      --red-dim: rgba(255,0,0,0.10);
+      --red-glow:rgba(255,0,0,0.22);
+      --white:   #ffffff;
+      --w80:     rgba(255,255,255,0.80);
+      --w50:     rgba(255,255,255,0.50);
+      --w30:     rgba(255,255,255,0.30);
+      --w10:     rgba(255,255,255,0.10);
+      --green:   #4ade80;
+      --green-dim:rgba(74,222,128,0.12);
+      --f-display:'Nunito', sans-serif;
+      --f-body:  'Plus Jakarta Sans', sans-serif;
+      --f-mono:  'Space Mono', monospace;
+      --radius:  14px;
+      --radius-sm:10px;
+      --tr:      0.25s cubic-bezier(0.4,0,0.2,1);
+      --tr-b:    0.35s cubic-bezier(0.34,1.3,0.64,1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--f-body);
+      background: var(--bg);
+      color: var(--white);
+      min-height: 100vh;
+      font-weight: 500;
+      overflow-x: hidden;
+    }
+    a { text-decoration: none; color: inherit; }
+    button { font-family: var(--f-body); cursor: pointer; border: none; background: none; }
+    input, select { font-family: var(--f-body); }
+
+    /* ─── NAV ─────────────────────────────────── */
+    #nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(8,8,16,0.95);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      max-width: 1100px; margin: 0 auto; padding: 0 24px;
+      height: 64px; display: flex; align-items: center;
+      justify-content: space-between; gap: 20px;
+    }
+    .logo {
+      display: flex; align-items: center; gap: 8px;
+      font-family: var(--f-display); font-size: 17px; font-weight: 800;
+    }
+    .logo-mark { color: var(--red); font-size: 20px; }
+    .logo strong { color: var(--red); }
+    .nav-back {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 13px; color: var(--w50);
+      padding: 7px 14px; border-radius: var(--radius-sm);
+      transition: var(--tr); font-weight: 600;
+    }
+    .nav-back:hover { color: var(--white); background: var(--surface-hover); }
+
+    /* ─── PAGE LAYOUT ─────────────────────────── */
+    .page { padding-top: 64px; min-height: 100vh; }
+
+    /* ─── AUTH VIEWS (login / register / forgot) ─ */
+    .auth-view {
+      display: none; flex-direction: column; align-items: center;
+      justify-content: center; min-height: calc(100vh - 64px);
+      padding: 48px 24px;
+    }
+    .auth-view.active { display: flex; }
+
+    .auth-card {
+      width: 100%; max-width: 440px;
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 24px 80px rgba(0,0,0,0.5);
+    }
+    .auth-header {
+      text-align: center;
+      padding: 32px 32px 24px;
+      border-bottom: 1px solid var(--border);
+    }
+    .auth-icon {
+      width: 52px; height: 52px;
+      background: var(--red-dim);
+      border: 1px solid rgba(255,0,0,0.25);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px; margin: 0 auto 14px;
+    }
+    .auth-title {
+      font-family: var(--f-display);
+      font-size: 22px; font-weight: 900; letter-spacing: -0.5px;
+      margin-bottom: 6px;
+    }
+    .auth-sub { font-size: 13px; color: var(--w50); line-height: 1.6; }
+
+    .auth-tabs {
+      display: flex; border-bottom: 1px solid var(--border);
+    }
+    .auth-tab {
+      flex: 1; padding: 14px; text-align: center;
+      font-size: 14px; font-weight: 700; color: var(--w30);
+      font-family: var(--f-body); border-bottom: 2px solid transparent;
+      margin-bottom: -1px; transition: var(--tr); cursor: pointer;
+    }
+    .auth-tab.active { color: var(--red); border-bottom-color: var(--red); }
+    .auth-tab:hover:not(.active) { color: var(--w80); }
+
+    .auth-body { padding: 28px 32px 32px; }
+
+    .field { margin-bottom: 16px; }
+    .field label {
+      display: block; font-size: 11px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 1px;
+      color: var(--w30); margin-bottom: 7px;
+      font-family: var(--f-mono);
+    }
+    .field input {
+      width: 100%; padding: 13px 16px;
+      background: var(--bg-3); border: 1px solid var(--border);
+      border-radius: var(--radius-sm); color: var(--white);
+      font-size: 15px; outline: none; transition: var(--tr);
+      font-weight: 500;
+    }
+    .field input:focus {
+      border-color: rgba(255,0,0,0.4);
+      background: rgba(255,0,0,0.03);
+      box-shadow: 0 0 0 3px rgba(255,0,0,0.07);
+    }
+    .field input::placeholder { color: var(--w30); }
+    .field input.error { border-color: rgba(255,80,80,0.5); }
+
+    .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+    .password-wrap { position: relative; }
+    .password-wrap input { padding-right: 46px; }
+    .pw-toggle {
+      position: absolute; right: 14px; top: 50%; transform: translateY(-50%);
+      color: var(--w30); font-size: 16px; cursor: pointer;
+      transition: var(--tr); background: none; border: none; padding: 4px;
+    }
+    .pw-toggle:hover { color: var(--w80); }
+
+    .error-msg {
+      display: none; font-size: 12px; color: #ff6b6b;
+      margin-top: 6px; font-family: var(--f-mono);
+    }
+    .error-msg.show { display: block; }
+
+    .auth-error {
+      display: none; padding: 12px 16px;
+      background: rgba(255,80,80,0.08);
+      border: 1px solid rgba(255,80,80,0.25);
+      border-radius: var(--radius-sm); margin-bottom: 16px;
+      font-size: 13px; color: #ff8080; line-height: 1.5;
+    }
+    .auth-error.show { display: block; }
+
+    .auth-success {
+      display: none; padding: 12px 16px;
+      background: var(--green-dim);
+      border: 1px solid rgba(74,222,128,0.25);
+      border-radius: var(--radius-sm); margin-bottom: 16px;
+      font-size: 13px; color: var(--green); line-height: 1.5;
+    }
+    .auth-success.show { display: block; }
+
+    .forgot-link {
+      display: block; text-align: right;
+      font-size: 12px; color: var(--w30);
+      margin-top: -8px; margin-bottom: 16px;
+      transition: var(--tr); font-family: var(--f-mono);
+    }
+    .forgot-link:hover { color: var(--red); }
+
+    .btn-primary {
+      display: flex; align-items: center; justify-content: center;
+      gap: 8px; width: 100%; padding: 14px;
+      background: var(--red); color: var(--white);
+      border-radius: var(--radius-sm); font-size: 15px;
+      font-weight: 800; font-family: var(--f-display);
+      letter-spacing: -0.2px; transition: var(--tr-b);
+      box-shadow: 0 0 24px rgba(255,0,0,0.2);
+    }
+    .btn-primary:hover { background: var(--red-dark); transform: translateY(-2px); box-shadow: 0 4px 24px rgba(255,0,0,0.35); }
+    .btn-primary:disabled { opacity: 0.6; transform: none; cursor: not-allowed; }
+
+    .auth-divider {
+      display: flex; align-items: center; gap: 12px;
+      margin: 20px 0;
+    }
+    .auth-divider::before, .auth-divider::after {
+      content: ''; flex: 1; height: 1px; background: var(--border);
+    }
+    .auth-divider span { font-size: 11px; color: var(--w30); font-family: var(--f-mono); }
+
+    .terms-note {
+      font-size: 11px; color: var(--w30); text-align: center;
+      margin-top: 14px; line-height: 1.6;
+    }
+    .terms-note a { color: var(--red); }
+
+    .strength-bar { height: 4px; background: var(--border); border-radius: 2px; margin-top: 6px; overflow: hidden; }
+    .strength-fill { height: 100%; border-radius: 2px; transition: width 0.3s, background 0.3s; width: 0%; }
+
+    /* ─── DASHBOARD VIEW ──────────────────────── */
+    .dashboard-view {
+      display: none; min-height: calc(100vh - 64px);
+      padding: 40px 24px 80px;
+    }
+    .dashboard-view.active { display: block; }
+
+    .dash-container { max-width: 960px; margin: 0 auto; }
+
+    /* Welcome bar */
+    .dash-welcome {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 20px; margin-bottom: 36px; flex-wrap: wrap;
+    }
+    .dash-welcome-left h1 {
+      font-family: var(--f-display);
+      font-size: clamp(24px,4vw,36px);
+      font-weight: 900; letter-spacing: -0.5px; margin-bottom: 4px;
+    }
+    .dash-welcome-left h1 span { color: var(--red); }
+    .dash-welcome-left p { font-size: 14px; color: var(--w50); }
+    .btn-logout {
+      display: flex; align-items: center; gap: 6px;
+      padding: 9px 18px; border: 1px solid var(--border-bright);
+      border-radius: var(--radius-sm); font-size: 13px;
+      font-weight: 600; color: var(--w50); transition: var(--tr);
+    }
+    .btn-logout:hover { color: var(--white); border-color: rgba(255,80,80,0.4); }
+
+    /* Stats row */
+    .dash-stats {
+      display: grid; grid-template-columns: repeat(3,1fr);
+      gap: 14px; margin-bottom: 36px;
+    }
+    .dash-stat {
+      background: var(--bg-2); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 20px 22px;
+    }
+    .dash-stat-label { font-size: 11px; color: var(--w30); font-family: var(--f-mono); letter-spacing: 1px; margin-bottom: 8px; }
+    .dash-stat-val { font-family: var(--f-display); font-size: 28px; font-weight: 900; letter-spacing: -0.5px; }
+    .dash-stat-val.red { color: var(--red); }
+    .dash-stat-sub { font-size: 12px; color: var(--w30); margin-top: 4px; }
+
+    /* Section title */
+    .dash-section-title {
+      font-family: var(--f-display); font-size: 18px;
+      font-weight: 900; letter-spacing: -0.3px;
+      margin-bottom: 16px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .dash-section-title span {
+      font-size: 11px; color: var(--w30); font-weight: 400;
+      font-family: var(--f-mono); letter-spacing: 0.5px;
+    }
+
+    /* Orders */
+    .orders-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 40px; }
+
+    .order-card {
+      background: var(--bg-2); border: 1px solid var(--border);
+      border-radius: var(--radius); overflow: hidden;
+      transition: var(--tr);
+    }
+    .order-card:hover { border-color: var(--border-bright); }
+
+    .order-header {
+      display: flex; align-items: center; gap: 16px;
+      padding: 18px 22px; cursor: pointer;
+      justify-content: space-between; flex-wrap: wrap; gap: 12px;
+    }
+    .order-header-left { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; gap: 12px; }
+    .order-num {
+      font-family: var(--f-mono); font-size: 12px;
+      color: var(--red); letter-spacing: 1px; font-weight: 700;
+    }
+    .order-name { font-size: 15px; font-weight: 700; }
+    .order-date { font-size: 12px; color: var(--w30); font-family: var(--f-mono); }
+    .order-badge {
+      font-family: var(--f-mono); font-size: 10px; font-weight: 700;
+      padding: 3px 10px; border-radius: 100px; letter-spacing: 1px;
+    }
+    .badge-completed { background: var(--green-dim); color: var(--green); border: 1px solid rgba(74,222,128,0.2); }
+    .order-price {
+      font-family: var(--f-display); font-size: 18px; font-weight: 900;
+      color: var(--white); flex-shrink: 0;
+    }
+    .order-toggle {
+      color: var(--w30); font-size: 18px; transition: transform var(--tr);
+      flex-shrink: 0;
+    }
+    .order-card.open .order-toggle { transform: rotate(180deg); }
+
+    .order-body {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.4s cubic-bezier(0.4,0,0.2,1);
+      border-top: 1px solid transparent;
+    }
+    .order-card.open .order-body {
+      max-height: 600px;
+      border-top-color: var(--border);
+    }
+    .order-body-inner { padding: 20px 22px 22px; }
+
+    .order-meta {
+      display: grid; grid-template-columns: repeat(3,1fr);
+      gap: 16px; margin-bottom: 20px;
+      padding-bottom: 18px; border-bottom: 1px solid var(--border);
+    }
+    .order-meta-item label {
+      display: block; font-size: 10px; color: var(--w30);
+      font-family: var(--f-mono); letter-spacing: 1px; margin-bottom: 4px;
+    }
+    .order-meta-item span { font-size: 14px; font-weight: 600; }
+
+    /* PDF download items */
+    .pdf-downloads { display: flex; flex-direction: column; gap: 10px; }
+    .pdf-item {
+      display: flex; align-items: center; gap: 14px;
+      padding: 14px 16px;
+      background: var(--bg-3); border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      transition: var(--tr);
+    }
+    .pdf-item:hover { border-color: rgba(255,0,0,0.2); }
+    .pdf-cover {
+      width: 44px; height: 44px; border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; flex-shrink: 0;
+    }
+    .pdf-cover-1 { background: linear-gradient(135deg,#0a1628,#0d2341); }
+    .pdf-cover-2 { background: linear-gradient(135deg,#0d0a28,#1a0d41); }
+    .pdf-cover-3 { background: linear-gradient(135deg,#0a1a0a,#0d2e0a); }
+    .pdf-info { flex: 1; }
+    .pdf-info strong { display: block; font-size: 14px; font-weight: 700; margin-bottom: 2px; }
+    .pdf-info span { font-size: 11px; color: var(--w30); font-family: var(--f-mono); }
+    .btn-download-pdf {
+      display: flex; align-items: center; gap: 6px;
+      padding: 8px 16px;
+      background: var(--red-dim); border: 1px solid rgba(255,0,0,0.2);
+      color: #ff6666; border-radius: var(--radius-sm);
+      font-size: 12px; font-weight: 700; font-family: var(--f-display);
+      letter-spacing: -0.2px; transition: var(--tr-b); flex-shrink: 0;
+      white-space: nowrap;
+    }
+    .btn-download-pdf:hover { background: rgba(255,0,0,0.18); transform: scale(1.04); }
+    .btn-download-pdf.done { background: var(--green-dim); color: var(--green); border-color: rgba(74,222,128,0.2); }
+
+    /* Empty state */
+    .empty-orders {
+      text-align: center; padding: 60px 24px;
+      background: var(--bg-2); border: 1px solid var(--border);
+      border-radius: var(--radius);
+    }
+    .empty-orders .icon { font-size: 48px; margin-bottom: 16px; }
+    .empty-orders h3 { font-family: var(--f-display); font-size: 20px; font-weight: 900; margin-bottom: 8px; }
+    .empty-orders p { font-size: 14px; color: var(--w50); margin-bottom: 24px; }
+    .btn-shop {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--red); color: var(--white);
+      padding: 12px 24px; border-radius: var(--radius-sm);
+      font-weight: 800; font-size: 14px; font-family: var(--f-display);
+      letter-spacing: -0.2px; transition: var(--tr-b);
+    }
+    .btn-shop:hover { background: var(--red-dark); transform: translateY(-2px); }
+
+    /* Account settings */
+    .account-card {
+      background: var(--bg-2); border: 1px solid var(--border);
+      border-radius: var(--radius); overflow: hidden;
+    }
+    .account-card-header {
+      padding: 16px 22px;
+      border-bottom: 1px solid var(--border);
+      font-size: 14px; font-weight: 700; color: var(--w80);
+    }
+    .account-row {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 22px; border-bottom: 1px solid var(--border);
+      gap: 16px; flex-wrap: wrap;
+    }
+    .account-row:last-child { border-bottom: none; }
+    .account-row-label { font-size: 12px; color: var(--w30); font-family: var(--f-mono); letter-spacing: 0.5px; margin-bottom: 3px; }
+    .account-row-val { font-size: 14px; font-weight: 600; }
+    .btn-edit-inline {
+      font-size: 12px; color: var(--red); font-family: var(--f-mono);
+      font-weight: 700; letter-spacing: 0.5px; transition: var(--tr);
+      padding: 5px 12px; border-radius: var(--radius-sm);
+      border: 1px solid rgba(255,0,0,0.2); background: var(--red-dim);
+    }
+    .btn-edit-inline:hover { background: rgba(255,0,0,0.18); }
+
+    /* Toast */
+    .toast {
+      position: fixed; bottom: 28px; left: 50%;
+      transform: translateX(-50%) translateY(80px);
+      background: var(--green-dim);
+      border: 1px solid rgba(74,222,128,0.3);
+      color: var(--green); padding: 12px 24px;
+      border-radius: var(--radius-sm); font-size: 14px;
+      font-weight: 600; z-index: 300; transition: transform 0.4s cubic-bezier(0.34,1.4,0.64,1);
+      white-space: nowrap; backdrop-filter: blur(16px);
+    }
+    .toast.show { transform: translateX(-50%) translateY(0); }
+
+    /* Loading spinner */
+    .spinner {
+      display: inline-block; width: 16px; height: 16px;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-top-color: white; border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Scroll progress */
+    .scroll-progress {
+      position: fixed; top: 0; left: 0; height: 3px;
+      background: var(--red); z-index: 200; width: 0%;
+      transition: width 0.1s linear;
+      box-shadow: 0 0 8px rgba(255,0,0,0.5);
+    }
+
+    /* ─── RESPONSIVE ──────────────────────────── */
+    @media (max-width: 680px) {
+      .dash-stats { grid-template-columns: 1fr 1fr; }
+      .dash-stats .dash-stat:last-child { grid-column: span 2; }
+      .order-meta { grid-template-columns: 1fr 1fr; }
+      .order-meta .order-meta-item:last-child { grid-column: span 2; }
+      .auth-body { padding: 20px; }
+      .auth-header { padding: 24px 20px 18px; }
+      .field-row { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 420px) {
+      .dash-stats { grid-template-columns: 1fr; }
+      .dash-stats .dash-stat:last-child { grid-column: 1; }
+      .btn-download-pdf { padding: 7px 10px; font-size: 11px; }
+      .pdf-item { flex-wrap: wrap; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="scroll-progress" id="scrollProgress"></div>
+
+  <!-- ═══ NAV ═══════════════════════════════════ -->
+  <nav id="nav">
+    <div class="nav-inner">
+      <a href="creator-cash-blueprint.html" class="logo">
+        <span class="logo-mark">▶</span>
+        <span>Creator<strong>Cash</strong> Blueprint</span>
+      </a>
+      <a href="creator-cash-blueprint.html" class="nav-back">← Back to store</a>
+    </div>
+  </nav>
+
+  <div class="page">
+
+    <!-- ═══ AUTH VIEW ══════════════════════════ -->
+    <div id="authView" class="auth-view active">
+      <div class="auth-card">
+
+        <!-- Tabs: Login / Register -->
+        <div class="auth-tabs" id="authTabs">
+          <button class="auth-tab active" onclick="switchTab('login', this)">Sign In</button>
+          <button class="auth-tab" onclick="switchTab('register', this)">Create Account</button>
+        </div>
+
+        <!-- ── LOGIN PANEL ── -->
+        <div id="loginPanel" class="auth-body">
+          <div id="loginError" class="auth-error"></div>
+          <div id="loginSuccess" class="auth-success"></div>
+
+          <div class="field">
+            <label>Email Address</label>
+            <input type="email" id="loginEmail" placeholder="you@example.com" autocomplete="email" />
+            <div class="error-msg" id="loginEmailErr">Please enter a valid email address.</div>
+          </div>
+          <div class="field">
+            <label>Password</label>
+            <div class="password-wrap">
+              <input type="password" id="loginPw" placeholder="Your password" autocomplete="current-password" />
+              <button class="pw-toggle" onclick="togglePw('loginPw', this)" type="button" tabindex="-1">👁</button>
+            </div>
+            <div class="error-msg" id="loginPwErr">Password is required.</div>
+          </div>
+          <a href="#" class="forgot-link" onclick="showView('forgotView'); return false;">Forgot password?</a>
+
+          <button class="btn-primary" id="loginBtn" onclick="doLogin()">
+            Sign In →
+          </button>
+          <p class="terms-note" style="margin-top:16px;">
+            Don't have an account?
+            <a href="#" onclick="switchTabByName('register'); return false;" style="color:var(--red);">Create one →</a>
+          </p>
+        </div>
+
+        <!-- ── REGISTER PANEL ── -->
+        <div id="registerPanel" class="auth-body" style="display:none;">
+          <div id="regError" class="auth-error"></div>
+          <div id="regSuccess" class="auth-success"></div>
+
+          <div class="field-row">
+            <div class="field">
+              <label>First Name</label>
+              <input type="text" id="regFirst" placeholder="John" autocomplete="given-name" />
+              <div class="error-msg" id="regFirstErr">Required.</div>
+            </div>
+            <div class="field">
+              <label>Last Name</label>
+              <input type="text" id="regLast" placeholder="Doe" autocomplete="family-name" />
+            </div>
+          </div>
+          <div class="field">
+            <label>Email Address</label>
+            <input type="email" id="regEmail" placeholder="you@example.com" autocomplete="email" />
+            <div class="error-msg" id="regEmailErr">Please enter a valid email address.</div>
+          </div>
+          <div class="field">
+            <label>Password</label>
+            <div class="password-wrap">
+              <input type="password" id="regPw" placeholder="Min. 8 characters" autocomplete="new-password" oninput="checkStrength(this.value)" />
+              <button class="pw-toggle" onclick="togglePw('regPw', this)" type="button" tabindex="-1">👁</button>
+            </div>
+            <div class="strength-bar"><div class="strength-fill" id="strengthFill"></div></div>
+            <div class="error-msg" id="regPwErr">Password must be at least 8 characters.</div>
+          </div>
+          <div class="field">
+            <label>Confirm Password</label>
+            <div class="password-wrap">
+              <input type="password" id="regPw2" placeholder="Repeat password" autocomplete="new-password" />
+              <button class="pw-toggle" onclick="togglePw('regPw2', this)" type="button" tabindex="-1">👁</button>
+            </div>
+            <div class="error-msg" id="regPw2Err">Passwords do not match.</div>
+          </div>
+
+          <button class="btn-primary" id="regBtn" onclick="doRegister()">
+            Create Account →
+          </button>
+          <p class="terms-note">
+            By registering, you agree to our
+            <a href="#" style="color:var(--red);">Terms of Service</a> and
+            <a href="#" style="color:var(--red);">Privacy Policy</a>.
+          </p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ═══ FORGOT PASSWORD VIEW ═══════════════ -->
+    <div id="forgotView" class="auth-view" style="display:none;flex-direction:column;align-items:center;justify-content:center;min-height:calc(100vh - 64px);padding:48px 24px;">
+      <div class="auth-card">
+        <div class="auth-header">
+          <div class="auth-icon">🔑</div>
+          <div class="auth-title">Reset Password</div>
+          <div class="auth-sub">Enter your email and we'll send you a reset link.</div>
+        </div>
+        <div class="auth-body">
+          <div id="forgotSuccess" class="auth-success"></div>
+          <div id="forgotError" class="auth-error"></div>
+          <div class="field">
+            <label>Email Address</label>
+            <input type="email" id="forgotEmail" placeholder="you@example.com" />
+            <div class="error-msg" id="forgotEmailErr">Please enter a valid email.</div>
+          </div>
+          <button class="btn-primary" onclick="doForgot()">Send Reset Link →</button>
+          <p class="terms-note" style="margin-top:14px;">
+            <a href="#" onclick="showView('authView'); return false;" style="color:var(--red);">← Back to Sign In</a>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ DASHBOARD VIEW ══════════════════════ -->
+    <div id="dashView" class="dashboard-view">
+      <div class="dash-container">
+
+        <!-- Welcome -->
+        <div class="dash-welcome">
+          <div class="dash-welcome-left">
+            <h1>Welcome back, <span id="dashName">—</span></h1>
+            <p id="dashEmail" style="color:var(--w30);font-family:var(--f-mono);font-size:12px;letter-spacing:0.5px;"></p>
+          </div>
+          <button class="btn-logout" onclick="doLogout()">Sign Out ↗</button>
+        </div>
+
+        <!-- Stats -->
+        <div class="dash-stats">
+          <div class="dash-stat">
+            <div class="dash-stat-label">ORDERS</div>
+            <div class="dash-stat-val red" id="statOrders">0</div>
+            <div class="dash-stat-sub">Total purchases</div>
+          </div>
+          <div class="dash-stat">
+            <div class="dash-stat-label">PDF GUIDES</div>
+            <div class="dash-stat-val" id="statPdfs">0</div>
+            <div class="dash-stat-sub">Available to download</div>
+          </div>
+          <div class="dash-stat">
+            <div class="dash-stat-label">TOTAL SPENT</div>
+            <div class="dash-stat-val" id="statSpent">$0</div>
+            <div class="dash-stat-sub">Lifetime value</div>
+          </div>
+        </div>
+
+        <!-- Orders -->
+        <div class="dash-section-title">
+          My Orders <span id="orderCount"></span>
+        </div>
+        <div class="orders-list" id="ordersList"></div>
+
+        <!-- Account details -->
+        <div class="dash-section-title" style="margin-top:40px;">
+          Account Details
+        </div>
+        <div class="account-card">
+          <div class="account-card-header">Personal Information</div>
+          <div class="account-row">
+            <div>
+              <div class="account-row-label">FULL NAME</div>
+              <div class="account-row-val" id="accName">—</div>
+            </div>
+            <button class="btn-edit-inline" onclick="showEditName()">Edit</button>
+          </div>
+          <div class="account-row">
+            <div>
+              <div class="account-row-label">EMAIL ADDRESS</div>
+              <div class="account-row-val" id="accEmail">—</div>
+            </div>
+          </div>
+          <div class="account-row">
+            <div>
+              <div class="account-row-label">MEMBER SINCE</div>
+              <div class="account-row-val" id="accSince">—</div>
+            </div>
+          </div>
+          <div class="account-row">
+            <div>
+              <div class="account-row-label">PASSWORD</div>
+              <div class="account-row-val">••••••••••</div>
+            </div>
+            <button class="btn-edit-inline" onclick="showChangePw()">Change</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div><!-- /page -->
+
+  <!-- Toast -->
+  <div id="toast" class="toast"></div>
+
+  <script>
+  // ═══════════════════════════════════════════════
+  // CREATOR CASH BLUEPRINT — ACCOUNT SYSTEM
+  // Uses localStorage for demo; replace with real
+  // backend API (Supabase, Firebase, etc.) in prod
+  // ═══════════════════════════════════════════════
+
+  // ── PDF catalog ─────────────────────────────────
+  var PDF_CATALOG = {
+    basic: [
+      { id:'pdf1', title:'Faceless Content Starter Blueprint', pages:'28 pages', size:'57 KB', cover:'pdf-cover-1', icon:'📄', file:'pdfs/Faceless_YouTube_Basic.pdf', filename:'Faceless_YouTube_Basic.pdf' }
+    ],
+    medium: [
+      { id:'pdf1', title:'Faceless Content Starter Blueprint', pages:'28 pages', size:'57 KB', cover:'pdf-cover-1', icon:'📄', file:'pdfs/Faceless_YouTube_Basic.pdf', filename:'Faceless_YouTube_Basic.pdf' },
+      { id:'pdf2', title:'Faceless Growth & Monetization Guide', pages:'60 pages', size:'116 KB', cover:'pdf-cover-2', icon:'🚀', file:'pdfs/Faceless_YouTube_Medium.pdf', filename:'Faceless_YouTube_Medium.pdf' }
+    ],
+    premium: [
+      { id:'pdf1', title:'Faceless Content Starter Blueprint', pages:'28 pages', size:'57 KB', cover:'pdf-cover-1', icon:'📄', file:'pdfs/Faceless_YouTube_Basic.pdf', filename:'Faceless_YouTube_Basic.pdf' },
+      { id:'pdf2', title:'Faceless Growth & Monetization Guide', pages:'60 pages', size:'116 KB', cover:'pdf-cover-2', icon:'🚀', file:'pdfs/Faceless_YouTube_Medium.pdf', filename:'Faceless_YouTube_Medium.pdf' },
+      { id:'pdf3', title:'Faceless Automation & Profit Blueprint', pages:'100 pages', size:'200 KB', cover:'pdf-cover-3', icon:'💸', file:'pdfs/Faceless_YouTube_Premium.pdf', filename:'Faceless_YouTube_Premium.pdf' }
+    ]
+  };
+
+  // ── Storage helpers ──────────────────────────────
+  function getUsers() { try { return JSON.parse(localStorage.getItem('ccb_users') || '{}'); } catch(e) { return {}; } }
+  function saveUsers(u) { localStorage.setItem('ccb_users', JSON.stringify(u)); }
+  function getCurrentUser() { try { return JSON.parse(localStorage.getItem('ccb_current') || 'null'); } catch(e) { return null; } }
+  function saveCurrentUser(u) { localStorage.setItem('ccb_current', JSON.stringify(u)); }
+
+  // ── View management ──────────────────────────────
+  function showView(id) {
+    document.querySelectorAll('.auth-view, .dashboard-view').forEach(function(el) {
+      el.classList.remove('active');
+      el.style.display = '';
+    });
+    var el = document.getElementById(id);
+    if (!el) return;
+    if (id === 'dashView') {
+      el.style.display = 'block';
+      el.classList.add('active');
+    } else {
+      el.style.display = 'flex';
+      el.classList.add('active');
+    }
+  }
+
+  // ── Tab switching ────────────────────────────────
+  function switchTab(tab, btn) {
+    document.querySelectorAll('.auth-tab').forEach(function(t) { t.classList.remove('active'); });
+    btn.classList.add('active');
+    document.getElementById('loginPanel').style.display = tab === 'login' ? 'block' : 'none';
+    document.getElementById('registerPanel').style.display = tab === 'register' ? 'block' : 'none';
+    clearErrors();
+  }
+  function switchTabByName(tab) {
+    var tabs = document.querySelectorAll('.auth-tab');
+    var idx = tab === 'register' ? 1 : 0;
+    switchTab(tab, tabs[idx]);
+  }
+
+  // ── Helpers ──────────────────────────────────────
+  function isValidEmail(e) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e); }
+  function hashPassword(pw) {
+    // Simple hash for demo — use bcrypt server-side in production
+    var h = 0;
+    for (var i = 0; i < pw.length; i++) { h = ((h << 5) - h) + pw.charCodeAt(i); h |= 0; }
+    return 'hash_' + Math.abs(h).toString(36);
+  }
+  function showToast(msg, type) {
+    var t = document.getElementById('toast');
+    t.textContent = msg;
+    t.style.background = type === 'error' ? 'rgba(255,80,80,0.12)' : 'var(--green-dim)';
+    t.style.borderColor = type === 'error' ? 'rgba(255,80,80,0.3)' : 'rgba(74,222,128,0.3)';
+    t.style.color = type === 'error' ? '#ff8080' : 'var(--green)';
+    t.classList.add('show');
+    setTimeout(function() { t.classList.remove('show'); }, 4000);
+  }
+  function clearErrors() {
+    document.querySelectorAll('.error-msg').forEach(function(e) { e.classList.remove('show'); });
+    document.querySelectorAll('.auth-error, .auth-success').forEach(function(e) { e.classList.remove('show'); });
+    document.querySelectorAll('input').forEach(function(i) { i.classList.remove('error'); });
+  }
+  function showError(elId, inputId) {
+    var errEl = document.getElementById(elId);
+    if (errEl) errEl.classList.add('show');
+    var inp = document.getElementById(inputId);
+    if (inp) inp.classList.add('error');
+  }
+  function setLoading(btnId, loading, text) {
+    var btn = document.getElementById(btnId);
+    if (!btn) return;
+    btn.disabled = loading;
+    btn.innerHTML = loading ? '<span class="spinner"></span>' : text;
+  }
+
+  // ── Password strength ────────────────────────────
+  function checkStrength(pw) {
+    var score = 0;
+    if (pw.length >= 8) score++;
+    if (/[A-Z]/.test(pw)) score++;
+    if (/[0-9]/.test(pw)) score++;
+    if (/[^A-Za-z0-9]/.test(pw)) score++;
+    var fill = document.getElementById('strengthFill');
+    if (!fill) return;
+    var pct = (score / 4) * 100;
+    var colors = ['#ff4444','#ff9500','#fbbf24','#4ade80'];
+    fill.style.width = pct + '%';
+    fill.style.background = colors[Math.max(0, score - 1)] || '#ff4444';
+  }
+
+  // ── Toggle password visibility ───────────────────
+  function togglePw(inputId, btn) {
+    var inp = document.getElementById(inputId);
+    if (!inp) return;
+    inp.type = inp.type === 'password' ? 'text' : 'password';
+    btn.textContent = inp.type === 'password' ? '👁' : '🙈';
+  }
+
+  // ── REGISTER ────────────────────────────────────
+  function doRegister() {
+    clearErrors();
+    var first = document.getElementById('regFirst').value.trim();
+    var last = document.getElementById('regLast').value.trim();
+    var email = document.getElementById('regEmail').value.trim().toLowerCase();
+    var pw = document.getElementById('regPw').value;
+    var pw2 = document.getElementById('regPw2').value;
+    var ok = true;
+
+    if (!first) { showError('regFirstErr','regFirst'); ok = false; }
+    if (!isValidEmail(email)) { showError('regEmailErr','regEmail'); ok = false; }
+    if (pw.length < 8) { showError('regPwErr','regPw'); ok = false; }
+    if (pw !== pw2) { showError('regPw2Err','regPw2'); ok = false; }
+    if (!ok) return;
+
+    setLoading('regBtn', true);
+
+    setTimeout(function() {
+      var users = getUsers();
+      if (users[email]) {
+        var err = document.getElementById('regError');
+        err.textContent = 'An account with this email already exists. Please sign in.';
+        err.classList.add('show');
+        setLoading('regBtn', false, 'Create Account →');
+        return;
+      }
+
+      // Create account
+      users[email] = {
+        firstName: first,
+        lastName: last,
+        email: email,
+        password: hashPassword(pw),
+        createdAt: new Date().toISOString(),
+        orders: []
+      };
+      saveUsers(users);
+
+      // Auto-link orders from purchase history
+      linkPendingOrders(email, users);
+
+      var succ = document.getElementById('regSuccess');
+      succ.textContent = '✅ Account created! A confirmation email has been sent to ' + email + '. You are now signed in.';
+      succ.classList.add('show');
+      setLoading('regBtn', false, 'Create Account →');
+
+      setTimeout(function() {
+        saveCurrentUser({ email: email, firstName: first, lastName: last });
+        renderDashboard(email);
+        showView('dashView');
+      }, 1500);
+
+    }, 900);
+  }
+
+  // ── LOGIN ───────────────────────────────────────
+  function doLogin() {
+    clearErrors();
+    var email = document.getElementById('loginEmail').value.trim().toLowerCase();
+    var pw = document.getElementById('loginPw').value;
+    var ok = true;
+
+    if (!isValidEmail(email)) { showError('loginEmailErr','loginEmail'); ok = false; }
+    if (!pw) { showError('loginPwErr','loginPw'); ok = false; }
+    if (!ok) return;
+
+    setLoading('loginBtn', true);
+
+    setTimeout(function() {
+      var users = getUsers();
+      var user = users[email];
+
+      if (!user || user.password !== hashPassword(pw)) {
+        var err = document.getElementById('loginError');
+        err.textContent = '❌ Incorrect email or password. Please try again.';
+        err.classList.add('show');
+        setLoading('loginBtn', false, 'Sign In →');
+        return;
+      }
+
+      saveCurrentUser({ email: email, firstName: user.firstName, lastName: user.lastName });
+      setLoading('loginBtn', false, 'Sign In →');
+      renderDashboard(email);
+      showView('dashView');
+    }, 800);
+  }
+
+  // ── FORGOT PASSWORD ──────────────────────────────
+  function doForgot() {
+    clearErrors();
+    var email = document.getElementById('forgotEmail').value.trim().toLowerCase();
+    if (!isValidEmail(email)) { showError('forgotEmailErr','forgotEmail'); return; }
+
+    var btn = document.querySelector('#forgotView .btn-primary');
+    if (btn) { btn.disabled = true; btn.innerHTML = '<span class="spinner"></span>'; }
+
+    setTimeout(function() {
+      var succ = document.getElementById('forgotSuccess');
+      succ.textContent = '✅ If an account exists for ' + email + ', a reset link has been sent. Check your inbox.';
+      succ.classList.add('show');
+      if (btn) { btn.disabled = false; btn.innerHTML = 'Send Reset Link →'; }
+      // Production: send actual reset email via your backend
+    }, 1000);
+  }
+
+  // ── LOGOUT ──────────────────────────────────────
+  function doLogout() {
+    localStorage.removeItem('ccb_current');
+    showView('authView');
+    switchTabByName('login');
+    showToast('You have been signed out.', 'success');
+  }
+
+  // ── LINK PENDING ORDERS ─────────────────────────
+  // Orders placed before account creation are linked by email
+  function linkPendingOrders(email, users) {
+    var pending = JSON.parse(localStorage.getItem('ccb_pending_orders') || '[]');
+    var matched = pending.filter(function(o) { return o.email === email; });
+    if (matched.length > 0) {
+      users[email].orders = users[email].orders.concat(matched);
+      saveUsers(users);
+      localStorage.removeItem('ccb_pending_orders');
+    }
+  }
+
+  // ── ADD DEMO ORDERS (for testing) ───────────────
+  function addDemoOrders(email) {
+    var users = getUsers();
+    if (!users[email]) return;
+    if (users[email].orders && users[email].orders.length > 0) return;
+    users[email].orders = [
+      {
+        id: 'CCB-2026-001',
+        date: '2026-03-15',
+        product: 'Premium Package',
+        packageKey: 'premium',
+        amount: 95,
+        status: 'completed'
+      }
+    ];
+    saveUsers(users);
+  }
+
+  // ── RENDER DASHBOARD ────────────────────────────
+  function renderDashboard(email) {
+    var users = getUsers();
+    var user = users[email];
+    if (!user) return;
+
+    // For demo: add sample orders if none
+    addDemoOrders(email);
+    var users2 = getUsers();
+    var user2 = users2[email];
+
+    // Header
+    document.getElementById('dashName').textContent = user2.firstName + ' ' + user2.lastName;
+    document.getElementById('dashEmail').textContent = email;
+    document.getElementById('accName').textContent = user2.firstName + ' ' + user2.lastName;
+    document.getElementById('accEmail').textContent = email;
+    document.getElementById('accSince').textContent = new Date(user2.createdAt).toLocaleDateString('en-US', { year:'numeric', month:'long', day:'numeric' });
+
+    var orders = user2.orders || [];
+    var totalSpent = orders.reduce(function(s,o) { return s + (o.amount || 0); }, 0);
+    var totalPdfs = orders.reduce(function(s,o) {
+      var cat = PDF_CATALOG[o.packageKey] || [];
+      return s + cat.length;
+    }, 0);
+
+    document.getElementById('statOrders').textContent = orders.length;
+    document.getElementById('statPdfs').textContent = totalPdfs;
+    document.getElementById('statSpent').textContent = '$' + totalSpent;
+    document.getElementById('orderCount').textContent = orders.length + ' order' + (orders.length !== 1 ? 's' : '');
+
+    var listEl = document.getElementById('ordersList');
+    if (orders.length === 0) {
+      listEl.innerHTML = '<div class="empty-orders"><div class="icon">📦</div><h3>No orders yet</h3><p>Purchase a guide to get started. All your downloads will appear here.</p><a href="creator-cash-blueprint.html#products" class="btn-shop">Browse Guides →</a></div>';
+      return;
+    }
+
+    listEl.innerHTML = orders.map(function(order, idx) {
+      var pdfs = PDF_CATALOG[order.packageKey] || [];
+      var dateStr = new Date(order.date).toLocaleDateString('en-US', { year:'numeric', month:'short', day:'numeric' });
+      return '<div class="order-card" id="order-' + idx + '">' +
+        '<div class="order-header" onclick="toggleOrder(' + idx + ')">' +
+          '<div class="order-header-left">' +
+            '<div>' +
+              '<div class="order-num">' + order.id + '</div>' +
+              '<div class="order-name">' + order.product + '</div>' +
+            '</div>' +
+            '<div class="order-date">' + dateStr + '</div>' +
+            '<span class="order-badge badge-completed">✓ Completed</span>' +
+          '</div>' +
+          '<div style="display:flex;align-items:center;gap:16px;">' +
+            '<div class="order-price">$' + order.amount + '</div>' +
+            '<div class="order-toggle">▾</div>' +
+          '</div>' +
+        '</div>' +
+        '<div class="order-body">' +
+          '<div class="order-body-inner">' +
+            '<div class="order-meta">' +
+              '<div class="order-meta-item"><label>ORDER NUMBER</label><span>' + order.id + '</span></div>' +
+              '<div class="order-meta-item"><label>DATE</label><span>' + dateStr + '</span></div>' +
+              '<div class="order-meta-item"><label>TOTAL</label><span>$' + order.amount + '</span></div>' +
+            '</div>' +
+            '<div style="font-size:13px;color:var(--w30);font-family:var(--f-mono);letter-spacing:0.5px;margin-bottom:12px;">PDF DOWNLOADS (' + pdfs.length + ')</div>' +
+            '<div class="pdf-downloads">' +
+              pdfs.map(function(pdf) {
+                return '<div class="pdf-item">' +
+                  '<div class="pdf-cover ' + pdf.cover + '">' + pdf.icon + '</div>' +
+                  '<div class="pdf-info"><strong>' + pdf.title + '</strong><span>' + pdf.pages + ' · PDF · ' + pdf.size + '</span></div>' +
+                  '<button class="btn-download-pdf" onclick="downloadPdf(this, \'' + pdf.file + '\', \'' + pdf.filename + '\')">↓ Download</button>' +
+                '</div>';
+              }).join('') +
+            '</div>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
+    }).join('');
+  }
+
+  // ── TOGGLE ORDER ─────────────────────────────────
+  function toggleOrder(idx) {
+    var card = document.getElementById('order-' + idx);
+    if (!card) return;
+    var isOpen = card.classList.contains('open');
+    document.querySelectorAll('.order-card').forEach(function(c) { c.classList.remove('open'); var b = c.querySelector('.order-body'); if (b) b.style.maxHeight = '0'; });
+    if (!isOpen) {
+      card.classList.add('open');
+      var body = card.querySelector('.order-body');
+      if (body) body.style.maxHeight = body.scrollHeight + 'px';
+    }
+  }
+
+  // ── DOWNLOAD PDF ─────────────────────────────────
+  function downloadPdf(btn, file, filename) {
+    var orig = btn.innerHTML;
+    btn.innerHTML = '⏳ Preparing...';
+    btn.disabled = true;
+    setTimeout(function() {
+      // Create download link
+      var a = document.createElement('a');
+      a.href = file;
+      a.download = filename;
+      a.target = '_blank';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      btn.innerHTML = '✓ Downloaded!';
+      btn.classList.add('done');
+      setTimeout(function() {
+        btn.innerHTML = orig;
+        btn.classList.remove('done');
+        btn.disabled = false;
+      }, 3000);
+      showToast('✅ ' + filename + ' download started!', 'success');
+    }, 800);
+  }
+
+  // ── EDIT NAME ────────────────────────────────────
+  function showEditName() {
+    var current = getCurrentUser();
+    if (!current) return;
+    var newName = prompt('Enter your new full name:', current.firstName + ' ' + current.lastName);
+    if (!newName || !newName.trim()) return;
+    var parts = newName.trim().split(' ');
+    var first = parts[0]; var last = parts.slice(1).join(' ') || '';
+    var users = getUsers();
+    if (users[current.email]) {
+      users[current.email].firstName = first;
+      users[current.email].lastName = last;
+      saveUsers(users);
+      current.firstName = first; current.lastName = last;
+      saveCurrentUser(current);
+      document.getElementById('dashName').textContent = first + ' ' + last;
+      document.getElementById('accName').textContent = first + ' ' + last;
+      showToast('✅ Name updated successfully!', 'success');
+    }
+  }
+
+  // ── CHANGE PASSWORD ──────────────────────────────
+  function showChangePw() {
+    var current = getCurrentUser();
+    if (!current) return;
+    var pw = prompt('Enter your new password (min. 8 characters):');
+    if (!pw || pw.length < 8) { if (pw !== null) showToast('Password must be at least 8 characters.', 'error'); return; }
+    var pw2 = prompt('Confirm new password:');
+    if (pw !== pw2) { showToast('Passwords do not match.', 'error'); return; }
+    var users = getUsers();
+    if (users[current.email]) {
+      users[current.email].password = hashPassword(pw);
+      saveUsers(users);
+      showToast('✅ Password changed successfully!', 'success');
+    }
+  }
+
+  // ── INIT ─────────────────────────────────────────
+  (function init() {
+    var user = getCurrentUser();
+    if (user) {
+      renderDashboard(user.email);
+      showView('dashView');
+    }
+
+    // Scroll progress
+    window.addEventListener('scroll', function() {
+      var el = document.getElementById('scrollProgress');
+      if (el) {
+        var total = document.body.scrollHeight - window.innerHeight;
+        el.style.width = total > 0 ? (window.scrollY / total * 100) + '%' : '0%';
+      }
+    }, { passive: true });
+
+    // Enter key submits forms
+    document.addEventListener('keydown', function(e) {
+      if (e.key !== 'Enter') return;
+      var activeView = document.querySelector('.auth-view.active');
+      if (!activeView) return;
+      if (activeView.id === 'authView') {
+        var loginVisible = document.getElementById('loginPanel').style.display !== 'none';
+        if (loginVisible) doLogin();
+        else doRegister();
+      } else if (activeView.id === 'forgotView') {
+        doForgot();
+      }
+    });
+
+    // Check URL params (e.g. ?tab=register from main site)
+    var params = new URLSearchParams(window.location.search);
+    if (params.get('tab') === 'register') switchTabByName('register');
+
+    // Demo: if ?demo=1 auto-login with test account
+    if (params.get('demo') === '1') {
+      var users = getUsers();
+      if (!users['demo@creatorcashblueprint.com']) {
+        users['demo@creatorcashblueprint.com'] = {
+          firstName: 'Demo', lastName: 'User',
+          email: 'demo@creatorcashblueprint.com',
+          password: hashPassword('demo1234'),
+          createdAt: new Date().toISOString(), orders: []
+        };
+        saveUsers(users);
+      }
+      saveCurrentUser({ email:'demo@creatorcashblueprint.com', firstName:'Demo', lastName:'User' });
+      renderDashboard('demo@creatorcashblueprint.com');
+      showView('dashView');
+    }
+  })();
+  </script>
+
+</body>
+</html>
