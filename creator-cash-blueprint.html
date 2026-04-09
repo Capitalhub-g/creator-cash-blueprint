@@ -882,94 +882,6 @@ img { max-width: 100%; display: block; }
 
 .btn-pay-sm.paypal:hover { background: rgba(0,112,186,0.25); }
 
-/* Bundle Banner */
-.bundle-banner {
-  display: flex;
-  align-items: center;
-  gap: 24px;
-  background: linear-gradient(135deg, rgba(0,245,196,0.06), rgba(167,139,250,0.06));
-  border: 1px solid rgba(0,245,196,0.2);
-  border-radius: var(--radius);
-  padding: 24px 28px;
-  cursor: pointer;
-  transition: var(--transition);
-  flex-wrap: wrap;
-}
-
-.bundle-banner:hover { border-color: rgba(0,245,196,0.4); background: linear-gradient(135deg, rgba(0,245,196,0.1), rgba(167,139,250,0.1)); }
-
-.bundle-left { flex: 1; }
-
-.bundle-tag {
-  display: inline-block;
-  font-family: var(--f-mono);
-  font-size: 10px;
-  letter-spacing: 2px;
-  color: var(--neon);
-  background: var(--neon-dim);
-  border-radius: 6px;
-  padding: 3px 10px;
-  margin-bottom: 8px;
-}
-
-.bundle-left strong {
-  display: block;
-  font-family: var(--f-display);
-  font-size: 20px;
-  font-weight: 700;
-  letter-spacing: -0.5px;
-  margin-bottom: 4px;
-}
-
-.bundle-left p { font-size: 13px; color: var(--white-30); }
-
-.bundle-price-area {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  flex-shrink: 0;
-}
-
-.bundle-old {
-  font-size: 20px;
-  color: var(--white-30);
-  text-decoration: line-through;
-  font-family: var(--f-display);
-}
-
-.bundle-new {
-  font-family: var(--f-display);
-  font-size: 36px;
-  font-weight: 800;
-  color: var(--neon);
-  letter-spacing: -1px;
-}
-
-.bundle-save {
-  font-size: 11px;
-  font-family: var(--f-mono);
-  background: rgba(0,245,196,0.12);
-  color: var(--neon);
-  padding: 4px 10px;
-  border-radius: 100px;
-}
-
-.bundle-btn {
-  background: var(--neon);
-  color: var(--bg);
-  padding: 12px 24px;
-  border-radius: var(--radius-sm);
-  font-weight: 800;
-  font-family: var(--f-display);
-  font-size: 15px;
-  letter-spacing: -0.3px;
-  transition: var(--transition-bounce);
-  white-space: nowrap;
-  flex-shrink: 0;
-}
-
-.bundle-btn:hover { transform: scale(1.05); box-shadow: 0 0 32px rgba(0,245,196,0.3); }
-
 /* ══════════════════════════════════════════════
    WHY GRID
 ══════════════════════════════════════════════ */
@@ -1620,7 +1532,7 @@ img { max-width: 100%; display: block; }
   .why-grid { grid-template-columns: 1fr; }
   .footer-links-group { flex-wrap: wrap; gap: 32px; }
   .footer-base-inner { flex-direction: column; gap: 8px; }
-  .bundle-banner { flex-direction: column; align-items: flex-start; gap: 16px; }
+  
   .br-hide { display: none; }
   .mfield-row { grid-template-columns: 1fr; }
   .hero-actions { flex-direction: column; }
@@ -1632,7 +1544,6 @@ img { max-width: 100%; display: block; }
   .hero-tag { font-size: 10px; }
   .trust-inner span { padding: 0 20px; font-size: 11px; }
 }
-
 
 /* ══════════════════════════════════════════════
    YOUTUBE THEMA AANPASSINGEN
@@ -1812,29 +1723,7 @@ h1, h2, h3, h4, h5 {
 }
 
 /* Bundle: rode border en knop */
-.bundle-banner {
-  border-color: rgba(255,0,0,0.25) !important;
-  background: linear-gradient(135deg, rgba(255,0,0,0.05), rgba(255,68,68,0.03)) !important;
-}
-.bundle-banner:hover {
-  border-color: rgba(255,0,0,0.45) !important;
-  background: linear-gradient(135deg, rgba(255,0,0,0.1), rgba(255,68,68,0.06)) !important;
-}
-.bundle-new { color: #ff0000 !important; }
-.bundle-save {
-  background: rgba(255,0,0,0.12) !important;
-  color: #ff6666 !important;
-}
-.bundle-tag {
-  color: #ff0000 !important;
-  background: rgba(255,0,0,0.1) !important;
-}
-.bundle-btn {
-  background: #ff0000 !important;
-}
-.bundle-btn:hover {
-  box-shadow: 0 0 32px rgba(255,0,0,0.4) !important;
-}
+
 
 /* Nav CTA: YouTube rood */
 .nav-cta {
@@ -1929,7 +1818,6 @@ h1, h2, h3, h4, h5 {
   --neon-glow: rgba(255,0,0,0.25);
 }
 
-
 /* YouTube stats balk in hero */
 .yt-stats-row {
   display: flex;
@@ -1980,7 +1868,6 @@ h1, h2, h3, h4, h5 {
   .yt-stat { padding: 4px 0; min-width: 120px; }
 }
 
-
 .cover-views {
   position: absolute;
   bottom: 10px;
@@ -1995,7 +1882,6 @@ h1, h2, h3, h4, h5 {
   font-weight: 700;
   z-index: 2;
 }
-
 
 /* YouTube Thumbnail Mockups in hero */
 .hero-visual {
@@ -2176,10 +2062,6 @@ h1, h2, h3, h4, h5 {
   font-family: var(--f-mono);
 }
 
-
-
-
-
 /* Package includes label */
 .pkg-includes {
   font-size: 12px;
@@ -2196,7 +2078,6 @@ h1, h2, h3, h4, h5 {
 .pkg-includes strong {
   color: rgba(255,255,255,0.8);
 }
-
 
 /* ── Mobile fixes ── */
 @media (max-width: 480px) {
@@ -2238,7 +2119,6 @@ h1, h2, h3, h4, h5 {
   .logo { font-size: 14px; }
   .hero-tag { display: none; }
 }
-
 
 /* ── Discount / Was-price styling ── */
 .price-stack {
@@ -2282,7 +2162,6 @@ h1, h2, h3, h4, h5 {
   .price-was { font-size: 13px; }
   .price-badge { font-size: 9px; padding: 2px 7px; }
 }
-
 
 /* ══ Comparison Table ══ */
 .compare-wrap {
@@ -2399,7 +2278,6 @@ h1, h2, h3, h4, h5 {
   .compare-head .col-pkg { font-size: 13px; }
 }
 
-
 /* ══ Sticky CTA Bar ══ */
 .sticky-cta {
   position: fixed;
@@ -2474,7 +2352,6 @@ h1, h2, h3, h4, h5 {
   .back-top { right: 16px; bottom: 70px; width: 38px; height: 38px; }
 }
 
-
 /* ══ Live activity ══ */
 .live-activity {
   display: inline-flex;
@@ -2503,7 +2380,6 @@ h1, h2, h3, h4, h5 {
   50% { opacity: 0.4; transform: scale(0.8); }
 }
 
-
 /* ══ Payment trust logos ══ */
 .payment-trust-row {
   display: flex;
@@ -2526,7 +2402,6 @@ h1, h2, h3, h4, h5 {
   border-radius: 100px;
   letter-spacing: 1px;
 }
-
 
 /* ══ Email Capture ══ */
 .section-email {
@@ -2612,7 +2487,6 @@ h1, h2, h3, h4, h5 {
   .email-btn { width: 100%; padding: 14px; text-align: center; }
 }
 
-
 /* ══ Cookie Banner ══ */
 .cookie-banner {
   position: fixed;
@@ -2666,7 +2540,6 @@ h1, h2, h3, h4, h5 {
   .cookie-btns { width: 100%; justify-content: flex-end; }
 }
 
-
 /* ══ Tools bar ══ */
 .tools-bar {
   background: var(--bg-2);
@@ -2712,7 +2585,6 @@ h1, h2, h3, h4, h5 {
   .tool-badge { font-size: 11px; padding: 4px 10px; }
 }
 
-
 /* ══ Scroll progress ══ */
 .scroll-progress {
   position: fixed;
@@ -2723,6 +2595,409 @@ h1, h2, h3, h4, h5 {
   width: 0%;
   transition: width 0.1s linear;
   box-shadow: 0 0 8px rgba(255,0,0,0.5);
+}
+
+.hero-from-price {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--white-30);
+  font-family: var(--f-mono);
+  margin-top: -28px;
+  margin-bottom: 36px;
+  letter-spacing: 0.3px;
+}
+.hero-from-price strong { color: var(--neon); font-weight: 700; }
+
+/* Overall rating */
+.overall-rating {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 40px;
+  padding: 18px 24px;
+  background: var(--bg-3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  flex-wrap: wrap;
+}
+.overall-stars { color: #fbbf24; font-size: 22px; letter-spacing: 3px; }
+.overall-score {
+  font-family: var(--f-display);
+  font-size: 36px;
+  font-weight: 900;
+  letter-spacing: -1px;
+  color: var(--white);
+}
+.overall-score span { font-size: 14px; color: var(--white-30); font-family: var(--f-body); font-weight: 400; }
+.overall-count { font-size: 13px; color: var(--white-30); font-family: var(--f-mono); }
+
+/* Verified badge */
+.verified-badge {
+  display: inline-block;
+  font-size: 10px;
+  color: #4ade80;
+  background: rgba(74,222,128,0.1);
+  border: 1px solid rgba(74,222,128,0.2);
+  border-radius: 100px;
+  padding: 2px 8px;
+  font-family: var(--f-mono);
+  letter-spacing: 0.5px;
+  margin-top: 4px;
+}
+
+/* ══ About sectie ══ */
+.about-inner {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 60px;
+  align-items: start;
+}
+.about-avatar-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+.about-avatar {
+  width: 160px; height: 160px;
+  background: linear-gradient(135deg, #1a0000, #330000);
+  border: 2px solid rgba(255,0,0,0.3);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 40px rgba(255,0,0,0.1);
+}
+.about-avatar-inner {
+  font-size: 52px;
+  color: var(--red);
+  text-shadow: 0 0 30px rgba(255,0,0,0.5);
+}
+.about-socials {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+.about-social-link {
+  display: block;
+  text-align: center;
+  padding: 8px 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  color: var(--white-50);
+  font-family: var(--f-mono);
+  text-decoration: none;
+  transition: var(--transition);
+  letter-spacing: 0.5px;
+}
+.about-social-link:hover { color: var(--white); border-color: var(--border-bright); }
+.about-p {
+  font-size: 15px;
+  color: var(--white-50);
+  line-height: 1.8;
+  margin-bottom: 16px;
+  font-weight: 500;
+}
+.about-stats {
+  display: flex;
+  gap: 32px;
+  margin-top: 28px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+  flex-wrap: wrap;
+}
+.about-stat strong {
+  display: block;
+  font-family: var(--f-display);
+  font-size: 28px;
+  font-weight: 900;
+  letter-spacing: -0.5px;
+  color: var(--white);
+  margin-bottom: 4px;
+}
+.about-stat span {
+  font-size: 12px;
+  color: var(--white-30);
+  font-family: var(--f-mono);
+}
+@media (max-width: 768px) {
+  .about-inner { grid-template-columns: 1fr; gap: 32px; }
+  .about-avatar-col { flex-direction: row; align-items: center; gap: 20px; }
+  .about-avatar { width: 80px; height: 80px; flex-shrink: 0; }
+  .about-avatar-inner { font-size: 28px; }
+  .about-socials { flex-direction: row; width: auto; }
+  .about-stats { gap: 20px; }
+}
+@media (max-width: 480px) {
+  .about-stats { flex-direction: column; gap: 16px; }
+}
+
+/* ══ PDF Preview / Look Inside ══ */
+.preview-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.preview-card {
+  background: var(--bg-3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  position: relative;
+  transition: var(--transition);
+}
+.preview-card:hover { border-color: var(--border-bright); transform: translateY(-3px); }
+.preview-popular {
+  border-color: rgba(255,0,0,0.3) !important;
+  box-shadow: 0 0 40px rgba(255,0,0,0.06);
+}
+.preview-crown {
+  position: absolute;
+  top: -1px; left: 50%;
+  transform: translateX(-50%);
+  background: var(--red);
+  color: white;
+  font-family: var(--f-mono);
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  font-weight: 700;
+  padding: 4px 14px;
+  border-radius: 0 0 8px 8px;
+  z-index: 2;
+  white-space: nowrap;
+}
+.preview-header {
+  padding: 24px 20px 18px;
+  position: relative;
+}
+.preview-h-1 { background: linear-gradient(135deg, #0a1628, #0d2341); }
+.preview-h-2 { background: linear-gradient(135deg, #0d0a28, #1a0d41); }
+.preview-h-3 { background: linear-gradient(135deg, #1a0000, #2e0a0a); }
+.preview-badge {
+  font-family: var(--f-mono);
+  font-size: 9px;
+  letter-spacing: 2px;
+  background: rgba(255,255,255,0.08);
+  color: rgba(255,255,255,0.5);
+  border-radius: 4px;
+  padding: 3px 8px;
+  display: inline-block;
+  margin-bottom: 10px;
+}
+.preview-badge-pop {
+  background: rgba(255,0,0,0.12) !important;
+  color: #ff6666 !important;
+}
+.preview-title {
+  font-family: var(--f-display);
+  font-size: 17px;
+  font-weight: 900;
+  line-height: 1.25;
+  letter-spacing: -0.3px;
+  margin-bottom: 6px;
+}
+.preview-pages {
+  font-size: 11px;
+  color: rgba(255,255,255,0.35);
+  font-family: var(--f-mono);
+}
+.preview-toc { padding: 16px 20px 0; }
+.toc-label {
+  font-family: var(--f-mono);
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: var(--red);
+  margin-bottom: 12px;
+  font-weight: 700;
+}
+.toc-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 7px 0;
+  font-size: 12px;
+  color: var(--white-50);
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  line-height: 1.4;
+  font-weight: 500;
+}
+.toc-item:last-child { border-bottom: none; }
+.toc-num {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  color: var(--red);
+  flex-shrink: 0;
+  width: 18px;
+  margin-top: 1px;
+}
+.toc-appendix { color: var(--white-30) !important; font-style: italic; }
+.btn-preview-buy {
+  display: block;
+  width: calc(100% - 40px);
+  margin: 16px 20px 20px;
+  padding: 11px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--white);
+  font-size: 13px;
+  font-weight: 800;
+  font-family: var(--f-display);
+  letter-spacing: -0.2px;
+  cursor: pointer;
+  transition: var(--transition);
+  text-align: center;
+}
+.btn-preview-buy:hover { background: rgba(255,255,255,0.12); border-color: var(--border-bright); }
+.btn-preview-pop {
+  background: rgba(255,0,0,0.1) !important;
+  color: #ff6666 !important;
+  border-color: rgba(255,0,0,0.25) !important;
+}
+.btn-preview-pop:hover { background: rgba(255,0,0,0.2) !important; }
+@media (max-width: 1024px) {
+  .preview-grid { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; }
+}
+@media (max-width: 480px) {
+  .preview-header { padding: 20px 16px 14px; }
+  .preview-toc { padding: 12px 16px 0; }
+  .btn-preview-buy { width: calc(100% - 32px); margin: 12px 16px 16px; }
+}
+
+.value-statement {
+  font-size: 12px;
+  color: var(--white-30);
+  font-family: var(--f-mono);
+  margin-bottom: 16px;
+  margin-top: -10px;
+  letter-spacing: 0.2px;
+}
+.value-statement s { opacity: 0.5; }
+.value-statement strong { color: var(--neon); }
+
+/* ══ Exit Intent Popup ══ */
+.exit-popup-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.88);
+  backdrop-filter: blur(12px);
+  z-index: 300;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+}
+.exit-popup-overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
+.exit-popup-box {
+  background: var(--bg-2);
+  border: 1px solid var(--border-bright);
+  border-radius: var(--radius);
+  padding: 40px 36px;
+  max-width: 440px;
+  width: 100%;
+  text-align: center;
+  position: relative;
+  transform: scale(0.92) translateY(20px);
+  transition: transform 0.35s cubic-bezier(0.34,1.2,0.64,1);
+}
+.exit-popup-overlay.active .exit-popup-box {
+  transform: scale(1) translateY(0);
+}
+.exit-popup-close {
+  position: absolute;
+  top: 12px; right: 12px;
+  width: 28px; height: 28px;
+  background: var(--surface);
+  border-radius: 50%;
+  color: var(--white-50);
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--transition);
+  border: none;
+}
+.exit-popup-close:hover { background: var(--red); color: white; }
+.exit-popup-icon { font-size: 40px; margin-bottom: 12px; }
+.exit-popup-h {
+  font-family: var(--f-display);
+  font-size: 26px;
+  font-weight: 900;
+  letter-spacing: -0.5px;
+  margin-bottom: 12px;
+}
+.exit-popup-p {
+  font-size: 14px;
+  color: var(--white-50);
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+.exit-popup-p strong { color: var(--white-80); }
+.exit-popup-p em { color: var(--neon); font-style: normal; font-weight: 600; }
+.exit-popup-input {
+  width: 100%;
+  padding: 12px 16px;
+  background: var(--bg-3);
+  border: 1px solid var(--border-bright);
+  border-radius: var(--radius-sm);
+  color: var(--white);
+  font-size: 14px;
+  font-family: var(--f-body);
+  outline: none;
+  margin-bottom: 10px;
+  transition: var(--transition);
+}
+.exit-popup-input:focus { border-color: rgba(255,0,0,0.4); }
+.exit-popup-input::placeholder { color: var(--white-30); }
+.exit-popup-btn {
+  width: 100%;
+  padding: 13px;
+  background: var(--red);
+  color: white;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-weight: 800;
+  font-size: 14px;
+  font-family: var(--f-display);
+  letter-spacing: -0.2px;
+  cursor: pointer;
+  transition: var(--transition);
+  margin-bottom: 10px;
+}
+.exit-popup-btn:hover { background: #cc0000; }
+.exit-popup-fine {
+  font-size: 11px;
+  color: var(--white-30);
+  font-family: var(--f-mono);
+  margin-bottom: 14px;
+}
+.exit-popup-skip {
+  font-size: 11px;
+  color: var(--white-30);
+  font-family: var(--f-mono);
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-decoration: underline;
+  transition: var(--transition);
+  padding: 0;
+}
+.exit-popup-skip:hover { color: var(--white-50); }
+@media (max-width: 480px) {
+  .exit-popup-box { padding: 28px 20px; }
+  .exit-popup-h { font-size: 22px; }
 }
 
 </style>
@@ -2776,6 +3051,7 @@ h1, h2, h3, h4, h5 {
       </a>
       <ul class="nav-links">
         <li><a href="#products">Guides</a></li>
+        <li><a href="#preview">Preview</a></li>
         <li><a href="#how">How It Works</a></li>
         <li><a href="#faq">FAQ</a></li>
         <li><a href="#" class="nav-login">Login</a></li>
@@ -2787,6 +3063,7 @@ h1, h2, h3, h4, h5 {
     </div>
     <div class="mobile-nav" id="mobileNav">
       <a href="#products">Guides</a>
+      <a href="#preview">Preview</a>
       <a href="#how">How It Works</a>
       <a href="#faq">FAQ</a>
       <a href="#">Login</a>
@@ -2817,6 +3094,7 @@ h1, h2, h3, h4, h5 {
         Learn how to create viral content, grow channels, and monetize<br class="br-hide" />
         using simple step-by-step PDF guides. Built for beginners.
       </p>
+      <div class="hero-from-price">Starting from <strong>$29</strong> · Instant PDF download</div>
 
       <div class="hero-actions">
         <a href="#products" class="btn-neon">
@@ -3028,6 +3306,7 @@ h1, h2, h3, h4, h5 {
               <span class="product-pages">88 pages · PDF</span>
             </div>
             <p class="pkg-includes">Includes: <strong>Basic PDF + Medium PDF</strong></p>
+            <div class="value-statement">Individually <s>$94</s> — together for <strong>$65</strong></div>
             <ul class="product-list">
               <li>Niche research system &amp; competitor analysis</li>
               <li>Script writing &amp; retention frameworks</li>
@@ -3068,6 +3347,7 @@ h1, h2, h3, h4, h5 {
               <span class="product-pages">188 pages · PDF</span>
             </div>
             <p class="pkg-includes">Includes: <strong>All 3 PDFs — Basic, Medium &amp; Premium</strong></p>
+            <div class="value-statement">Guides individually valued at <s>$189</s> — get all 3 for <strong>$95</strong></div>
             <ul class="product-list">
               <li>Everything in Basic &amp; Medium included</li>
               <li>Advanced automation workflows</li>
@@ -3177,6 +3457,82 @@ h1, h2, h3, h4, h5 {
       </div>
   </section>
 
+  <!-- ═══════════════ PDF PREVIEW ═══════════════ -->
+  <section id="preview" class="section">
+    <div class="container">
+      <div class="section-eyebrow">LOOK INSIDE</div>
+      <h2 class="section-h2">See Exactly What<br/><span class="grad-text">You're Getting.</span></h2>
+      <p class="section-sub">Here's a preview of the table of contents for each guide.</p>
+
+      <div class="preview-grid">
+
+        <div class="preview-card">
+          <div class="preview-header preview-h-1">
+            <div class="preview-badge">PDF 01 · $29</div>
+            <div class="preview-title">Faceless Content<br/>Starter Blueprint</div>
+            <div class="preview-pages">28 pages</div>
+          </div>
+          <div class="preview-toc">
+            <div class="toc-label">TABLE OF CONTENTS</div>
+            <div class="toc-item"><span class="toc-num">01</span>What Is a Faceless YouTube Channel</div>
+            <div class="toc-item"><span class="toc-num">02</span>Choosing a Profitable Niche</div>
+            <div class="toc-item"><span class="toc-num">03</span>Channel Setup &amp; Branding</div>
+            <div class="toc-item"><span class="toc-num">04</span>Content Creation Basics</div>
+            <div class="toc-item"><span class="toc-num">05</span>Uploading Your First Video</div>
+            <div class="toc-item"><span class="toc-num">06</span>Beginner Growth Tips</div>
+            <div class="toc-item"><span class="toc-num">07</span>30-Day Launch Plan</div>
+            <div class="toc-item"><span class="toc-num">08</span>Free Tools List</div>
+            <div class="toc-item toc-appendix"><span class="toc-num">+</span>Appendices A–F (Niche deep dives, script examples, glossary, FAQ)</div>
+          </div>
+          <button class="btn-preview-buy" onclick="openCheckout('Starter Blueprint', 29)">Get this guide — $29 →</button>
+        </div>
+
+        <div class="preview-card">
+          <div class="preview-header preview-h-2">
+            <div class="preview-badge">PDF 02 · $65</div>
+            <div class="preview-title">Faceless Growth &amp;<br/>Monetization Guide</div>
+            <div class="preview-pages">60 pages</div>
+          </div>
+          <div class="preview-toc">
+            <div class="toc-label">TABLE OF CONTENTS</div>
+            <div class="toc-item"><span class="toc-num">01</span>Recap of the Fundamentals</div>
+            <div class="toc-item"><span class="toc-num">02</span>Niche Research Systems</div>
+            <div class="toc-item"><span class="toc-num">03</span>Script Writing Frameworks</div>
+            <div class="toc-item"><span class="toc-num">04</span>Thumbnail Psychology &amp; CTR</div>
+            <div class="toc-item"><span class="toc-num">05</span>YouTube SEO Deep Dive</div>
+            <div class="toc-item"><span class="toc-num">06</span>Monetization Methods</div>
+            <div class="toc-item"><span class="toc-num">07</span>Content Scaling &amp; Batch Systems</div>
+            <div class="toc-item"><span class="toc-num">08</span>Templates, Sheets &amp; Checklists</div>
+            <div class="toc-item toc-appendix"><span class="toc-num">+</span>Appendices A–W (Niche library, hook library, SEO playbook, 30 growth experiments)</div>
+          </div>
+          <button class="btn-preview-buy" onclick="openCheckout('Growth System', 65)">Get this guide — $65 →</button>
+        </div>
+
+        <div class="preview-card preview-popular">
+          <div class="preview-crown">⭐ MOST POPULAR</div>
+          <div class="preview-header preview-h-3">
+            <div class="preview-badge preview-badge-pop">PDF 03 · $95</div>
+            <div class="preview-title">Faceless Automation<br/>&amp; Profit Blueprint</div>
+            <div class="preview-pages">100 pages</div>
+          </div>
+          <div class="preview-toc">
+            <div class="toc-label">TABLE OF CONTENTS</div>
+            <div class="toc-item"><span class="toc-num">01</span>Advanced Automation Workflows</div>
+            <div class="toc-item"><span class="toc-num">02</span>Content Scaling Systems</div>
+            <div class="toc-item"><span class="toc-num">03</span>Monetization Expansion Methods</div>
+            <div class="toc-item"><span class="toc-num">04</span>Done-For-You Templates</div>
+            <div class="toc-item"><span class="toc-num">05</span>Productivity &amp; Batch Systems</div>
+            <div class="toc-item"><span class="toc-num">06</span>Multi-Channel Scaling</div>
+            <div class="toc-item"><span class="toc-num">07</span>Revenue Stack Optimization</div>
+            <div class="toc-item toc-appendix"><span class="toc-num">+</span>Includes all content from Guide 1 &amp; Guide 2</div>
+          </div>
+          <button class="btn-preview-buy btn-preview-pop" onclick="openCheckout('Automation &amp; Profit Blueprint', 95)">Get this guide — $95 →</button>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
   <!-- ═══════════════ WHY THIS WORKS ═══════════════ -->
   <section id="why" class="section section-alt">
     <div class="container">
@@ -3224,6 +3580,11 @@ h1, h2, h3, h4, h5 {
       <div class="section-eyebrow">REAL PEOPLE · REAL RESULTS</div>
       <h2 class="section-h2">What Other Creators<br/><span class="grad-text">Are Saying.</span></h2>
 
+      <div class="overall-rating">
+        <div class="overall-stars">★★★★★</div>
+        <div class="overall-score">4.9 <span>out of 5</span></div>
+        <div class="overall-count">Based on 2,400+ downloads</div>
+      </div>
       <div class="testi-grid">
 
         <div class="testi-card" data-aos>
@@ -3234,6 +3595,7 @@ h1, h2, h3, h4, h5 {
             <div>
               <strong>kai_j</strong>
               <span>19 · started 2 months ago</span>
+              <span class="verified-badge">✓ Verified buyer</span>
             </div>
           </div>
         </div>
@@ -3246,6 +3608,7 @@ h1, h2, h3, h4, h5 {
             <div>
               <strong>maya.creates</strong>
               <span>22 · freelancer</span>
+              <span class="verified-badge">✓ Verified buyer</span>
             </div>
           </div>
         </div>
@@ -3258,6 +3621,7 @@ h1, h2, h3, h4, h5 {
             <div>
               <strong>silent_$teve</strong>
               <span>24 · content biz owner</span>
+              <span class="verified-badge">✓ Verified buyer</span>
             </div>
           </div>
         </div>
@@ -3270,6 +3634,7 @@ h1, h2, h3, h4, h5 {
             <div>
               <strong>justjxmie</strong>
               <span>17 · student</span>
+              <span class="verified-badge">✓ Verified buyer</span>
             </div>
           </div>
         </div>
@@ -3282,10 +3647,47 @@ h1, h2, h3, h4, h5 {
             <div>
               <strong>riya.digital</strong>
               <span>26 · side-hustle creator</span>
+              <span class="verified-badge">✓ Verified buyer</span>
             </div>
           </div>
         </div>
 
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ OVER DE MAKER ═══════════════ -->
+  <section id="about" class="section section-alt">
+    <div class="container about-inner">
+      <div class="about-avatar-col">
+        <div class="about-avatar">
+          <div class="about-avatar-inner">✦</div>
+        </div>
+        <div class="about-socials">
+          <a href="https://x.com/creatorcashblueprint" class="about-social-link" target="_blank" rel="noopener">𝕏 Twitter</a>
+          <a href="https://instagram.com/creatorcashblueprint" class="about-social-link" target="_blank" rel="noopener">Instagram</a>
+        </div>
+      </div>
+      <div class="about-text-col">
+        <div class="section-eyebrow">ABOUT THE CREATOR</div>
+        <h2 class="section-h2" style="font-size:clamp(28px,4vw,42px);margin-bottom:20px;">Who Made These Guides?</h2>
+        <p class="about-p">Creator Cash Blueprint was built by a faceless content operator who grew multiple anonymous channels from zero — without ever appearing on camera.</p>
+        <p class="about-p">After years of testing niches, workflows, and monetization strategies, the best-performing systems were distilled into these three guides. No filler, no theory — just the exact steps that actually worked.</p>
+        <p class="about-p">The guides are written for beginners because that's where every successful channel starts. If you're willing to follow a system and stay consistent, the results will come.</p>
+        <div class="about-stats">
+          <div class="about-stat">
+            <strong>2,400+</strong>
+            <span>Guides downloaded</span>
+          </div>
+          <div class="about-stat">
+            <strong>2026</strong>
+            <span>Edition — fully updated</span>
+          </div>
+          <div class="about-stat">
+            <strong>3</strong>
+            <span>Complete PDF guides</span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -3417,6 +3819,26 @@ h1, h2, h3, h4, h5 {
           </button>
           <div class="faq-a">
             <p>If you're brand new, start with Guide 1 (Starter Blueprint). It covers niche selection, channel setup, scripting, and a full 30-day launch plan. If you have a channel and want to grow and monetize it, Guide 2 (Growth & Monetization) is your next step. Guide 3 covers advanced automation, scaling, and profit systems.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q">
+            What language are the guides written in?
+            <span class="faq-toggle">+</span>
+          </button>
+          <div class="faq-a">
+            <p>All three guides are written in English. The content is clear and accessible — no advanced English required. If you can read basic English, you can follow every step in the guides.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q">
+            Are the guides kept up to date?
+            <span class="faq-toggle">+</span>
+          </button>
+          <div class="faq-a">
+            <p>Yes. All three guides are the 2026 Edition, updated to reflect current tools, platform changes, and monetization strategies. When you purchase, you receive the most current version available.</p>
           </div>
         </div>
 
@@ -3908,6 +4330,54 @@ function handleEmailSignup(e) {
   // Production: send to your email provider (Mailchimp, ConvertKit, etc.)
 }
 
+
+// ── Exit Intent Popup ─────────────────────────
+(function() {
+  if (sessionStorage.getItem('ccb_exit_shown')) return;
+  var triggered = false;
+  document.addEventListener('mouseleave', function(e) {
+    if (e.clientY <= 5 && !triggered) {
+      triggered = true;
+      sessionStorage.setItem('ccb_exit_shown', '1');
+      var popup = document.getElementById('exitPopup');
+      if (popup) popup.classList.add('active');
+    }
+  });
+  // Mobile: trigger after 45 seconds of inactivity
+  var mobileTimer = setTimeout(function() {
+    if (!triggered && window.innerWidth < 768) {
+      triggered = true;
+      sessionStorage.setItem('ccb_exit_shown', '1');
+      var popup = document.getElementById('exitPopup');
+      if (popup) popup.classList.add('active');
+    }
+  }, 45000);
+})();
+
+function closeExitPopup() {
+  var popup = document.getElementById('exitPopup');
+  if (popup) popup.classList.remove('active');
+}
+
+function exitEmailSignup(e) {
+  e.preventDefault();
+  closeExitPopup();
+  // Show the main success toast
+  var toast = document.getElementById('toast');
+  if (toast) {
+    toast.textContent = '✅ Free guide sent! Check your inbox.';
+    toast.classList.add('show');
+    setTimeout(function() { toast.classList.remove('show'); }, 4000);
+  }
+  // Production: send email to provider
+}
+
+// Close exit popup on overlay click
+document.addEventListener('click', function(e) {
+  var popup = document.getElementById('exitPopup');
+  if (popup && e.target === popup) closeExitPopup();
+});
+
 </script>
 
   <!-- Sticky bottom CTA bar -->
@@ -3948,5 +4418,22 @@ function handleEmailSignup(e) {
     </div>
   </div>
 
+
+  <!-- Exit Intent Popup -->
+  <div id="exitPopup" class="exit-popup-overlay">
+    <div class="exit-popup-box">
+      <button class="exit-popup-close" onclick="closeExitPopup()">&#10005;</button>
+      <div class="exit-popup-icon">👋</div>
+      <h3 class="exit-popup-h">Wait — before you go!</h3>
+      <p class="exit-popup-p">Grab our <strong>free mini-guide</strong> before you leave:<br/>
+      <em>"5 Faceless Niches That Are Blowing Up Right Now"</em></p>
+      <form onsubmit="exitEmailSignup(event)">
+        <input type="email" class="exit-popup-input" placeholder="Enter your email" required />
+        <button type="submit" class="exit-popup-btn">Send me the free guide →</button>
+      </form>
+      <p class="exit-popup-fine">No spam. Unsubscribe anytime.</p>
+      <button class="exit-popup-skip" onclick="closeExitPopup()">No thanks, I'll figure it out myself</button>
+    </div>
+  </div>
 </body>
 </html>
