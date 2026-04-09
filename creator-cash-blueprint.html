@@ -2414,26 +2414,10 @@ h1, h2, h3, h4, h5 {
 }
 .email-sub strong { color: var(--white-80); }
 .email-form { width: 100%; }
-.email-input-wrap {
-  display: flex;
-  gap: 10px;
-  max-width: 540px;
-  margin: 0 auto 12px;
-}
-.email-input {
-  flex: 1;
-  padding: 14px 18px;
-  background: var(--bg-3);
-  border: 1px solid var(--border-bright);
-  border-radius: var(--radius-sm);
-  color: var(--white);
-  font-size: 15px;
-  font-family: var(--f-body);
-  outline: none;
-  transition: var(--transition);
-}
-.email-input:focus { border-color: rgba(255,0,0,0.4); background: rgba(255,0,0,0.03); }
-.email-input::placeholder { color: var(--white-30); }
+
+
+
+
 .email-btn {
   padding: 14px 22px;
   background: var(--red);
@@ -2450,19 +2434,9 @@ h1, h2, h3, h4, h5 {
 }
 .email-btn:hover { background: #cc0000; transform: translateY(-2px); }
 .email-fine { font-size: 12px; color: var(--white-30); font-family: var(--f-mono); }
-.email-success {
-  margin-top: 16px;
-  padding: 14px 24px;
-  background: rgba(74,222,128,0.1);
-  border: 1px solid rgba(74,222,128,0.3);
-  border-radius: var(--radius-sm);
-  color: #4ade80;
-  font-size: 15px;
-  font-weight: 600;
-  display: inline-block;
-}
+
 @media (max-width: 600px) {
-  .email-input-wrap { flex-direction: column; }
+  
   .email-btn { width: 100%; padding: 14px; text-align: center; }
 }
 
@@ -2907,19 +2881,7 @@ h1, h2, h3, h4, h5 {
 }
 .exit-popup-p strong { color: var(--white-80); }
 .exit-popup-p em { color: var(--neon); font-style: normal; font-weight: 600; }
-.exit-popup-input {
-  width: 100%;
-  padding: 12px 16px;
-  background: var(--bg-3);
-  border: 1px solid var(--border-bright);
-  border-radius: var(--radius-sm);
-  color: var(--white);
-  font-size: 14px;
-  font-family: var(--f-body);
-  outline: none;
-  margin-bottom: 10px;
-  transition: var(--transition);
-}
+
 .exit-popup-input:focus { border-color: rgba(255,0,0,0.4); }
 .exit-popup-input::placeholder { color: var(--white-30); }
 .exit-popup-btn {
@@ -3808,19 +3770,13 @@ h1, h2, h3, h4, h5 {
   <section id="email-capture" class="section section-email">
     <div class="email-orb"></div>
     <div class="container email-inner">
-      <div class="email-icon">✉️</div>
-      <h2 class="email-h2">Not ready to buy yet?</h2>
-      <p class="email-sub">Get our free mini-guide: <strong>"5 Faceless Niches That Are Blowing Up Right Now"</strong> — delivered instantly to your inbox.</p>
-      <form class="email-form" onsubmit="handleEmailSignup(event); return false;">
-        <div class="email-input-wrap">
-          <input type="email" class="email-input" placeholder="Enter your email address" required />
-          <button type="submit" class="email-btn">Send me the free guide →</button>
-        </div>
-        <p class="email-fine">No spam. Unsubscribe anytime. Takes 10 seconds.</p>
-      </form>
-      <div id="emailSuccess" class="email-success" style="display:none">
-        ✅ Check your inbox — your free guide is on its way!
-      </div>
+      <div class="email-icon">📋</div>
+      <h2 class="email-h2">Not sure which guide to pick?</h2>
+      <p class="email-sub">Compare all three packages below and choose the one that fits where you are right now.</p>
+      <a href="#products" class="btn-neon btn-neon-xl" style="display:inline-flex;margin-top:8px;">
+        ▶ View All Guides →
+      </a>
+      <p class="email-fine" style="margin-top:16px;">Instant PDF download · No subscription needed</p>
     </div>
   </section>
 
@@ -4371,13 +4327,12 @@ document.addEventListener('click', function(e) {
       <button class="exit-popup-close" onclick="closeExitPopup()">&#10005;</button>
       <div class="exit-popup-icon">👋</div>
       <h3 class="exit-popup-h">Wait — before you go!</h3>
-      <p class="exit-popup-p">Grab our <strong>free mini-guide</strong> before you leave:<br/>
-      <em>"5 Faceless Niches That Are Blowing Up Right Now"</em></p>
-      <form onsubmit="exitEmailSignup(event)">
-        <input type="email" class="exit-popup-input" placeholder="Enter your email" required />
-        <button type="submit" class="exit-popup-btn">Send me the free guide →</button>
-      </form>
-      <p class="exit-popup-fine">No spam. Unsubscribe anytime.</p>
+      <p class="exit-popup-p">Before you go — all three guides start at just <strong>$29</strong>.<br/>
+      <em>Instant download, no subscription needed.</em></p>
+      <a href="#products" class="exit-popup-btn" onclick="closeExitPopup()" style="display:block;text-decoration:none;text-align:center;">
+        ▶ View All Guides →
+      </a>
+      <p class="exit-popup-fine">Starting from $29 · Instant PDF download</p>
       <button class="exit-popup-skip" onclick="closeExitPopup()">No thanks, I'll figure it out myself</button>
     </div>
   </div>
