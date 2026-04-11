@@ -1,0 +1,15 @@
+{
+  "name": "creator-cash-blueprint",
+  "version": "1.0.0",
+  "description": "Creator Cash Blueprint website with email automation",
+  "scripts": {
+    "dev": "netlify dev",
+    "test-email": "node test-email.js"
+  },
+  "dependencies": {
+    "@netlify/functions": "^2.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

@@ -3853,7 +3853,7 @@ h1, h2, h3, h4, h5 {
       <div id="cardPane">
         <div class="mfield">
           <label>Email</label>
-          <input type="email" placeholder="you@example.com" />
+          <input type="email" id="checkout-email" placeholder="you@example.com" autocomplete="email" />
         </div>
         <div class="mfield">
           <label>Card Number</label>
@@ -4062,26 +4062,93 @@ function generateDownloadToken(pkgKey) {
   return btoa(payload).replace(/=/g, '');
 }
 
+// ── Email function endpoint (update after Netlify deploy) ──
+var EMAIL_FUNCTION_URL = '/.netlify/functions/send-confirmation';
+
+// ── Generate order number ──────────────────────────────
+function generateOrderNumber() {
+  var now = new Date();
+  var y = now.getFullYear();
+  var rand = Math.floor(Math.random() * 90000) + 10000;
+  return 'CCB-' + y + '-' + rand;
+}
+
+// ── Send confirmation email ────────────────────────────
+async function sendConfirmationEmail(customerName, customerEmail, pkgKey, orderNumber) {
+  try {
+    var response = await fetch(EMAIL_FUNCTION_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ customerName, customerEmail, packageKey: pkgKey, orderNumber })
+    });
+    var result = await response.json();
+    if (result.success) {
+      console.log('Email sent:', result.messageId);
+      return result.downloadUrl;
+    } else {
+      console.warn('Email failed:', result.error);
+      return null;
+    }
+  } catch (err) {
+    console.warn('Email error:', err.message);
+    return null;
+  }
+}
+
 function processCheckout() {
-  const btn = event.currentTarget;
-  const orig = btn.innerHTML;
+  var btn = event.currentTarget;
+  var orig = btn.innerHTML;
   btn.innerHTML = '<span style="opacity:.6">Processing...</span>';
   btn.disabled = true;
 
-  // Get package from modal subtitle
-  const subtitle = document.getElementById('modal-subtitle');
+  // Get package + customer info from modal
+  var subtitle = document.getElementById('modal-subtitle');
   var pkgName = subtitle ? subtitle.textContent.split(' — ')[0].trim() : '';
   var pkgKey = PACKAGE_MAP[pkgName] || 'basic';
+  var customerEmail = document.getElementById('checkout-email') ?
+    document.getElementById('checkout-email').value.trim() : '';
+  var customerName = document.getElementById('checkout-name') ?
+    document.getElementById('checkout-name').value.trim() : 'Customer';
+  var orderNumber = generateOrderNumber();
 
-  setTimeout(() => {
+  // Simulate payment processing (replace with real Stripe/PayPal)
+  setTimeout(async function() {
     btn.innerHTML = orig;
     btn.disabled = false;
     closeCheckout();
 
+    // Show processing toast
+    var toast = document.getElementById('toast');
+    if (toast) {
+      toast.textContent = 'Processing your order...';
+      toast.style.color = '#fbbf24';
+      toast.style.borderColor = 'rgba(251,191,36,0.3)';
+      toast.style.background = 'rgba(251,191,36,0.08)';
+      toast.classList.add('show');
+    }
+
+    // Send confirmation email
+    var downloadUrl = await sendConfirmationEmail(customerName, customerEmail, pkgKey, orderNumber);
+
+    // Show success toast
+    if (toast) {
+      setTimeout(function() {
+        toast.textContent = '✅ Order confirmed! Check your email for download links.';
+        toast.style.color = 'var(--green)';
+        toast.style.borderColor = 'rgba(74,222,128,0.3)';
+        toast.style.background = 'var(--green-dim)';
+        setTimeout(function() { toast.classList.remove('show'); }, 5000);
+      }, 800);
+    }
+
     // Generate token and redirect to download page
-    const token = generateDownloadToken(pkgKey);
-    window.location.href = 'download.html?token=' + token + '&pkg=' + pkgKey;
-  }, 2000);
+    var token = generateDownloadToken(pkgKey);
+    var url = downloadUrl || ('download.html?token=' + token + '&pkg=' + pkgKey);
+    setTimeout(function() {
+      window.location.href = url;
+    }, 2000);
+
+  }, 1800);
 }
 
 // ── Input formatting ─────────────────────
