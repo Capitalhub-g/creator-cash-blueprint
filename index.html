@@ -2959,7 +2959,6 @@ h1, h2, h3, h4, h5 {
     ]
   }
   </script>
-  <script src="https://gumroad.com/js/gumroad.js"></script>
 </head>
 <body>
     <div id="scrollProgress" class="scroll-progress"></div>
@@ -4069,127 +4068,114 @@ function generateDownloadToken(pkgKey) {
 }
 
 
+  
   // ══════════════════════════════════════════════════
-  // GUMROAD BETAALLINKS — pas deze aan na registratie
-  // Vervang de placeholder URLs met jouw echte links
-  // van je Gumroad dashboard
+  // MOLLIE BETAALINTEGRATIE
+  // Serverless function op Netlify verwerkt de betaling
   // ══════════════════════════════════════════════════
-  var GUMROAD_LINKS = {
-    'Starter Blueprint':             'https://YOUR_NAME.gumroad.com/l/basic-blueprint',
-    'Growth System':                 'https://YOUR_NAME.gumroad.com/l/medium-blueprint',
-    'Automation & Profit Blueprint': 'https://YOUR_NAME.gumroad.com/l/premium-blueprint'
-  };
+  var MOLLIE_FUNCTION_URL = '/.netlify/functions/create-payment';
 
-  // Gumroad overlay modus (true = popup in dezelfde pagina)
-  // false = nieuwe tab opent
-  var GUMROAD_OVERLAY = true;
+  var PACKAGE_PRICES = { basic: 29, medium: 65, premium: 95 };
 
-  // ── Email function endpoint (update after Netlify deploy) ──
+  function openCheckout(name, price, method) {
+    var modal = document.getElementById('modal');
+    document.getElementById('modal-title').textContent = name;
+    document.getElementById('modal-subtitle').textContent = name + ' — $' + price;
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    var tabs = document.querySelectorAll('.pay-tab');
+    tabs.forEach(function(t) { t.classList.remove('on'); });
+    if (method === 'paypal') {
+      if (tabs[1]) tabs[1].classList.add('on');
+      document.getElementById('cardPane').style.display = 'none';
+      document.getElementById('paypalPane').style.display = 'block';
+    } else {
+      if (tabs[0]) tabs[0].classList.add('on');
+      document.getElementById('cardPane').style.display = 'block';
+      document.getElementById('paypalPane').style.display = 'none';
+    }
+  }
+
+
+  // ── Mollie betaalintegratie ──────────────────────────
 var EMAIL_FUNCTION_URL = '/.netlify/functions/send-confirmation';
 
-// ── Generate order number ──────────────────────────────
 function generateOrderNumber() {
-  var now = new Date();
-  var y = now.getFullYear();
-  var rand = Math.floor(Math.random() * 90000) + 10000;
-  return 'CCB-' + y + '-' + rand;
+  return 'CCB-' + new Date().getFullYear() + '-' + (Math.floor(Math.random() * 90000) + 10000);
 }
 
-// ── Send confirmation email ────────────────────────────
-async function sendConfirmationEmail(customerName, customerEmail, pkgKey, orderNumber) {
-  try {
-    var response = await fetch(EMAIL_FUNCTION_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ customerName, customerEmail, packageKey: pkgKey, orderNumber })
-    });
-    var result = await response.json();
-    if (result.success) {
-      console.log('Email sent:', result.messageId);
-      return result.downloadUrl;
-    } else {
-      console.warn('Email failed:', result.error);
-      return null;
-    }
-  } catch (err) {
-    console.warn('Email error:', err.message);
-    return null;
-  }
-}
+var PACKAGE_MAP = {
+  'Starter Blueprint':              'basic',
+  'Growth System':                  'medium',
+  'Automation & Profit Blueprint':  'premium'
+};
+
+var pkgPrices = { basic: 29, medium: 65, premium: 95 };
 
 function processCheckout() {
   var btn = event.currentTarget;
   var orig = btn.innerHTML;
-  btn.innerHTML = '<span style="opacity:.6">Processing...</span>';
+  btn.innerHTML = '<span style="opacity:.6">Verwerken...</span>';
   btn.disabled = true;
 
-  // Get package + customer info from modal
   var subtitle = document.getElementById('modal-subtitle');
   var pkgName = subtitle ? subtitle.textContent.split(' — ')[0].trim() : '';
   var pkgKey = PACKAGE_MAP[pkgName] || 'basic';
   var customerEmail = document.getElementById('checkout-email') ?
     document.getElementById('checkout-email').value.trim() : '';
   var customerName = document.getElementById('checkout-name') ?
-    document.getElementById('checkout-name').value.trim() : 'Customer';
-  var orderNumber = generateOrderNumber();
+    document.getElementById('checkout-name').value.trim() : '';
 
-  // Simulate payment processing (replace with real Stripe/PayPal)
-  setTimeout(async function() {
-    btn.innerHTML = orig;
-    btn.disabled = false;
-    closeCheckout();
+  if (!customerEmail || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(customerEmail)) {
+    var inp = document.getElementById('checkout-email');
+    if (inp) { inp.style.borderColor = 'rgba(255,80,80,0.6)'; inp.focus(); }
+    btn.innerHTML = orig; btn.disabled = false;
+    return;
+  }
 
-    // Show processing toast
+  // Roep Mollie serverless function aan
+  fetch(MOLLIE_FUNCTION_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ packageKey: pkgKey, customerEmail: customerEmail, customerName: customerName })
+  })
+  .then(function(r) { return r.json(); })
+  .then(function(data) {
+    btn.innerHTML = orig; btn.disabled = false;
+    if (data.checkoutUrl) {
+      // Sluit modal en stuur door naar Mollie checkout
+      var modal = document.getElementById('modal');
+      if (modal) modal.classList.remove('open');
+      document.body.style.overflow = '';
+
+      var toast = document.getElementById('toast');
+      if (toast) {
+        toast.textContent = 'Je wordt doorgestuurd naar de betaalpagina...';
+        toast.style.color = '#fbbf24';
+        toast.style.background = 'rgba(251,191,36,0.08)';
+        toast.style.borderColor = 'rgba(251,191,36,0.3)';
+        toast.classList.add('show');
+      }
+      setTimeout(function() { window.location.href = data.checkoutUrl; }, 800);
+    } else {
+      alert('Er ging iets mis. Probeer het opnieuw.');
+    }
+  })
+  .catch(function(err) {
+    console.error('Mollie error:', err);
+    btn.innerHTML = orig; btn.disabled = false;
+
+    // Fallback: toon foutmelding
     var toast = document.getElementById('toast');
     if (toast) {
-      toast.textContent = 'Processing your order...';
-      toast.style.color = '#fbbf24';
-      toast.style.borderColor = 'rgba(251,191,36,0.3)';
-      toast.style.background = 'rgba(251,191,36,0.08)';
+      toast.textContent = '❌ Betaling tijdelijk niet beschikbaar. Probeer later opnieuw.';
+      toast.style.color = '#ff8080';
+      toast.style.background = 'rgba(255,80,80,0.08)';
+      toast.style.borderColor = 'rgba(255,80,80,0.3)';
       toast.classList.add('show');
+      setTimeout(function() { toast.classList.remove('show'); }, 5000);
     }
-
-    // Send confirmation email
-    var downloadUrl = await sendConfirmationEmail(customerName, customerEmail, pkgKey, orderNumber);
-
-    // Show success toast
-    if (toast) {
-      setTimeout(function() {
-        toast.textContent = '✅ Order confirmed! Check your email for download links.';
-        toast.style.color = 'var(--green)';
-        toast.style.borderColor = 'rgba(74,222,128,0.3)';
-        toast.style.background = 'var(--green-dim)';
-        setTimeout(function() { toast.classList.remove('show'); }, 5000);
-      }, 800);
-    }
-
-    // Save order to account (links to email used at checkout)
-    var savedEmail = customerEmail || '';
-    if (savedEmail && window.addOrderAfterPayment) {
-      window.addOrderAfterPayment(savedEmail, pkgKey, pkgPrices[pkgKey] || 0, orderNumber);
-    } else {
-      // Store as pending order — linked when user logs in with same email
-      var pending = JSON.parse(localStorage.getItem('ccb_pending_orders') || '[]');
-      pending.push({
-        id: orderNumber,
-        email: savedEmail,
-        date: new Date().toISOString().split('T')[0],
-        product: ({ basic:'Basic Package', medium:'Medium Package', premium:'Premium Package' })[pkgKey] || pkgKey,
-        packageKey: pkgKey,
-        amount: pkgPrices[pkgKey] || 0,
-        status: 'completed'
-      });
-      localStorage.setItem('ccb_pending_orders', JSON.stringify(pending));
-    }
-
-    // Generate token and redirect to download page
-    var token = generateDownloadToken(pkgKey);
-    var url = downloadUrl || ('download.html?token=' + token + '&pkg=' + pkgKey);
-    setTimeout(function() {
-      window.location.href = url;
-    }, 2000);
-
-  }, 1800);
+  });
 }
 
 // ── Input formatting ─────────────────────
