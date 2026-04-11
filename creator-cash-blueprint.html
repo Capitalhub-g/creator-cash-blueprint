@@ -4,10 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Creator Cash Blueprint — Start Making Money With Faceless Content</title>
-  <meta name="description" content="3 Blueprints that teach beginners how to create faceless content channels and monetize them. No camera. No face. Just results." />
+  <meta name="description" content="3 PDF guides that teach beginners how to create faceless content channels and monetize them. No camera. No face. Just results." />
   <meta name="keywords" content="faceless content, make money online, content creator, digital product, PDF guide, passive income" />
   <meta property="og:title" content="Creator Cash Blueprint — Make Money With Faceless Content" />
-  <meta property="og:description" content="3 Blueprints. Instant download. Start building faceless content channels that earn." />
+  <meta property="og:description" content="3 PDF guides. Instant download. Start building faceless content channels that earn." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://creatorcashblueprint.com" />
   <meta property="og:image" content="https://creatorcashblueprint.com/og-image.jpg" />
@@ -2925,137 +2925,26 @@ h1, h2, h3, h4, h5 {
 
 
 /* ══ Mollie betaalmodal ══ */
-.modal-step-label {
-  font-family: var(--f-mono);
-  font-size: 10px;
-  letter-spacing: 2px;
-  color: var(--red);
-  font-weight: 700;
-  margin-bottom: 16px;
-}
-.pay-methods-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 8px;
-  margin-bottom: 4px;
-}
-.pay-method-btn {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
-  padding: 12px 8px;
-  background: var(--bg-3);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  cursor: pointer;
-  transition: var(--tr);
-  position: relative;
-}
-.pay-method-btn:hover {
-  border-color: var(--border-bright);
-  background: var(--surface-hover);
-}
-.pay-method-btn.active {
-  border-color: rgba(255,0,0,0.5);
-  background: var(--red-dim);
-}
-.pay-method-btn.active::after {
-  content: '✓';
-  position: absolute;
-  top: 4px; right: 6px;
-  font-size: 10px;
-  color: var(--red);
-  font-weight: 700;
-}
-.pay-method-icon { font-size: 20px; }
-.pay-method-name {
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--white);
-  font-family: var(--f-display);
-}
-.pay-method-sub {
-  font-size: 10px;
-  color: var(--w30);
-  font-family: var(--f-mono);
-}
-.modal-back-btn {
-  font-size: 12px;
-  color: var(--w30);
-  font-family: var(--f-mono);
-  margin-bottom: 16px;
-  display: inline-block;
-  cursor: pointer;
-  transition: var(--tr);
-  padding: 4px 0;
-  background: none;
-  border: none;
-}
-.modal-back-btn:hover { color: var(--white); }
-.mfield-hint {
-  font-size: 11px;
-  color: var(--w30);
-  font-family: var(--f-mono);
-  margin-top: 4px;
-}
-.modal-summary {
-  background: var(--bg-3);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  padding: 14px 16px;
-  margin: 16px 0;
-}
-.modal-summary-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 6px;
-}
-#modal-summary-product {
-  font-size: 14px;
-  font-weight: 700;
-  color: var(--white);
-}
-#modal-summary-price {
-  font-size: 20px;
-  font-weight: 900;
-  color: var(--red);
-  font-family: var(--f-display);
-}
-.modal-summary-method {
-  font-size: 11px;
-  color: var(--w30);
-  font-family: var(--f-mono);
-}
-.modal-error-msg {
-  padding: 10px 14px;
-  background: rgba(255,80,80,0.08);
-  border: 1px solid rgba(255,80,80,0.25);
-  border-radius: var(--radius-sm);
-  font-size: 13px;
-  color: #ff8080;
-  margin-bottom: 14px;
-}
-.trust-mollie-badge {
-  font-family: var(--f-mono);
-  font-size: 11px;
-  color: var(--w50);
-  padding: 3px 10px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 100px;
-}
-@media (max-width: 480px) {
-  .pay-methods-grid { grid-template-columns: 1fr 1fr; }
-  .pay-method-name { font-size: 11px; }
-  .pay-method-icon { font-size: 18px; }
-}
-@media (max-width: 360px) {
-  .pay-methods-grid { grid-template-columns: 1fr 1fr 1fr; }
-  .pay-method-sub { display: none; }
-}
-
+.modal-step-label{font-family:var(--f-mono);font-size:10px;letter-spacing:2px;color:var(--red);font-weight:700;margin-bottom:16px}
+.pay-methods-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:4px}
+.pay-method-btn{display:flex;flex-direction:column;align-items:center;gap:4px;padding:12px 8px;background:var(--bg-3);border:1px solid var(--border);border-radius:var(--radius-sm);cursor:pointer;transition:var(--tr);position:relative}
+.pay-method-btn:hover{border-color:var(--border-bright);background:var(--surface-hover)}
+.pay-method-btn.active{border-color:rgba(255,0,0,.5);background:var(--red-dim)}
+.pay-method-btn.active::after{content:'✓';position:absolute;top:4px;right:6px;font-size:10px;color:var(--red);font-weight:700}
+.pay-method-icon{font-size:20px}
+.pay-method-name{font-size:12px;font-weight:700;color:var(--white);font-family:var(--f-display)}
+.pay-method-sub{font-size:10px;color:var(--w30);font-family:var(--f-mono)}
+.modal-back-btn{font-size:12px;color:var(--w30);font-family:var(--f-mono);margin-bottom:16px;display:inline-block;cursor:pointer;transition:var(--tr);padding:4px 0;background:none;border:none}
+.modal-back-btn:hover{color:var(--white)}
+.mfield-hint{font-size:11px;color:var(--w30);font-family:var(--f-mono);margin-top:4px}
+.modal-summary{background:var(--bg-3);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px 16px;margin:16px 0}
+.modal-summary-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+#modal-summary-product{font-size:14px;font-weight:700;color:var(--white)}
+#modal-summary-price{font-size:20px;font-weight:900;color:var(--red);font-family:var(--f-display)}
+.modal-summary-method{font-size:11px;color:var(--w30);font-family:var(--f-mono)}
+.modal-error-msg{padding:10px 14px;background:rgba(255,80,80,.08);border:1px solid rgba(255,80,80,.25);border-radius:var(--radius-sm);font-size:13px;color:#ff8080;margin-bottom:14px}
+.trust-mollie-badge{font-family:var(--f-mono);font-size:11px;color:var(--w50);padding:3px 10px;background:var(--surface);border:1px solid var(--border);border-radius:100px}
+@media(max-width:480px){.pay-methods-grid{grid-template-columns:repeat(2,1fr)}.pay-method-sub{display:none}}
 </style>
 
   <!-- Schema.org structured data for Google rich results -->
@@ -3148,9 +3037,9 @@ h1, h2, h3, h4, h5 {
 
       <p class="hero-sub">
         Learn how to create viral content, grow channels, and monetize<br class="br-hide" />
-        using simple step-by-step Blueprints. Built for beginners.
+        using simple step-by-step PDF guides. Built for beginners.
       </p>
-      <div class="hero-from-price">Starting from <strong>$29</strong> · Instant Blueprint download</div>
+      <div class="hero-from-price">Starting from <strong>$29</strong> · Instant PDF download</div>
 
       <div class="hero-actions">
         <a href="#products" class="btn-neon">
@@ -3207,7 +3096,7 @@ h1, h2, h3, h4, h5 {
         <div class="yt-thumb-img">
           <div class="yt-thumb-bg yt-thumb-bg-1"></div>
           <div class="yt-thumb-play">▶</div>
-          <div class="yt-thumb-duration">GUIDE</div>
+          <div class="yt-thumb-duration">PDF</div>
         </div>
         <div class="yt-thumb-info">
           <div class="yt-thumb-channel-icon" style="background:linear-gradient(135deg,#ff0000,#cc0000)">▶</div>
@@ -3222,7 +3111,7 @@ h1, h2, h3, h4, h5 {
         <div class="yt-thumb-img">
           <div class="yt-thumb-bg yt-thumb-bg-2"></div>
           <div class="yt-thumb-play">▶</div>
-          <div class="yt-thumb-duration">GUIDE</div>
+          <div class="yt-thumb-duration">PDF</div>
         </div>
         <div class="yt-thumb-info">
           <div class="yt-thumb-channel-icon" style="background:linear-gradient(135deg,#ff4500,#ff0000)">▶</div>
@@ -3238,7 +3127,7 @@ h1, h2, h3, h4, h5 {
         <div class="yt-thumb-img">
           <div class="yt-thumb-bg yt-thumb-bg-3"></div>
           <div class="yt-thumb-play yt-play-big">▶</div>
-          <div class="yt-thumb-duration">GUIDE</div>
+          <div class="yt-thumb-duration">PDF</div>
         </div>
         <div class="yt-thumb-info">
           <div class="yt-thumb-channel-icon" style="background:linear-gradient(135deg,#ff0000,#990000)">▶</div>
@@ -3254,13 +3143,13 @@ h1, h2, h3, h4, h5 {
   <!-- ═══════════════ TRUST BAR ═══════════════ -->
   <div class="trust-strip">
     <div class="trust-inner">
-      <span>✦ Instant Blueprint Access</span>
+      <span>✦ Instant PDF Access</span>
       <span>✦ No Camera Required</span>
       <span>✦ Works Worldwide</span>
       <span>✦ No Experience Needed</span>
       <span>✦ Beginner Friendly</span>
       <span>✦ 2026 Edition</span>
-      <span>✦ Instant Blueprint Access</span>
+      <span>✦ Instant PDF Access</span>
       <span>✦ No Camera Required</span>
       <span>✦ Works Worldwide</span>
       <span>✦ No Experience Needed</span>
@@ -3310,7 +3199,7 @@ h1, h2, h3, h4, h5 {
             <div class="cover-icon">📄</div>
             <div class="cover-title">Faceless Content<br/>Starter Blueprint</div>
             <div class="cover-sub">Your Zero-to-One Roadmap</div>
-          <div class="cover-views">28 pages · Blueprint</div>
+          <div class="cover-views">28 pages · PDF</div>
           </div>
           <div class="product-body">
             <div class="product-price-row">
@@ -3319,9 +3208,9 @@ h1, h2, h3, h4, h5 {
                 <span class="price-badge">41% OFF</span>
               </div>
               <span class="product-price">$29</span>
-              <span class="product-pages">28 pages · Blueprint</span>
+              <span class="product-pages">28 pages · PDF</span>
             </div>
-            <p class="pkg-includes">Includes: <strong>Basic Blueprint only</strong></p>
+            <p class="pkg-includes">Includes: <strong>Basic PDF only</strong></p>
             <ul class="product-list">
               <li>What faceless channels are &amp; how they work</li>
               <li>Choosing a profitable niche (with checklist)</li>
@@ -3334,10 +3223,6 @@ h1, h2, h3, h4, h5 {
             <button class="btn-product" onclick="openCheckout('Starter Blueprint', 29)">
               Buy for $29 →
             </button>
-            <div class="product-payment-row">
-              <button class="btn-pay-sm stripe" onclick="openCheckout('Starter Blueprint', 29, 'stripe')">Stripe</button>
-              <button class="btn-pay-sm paypal" onclick="openCheckout('Starter Blueprint', 29, 'paypal')">PayPal</button>
-            </div>
           </div>
         </div>
 
@@ -3350,7 +3235,7 @@ h1, h2, h3, h4, h5 {
             <div class="cover-icon">🚀</div>
             <div class="cover-title">Faceless Growth<br/>System</div>
             <div class="cover-sub">Grow, Monetize &amp; Scale</div>
-          <div class="cover-views">60 pages · Blueprint</div>
+          <div class="cover-views">60 pages · PDF</div>
           </div>
           <div class="product-body">
             <div class="product-price-row">
@@ -3359,9 +3244,9 @@ h1, h2, h3, h4, h5 {
                 <span class="price-badge">33% OFF</span>
               </div>
               <span class="product-price">$65</span>
-              <span class="product-pages">88 pages · Blueprint</span>
+              <span class="product-pages">88 pages · PDF</span>
             </div>
-            <p class="pkg-includes">Includes: <strong>Basic Blueprint + Medium Blueprint</strong></p>
+            <p class="pkg-includes">Includes: <strong>Basic PDF + Medium PDF</strong></p>
             <div class="value-statement">Individually <s>$94</s> — together for <strong>$65</strong></div>
             <ul class="product-list">
               <li>Niche research system &amp; competitor analysis</li>
@@ -3374,10 +3259,6 @@ h1, h2, h3, h4, h5 {
             <button class="btn-product" onclick="openCheckout('Growth System', 65)">
               Buy for $65 →
             </button>
-            <div class="product-payment-row">
-              <button class="btn-pay-sm stripe" onclick="openCheckout('Growth System', 65, 'stripe')">Stripe</button>
-              <button class="btn-pay-sm paypal" onclick="openCheckout('Growth System', 65, 'paypal')">PayPal</button>
-            </div>
           </div>
         </div>
 
@@ -3391,7 +3272,7 @@ h1, h2, h3, h4, h5 {
             <div class="cover-icon">💸</div>
             <div class="cover-title">Faceless Automation<br/>&amp; Profit Blueprint</div>
             <div class="cover-sub">Automate, Scale &amp; Profit</div>
-          <div class="cover-views">100 pages · Blueprint</div>
+          <div class="cover-views">100 pages · PDF</div>
           </div>
           <div class="product-body">
             <div class="product-price-row">
@@ -3400,9 +3281,9 @@ h1, h2, h3, h4, h5 {
                 <span class="price-badge popular-badge-off">35% OFF</span>
               </div>
               <span class="product-price neon-price">$95</span>
-              <span class="product-pages">188 pages · Blueprint</span>
+              <span class="product-pages">188 pages · PDF</span>
             </div>
-            <p class="pkg-includes">Includes: <strong>All 3 Blueprints — Basic, Medium &amp; Premium</strong></p>
+            <p class="pkg-includes">Includes: <strong>All 3 PDFs — Basic, Medium &amp; Premium</strong></p>
             <div class="value-statement">Guides individually valued at <s>$189</s> — get all 3 for <strong>$95</strong></div>
             <ul class="product-list">
               <li>Everything in Basic &amp; Medium included</li>
@@ -3415,10 +3296,6 @@ h1, h2, h3, h4, h5 {
             <button class="btn-product btn-product-neon" onclick="openCheckout('Automation & Profit Blueprint', 95)">
               Buy for $95 →
             </button>
-            <div class="product-payment-row">
-              <button class="btn-pay-sm stripe" onclick="openCheckout('Automation & Profit Blueprint', 95, 'stripe')">Stripe</button>
-              <button class="btn-pay-sm paypal" onclick="openCheckout('Automation & Profit Blueprint', 95, 'paypal')">PayPal</button>
-            </div>
           </div>
         </div>
 
@@ -3436,19 +3313,19 @@ h1, h2, h3, h4, h5 {
             <div class="col-pkg premium-col popular-col">Premium<br/><span>$95</span></div>
           </div>
           <div class="compare-row">
-            <div class="col-feat">Starter Blueprint (28 pages)</div>
+            <div class="col-feat">Starter Blueprint PDF (28 pages)</div>
             <div class="col-pkg">✓</div>
             <div class="col-pkg">✓</div>
             <div class="col-pkg premium-col">✓</div>
           </div>
           <div class="compare-row">
-            <div class="col-feat">Growth &amp; Monetization Blueprint (60 pages)</div>
+            <div class="col-feat">Growth &amp; Monetization PDF (60 pages)</div>
             <div class="col-pkg muted">—</div>
             <div class="col-pkg">✓</div>
             <div class="col-pkg premium-col">✓</div>
           </div>
           <div class="compare-row">
-            <div class="col-feat">Automation &amp; Profit Blueprint (100 pages)</div>
+            <div class="col-feat">Automation &amp; Profit PDF (100 pages)</div>
             <div class="col-pkg muted">—</div>
             <div class="col-pkg muted">—</div>
             <div class="col-pkg premium-col">✓</div>
@@ -3524,7 +3401,7 @@ h1, h2, h3, h4, h5 {
 
         <div class="preview-card">
           <div class="preview-header preview-h-1">
-            <div class="preview-badge">BLUEPRINT 01 · $29</div>
+            <div class="preview-badge">PDF 01 · $29</div>
             <div class="preview-title">Faceless Content<br/>Starter Blueprint</div>
             <div class="preview-pages">28 pages</div>
           </div>
@@ -3545,7 +3422,7 @@ h1, h2, h3, h4, h5 {
 
         <div class="preview-card">
           <div class="preview-header preview-h-2">
-            <div class="preview-badge">BLUEPRINT 02 · $65</div>
+            <div class="preview-badge">PDF 02 · $65</div>
             <div class="preview-title">Faceless Growth &amp;<br/>Monetization Guide</div>
             <div class="preview-pages">60 pages</div>
           </div>
@@ -3567,7 +3444,7 @@ h1, h2, h3, h4, h5 {
         <div class="preview-card preview-popular">
           <div class="preview-crown">⭐ MOST POPULAR</div>
           <div class="preview-header preview-h-3">
-            <div class="preview-badge preview-badge-pop">BLUEPRINT 03 · $95</div>
+            <div class="preview-badge preview-badge-pop">PDF 03 · $95</div>
             <div class="preview-title">Faceless Automation<br/>&amp; Profit Blueprint</div>
             <div class="preview-pages">100 pages</div>
           </div>
@@ -3658,7 +3535,7 @@ h1, h2, h3, h4, h5 {
 
         <div class="testi-card" data-aos>
           <div class="testi-stars">★★★★★</div>
-          <p>"The Growth System Blueprint is literally a game-changer. I followed the niche research section and found a gap nobody was covering. Got my first 1K in 5 weeks. The thumbnail section alone is worth the price."</p>
+          <p>"The Growth System PDF is literally a blueprint. I followed the niche research section and found a gap nobody was covering. Got my first 1K in 5 weeks. The thumbnail section alone is worth the price."</p>
           <div class="testi-author">
             <div class="testi-av" style="background:linear-gradient(135deg,#059669,#0d9488)">M</div>
             <div>
@@ -3737,7 +3614,7 @@ h1, h2, h3, h4, h5 {
           </div>
           <div class="about-stat">
             <strong>3</strong>
-            <span>Complete Blueprints</span>
+            <span>Complete PDF guides</span>
           </div>
         </div>
       </div>
@@ -3755,7 +3632,7 @@ h1, h2, h3, h4, h5 {
           <div class="step-num">01</div>
           <div class="step-body">
             <h3>Choose Your Guide</h3>
-            <p>Pick the Blueprint that matches where you're at: starter, growth, or the full automation system.</p>
+            <p>Pick the PDF that matches where you're at: starter, growth, or the full automation blueprint.</p>
           </div>
         </div>
         <div class="step-connector"></div>
@@ -3763,7 +3640,7 @@ h1, h2, h3, h4, h5 {
           <div class="step-num">02</div>
           <div class="step-body">
             <h3>Pay Securely</h3>
-            <p>Checkout with Stripe or PayPal. Secure, encrypted, and takes 30 seconds.</p>
+            <p>Checkout securely via Mollie. iDEAL, creditcard, PayPal and more. Takes 30 seconds.</p>
           </div>
         </div>
         <div class="step-connector"></div>
@@ -3771,7 +3648,7 @@ h1, h2, h3, h4, h5 {
           <div class="step-num">03</div>
           <div class="step-body">
             <h3>Download Instantly</h3>
-            <p>Your Blueprint arrives immediately via email and download link. No waiting, no delays.</p>
+            <p>Your PDF arrives immediately via email and download link. No waiting, no delays.</p>
           </div>
         </div>
         <div class="step-connector"></div>
@@ -3800,17 +3677,17 @@ h1, h2, h3, h4, h5 {
             <span class="faq-toggle">+</span>
           </button>
           <div class="faq-a">
-            <p>Yes, 100% instant. As soon as payment is confirmed, you receive an email with your download link and can access your Blueprints immediately. No waiting, no approval needed.</p>
+            <p>Yes, 100% instant. As soon as payment is confirmed, you receive an email with your download link and can access your PDFs immediately. No waiting, no approval needed.</p>
           </div>
         </div>
 
         <div class="faq-item">
           <button class="faq-q">
-            Are these videos or Blueprints?
+            Are these videos or PDF guides?
             <span class="faq-toggle">+</span>
           </button>
           <div class="faq-a">
-            <p>These are Blueprints only — no videos anywhere. You get well-structured, easy-to-read Blueprint documents that you can open on any device: phone, tablet, laptop, or print out if you prefer.</p>
+            <p>These are PDF guides only, no videos anywhere. You get well-structured, easy-to-read PDF documents that you can open on any device: phone, tablet, laptop, or print out if you prefer.</p>
           </div>
         </div>
 
@@ -3860,7 +3737,7 @@ h1, h2, h3, h4, h5 {
             <span class="faq-toggle">+</span>
           </button>
           <div class="faq-a">
-            <p>Because these are digital information products that are delivered instantly, all sales are final. We encourage you to read the full guide descriptions and FAQ carefully before purchasing. If you have any questions before buying, email us at <a href="/cdn-cgi/l/email-protection#a3d0d6d3d3ccd1d7e3c0d1c6c2d7ccd1c0c2d0cbc1cfd6c6d3d1cacdd78dc0ccce" style="color:#ff6666"><span class="__cf_email__" data-cfemail="45363035352a37310526372024312a372624362d2729302035372c2b316b262a28">[email&#160;protected]</span></a> and we'll help you pick the right guide.</p>
+            <p>Because these are digital information products that are delivered instantly, all sales are final. We encourage you to read the full guide descriptions and FAQ carefully before purchasing. If you have any questions before buying, email us at <a href="mailto:support@creatorcashblueprint.com" style="color:#ff6666">support@creatorcashblueprint.com</a> and we'll help you pick the right guide.</p>
           </div>
         </div>
 
@@ -3909,7 +3786,7 @@ h1, h2, h3, h4, h5 {
       <a href="#products" class="btn-neon btn-neon-xl" style="display:inline-flex;margin-top:8px;">
         ▶ View All Guides →
       </a>
-      <p class="email-fine" style="margin-top:16px;">Instant Blueprint download · No subscription needed</p>
+      <p class="email-fine" style="margin-top:16px;">Instant PDF download · No subscription needed</p>
     </div>
   </section>
 
@@ -3921,10 +3798,10 @@ h1, h2, h3, h4, h5 {
       <h2 class="cta-h2">Download Your Blueprint<br/><span class="grad-text">and Start Today.</span></h2>
       <p class="cta-p">Join 2,400+ creators who already downloaded. No experience needed. No camera. Just pick your package and start.</p>
       <a href="#products" class="btn-neon btn-neon-xl">
-        Get My Blueprints Now
+        Get My PDFs Now
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </a>
-      <p class="cta-fine">🔒 Secure checkout · Instant Blueprint delivery · All sales are final</p>
+      <p class="cta-fine">🔒 Secure checkout · Instant PDF delivery · All sales are final</p>
     </div>
   </section>
 
@@ -3936,7 +3813,7 @@ h1, h2, h3, h4, h5 {
           <span class="logo-mark">▶</span>
           <span>Creator<strong>Cash</strong> Blueprint</span>
         </a>
-        <p>Blueprints for beginners who want to build faceless content channels and make money online. No camera, no experience needed.</p>
+        <p>PDF guides for beginners who want to build faceless content channels and make money online. No camera, no experience needed.</p>
       </div>
 
       <div class="footer-links-group">
@@ -3950,7 +3827,7 @@ h1, h2, h3, h4, h5 {
           <h4>Help</h4>
           <a href="#faq">FAQ</a>
           <a href="#">
-          <a href="/cdn-cgi/l/email-protection#23505653534c51576340514642574c514042504b414f564653514a4d570d404c4e">Contact Us</a>
+          <a href="mailto:support@creatorcashblueprint.com">Contact Us</a>
         </div>
         <div class="footer-col">
           <h4>Legal</h4>
@@ -3972,62 +3849,57 @@ h1, h2, h3, h4, h5 {
   <div id="modal" class="modal-wrap">
     <div class="modal-box">
       <button class="modal-x" onclick="closeCheckout()">&#x2715;</button>
-
       <div class="modal-top">
         <div class="modal-mark">&#x2726;</div>
-        <h3 id="modal-title">Complete Purchase</h3>
+        <h3 id="modal-title">Afronden</h3>
         <p id="modal-subtitle">Blueprint &mdash; $29</p>
       </div>
 
-      <!-- Stap 1: Betaalmethode kiezen -->
+      <!-- Stap 1: Betaalmethode -->
       <div id="stepMethod">
         <p class="modal-step-label">STAP 1 &mdash; KIES JE BETAALMETHODE</p>
-
         <div class="pay-methods-grid">
-          <button class="pay-method-btn active" onclick="selectMethod('ideal', this)">
+          <button class="pay-method-btn active" onclick="selectMethod('ideal',this)">
             <span class="pay-method-icon">🏦</span>
             <span class="pay-method-name">iDEAL</span>
             <span class="pay-method-sub">Meest gebruikt</span>
           </button>
-          <button class="pay-method-btn" onclick="selectMethod('creditcard', this)">
+          <button class="pay-method-btn" onclick="selectMethod('creditcard',this)">
             <span class="pay-method-icon">💳</span>
             <span class="pay-method-name">Creditcard</span>
             <span class="pay-method-sub">Visa / Mastercard</span>
           </button>
-          <button class="pay-method-btn" onclick="selectMethod('paypal', this)">
+          <button class="pay-method-btn" onclick="selectMethod('paypal',this)">
             <span class="pay-method-icon">🅿️</span>
             <span class="pay-method-name">PayPal</span>
             <span class="pay-method-sub">Snel &amp; veilig</span>
           </button>
-          <button class="pay-method-btn" onclick="selectMethod('bancontact', this)">
+          <button class="pay-method-btn" onclick="selectMethod('bancontact',this)">
             <span class="pay-method-icon">🇧🇪</span>
             <span class="pay-method-name">Bancontact</span>
             <span class="pay-method-sub">Belgi&euml;</span>
           </button>
-          <button class="pay-method-btn" onclick="selectMethod('klarna', this)">
+          <button class="pay-method-btn" onclick="selectMethod('klarna',this)">
             <span class="pay-method-icon">🌸</span>
             <span class="pay-method-name">Klarna</span>
             <span class="pay-method-sub">Achteraf betalen</span>
           </button>
-          <button class="pay-method-btn" onclick="selectMethod('applepay', this)">
-            <span class="pay-method-icon"> </span>
+          <button class="pay-method-btn" onclick="selectMethod('applepay',this)">
+            <span class="pay-method-icon">&#xf8ff;</span>
             <span class="pay-method-name">Apple Pay</span>
             <span class="pay-method-sub">1-tap betalen</span>
           </button>
         </div>
-
         <button class="btn-checkout" onclick="goToStepDetails()" style="margin-top:20px;">
           Verder &rarr;
         </button>
       </div>
 
-      <!-- Stap 2: Gegevens invullen -->
+      <!-- Stap 2: Gegevens -->
       <div id="stepDetails" style="display:none;">
         <button class="modal-back-btn" onclick="goToStepMethod()">&#8592; Terug</button>
         <p class="modal-step-label">STAP 2 &mdash; JE GEGEVENS</p>
-
         <div id="modalError" class="modal-error-msg" style="display:none;"></div>
-
         <div class="mfield">
           <label>Naam</label>
           <input type="text" id="checkout-name" placeholder="Voor- en achternaam" autocomplete="name" />
@@ -4035,9 +3907,8 @@ h1, h2, h3, h4, h5 {
         <div class="mfield">
           <label>E-mailadres</label>
           <input type="email" id="checkout-email" placeholder="jij@voorbeeld.nl" autocomplete="email" />
-          <div class="mfield-hint">Downloadlink wordt hierheen gestuurd</div>
+          <div class="mfield-hint">Je downloadlink wordt hierheen gestuurd</div>
         </div>
-
         <div class="modal-summary">
           <div class="modal-summary-row">
             <span id="modal-summary-product">Blueprint</span>
@@ -4047,19 +3918,16 @@ h1, h2, h3, h4, h5 {
             Betaalmethode: <strong id="modal-summary-method">iDEAL</strong>
           </div>
         </div>
-
         <button class="btn-checkout" id="btnCheckout" onclick="processCheckout()">
-          &#x1F512;&nbsp; Veilig betalen via Mollie
+          &#x1F512; Veilig betalen via Mollie
         </button>
-
         <div class="payment-trust-row" style="margin-top:16px;">
           <div class="trust-mollie-badge">Betaling via <strong>Mollie</strong></div>
-          <svg height="20" viewBox="0 0 60 20" xmlns="http://www.w3.org/2000/svg" title="Visa"><rect width="60" height="20" rx="3" fill="#1A1F71"/><text x="50%" y="14" text-anchor="middle" font-family="Arial" font-weight="bold" font-size="11" fill="white" letter-spacing="1">VISA</text></svg>
-          <svg height="20" viewBox="0 0 80 20" xmlns="http://www.w3.org/2000/svg" title="Mastercard"><rect width="80" height="20" rx="3" fill="#252525"/><circle cx="27" cy="10" r="8" fill="#EB001B"/><circle cx="43" cy="10" r="8" fill="#F79E1B"/><path d="M35 4.8a8 8 0 010 10.4A8 8 0 0135 4.8z" fill="#FF5F00"/></svg>
+          <svg height="18" viewBox="0 0 60 20" xmlns="http://www.w3.org/2000/svg"><rect width="60" height="20" rx="3" fill="#1A1F71"/><text x="50%" y="14" text-anchor="middle" font-family="Arial" font-weight="bold" font-size="11" fill="white">VISA</text></svg>
+          <svg height="18" viewBox="0 0 50 20" xmlns="http://www.w3.org/2000/svg"><rect width="50" height="20" rx="3" fill="#252525"/><circle cx="18" cy="10" r="7" fill="#EB001B"/><circle cx="32" cy="10" r="7" fill="#F79E1B"/></svg>
           <div class="trust-ssl-badge">&#x1F512; SSL</div>
         </div>
       </div>
-
     </div>
   </div>
 
@@ -4074,7 +3942,7 @@ h1, h2, h3, h4, h5 {
     ✅ Purchase successful! Check your email for the download link.
   </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 /* ══════════════════════════════════════════
    CREATOR CASH BLUEPRINT — JAVASCRIPT
 ══════════════════════════════════════════ */
@@ -4174,27 +4042,15 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 // ── Checkout Modal ───────────────────────
 const modal = document.getElementById('modal');
 
-// openCheckout: zie modal flow hierboven
 
-function closeCheckout() {
-  modal.classList.remove('open');
-  document.body.style.overflow = '';
-}
 
-modal.addEventListener('click', (e) => {
-  if (e.target === modal) closeCheckout();
-});
 
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') closeCheckout();
-});
 
-function switchTab(type, btn) {
-  document.querySelectorAll('.pay-tab').forEach(t => t.classList.remove('on'));
-  btn.classList.add('on');
-  document.getElementById('cardPane').style.display = type === 'card' ? 'block' : 'none';
-  document.getElementById('paypalPane').style.display = type === 'paypal' ? 'block' : 'none';
-}
+
+
+
+
+
 
 // Package name → package key mapping
 const PACKAGE_MAP = {
@@ -4209,188 +4065,40 @@ function generateDownloadToken(pkgKey) {
   return btoa(payload).replace(/=/g, '');
 }
 
-
-  
-
-  // ── Mollie modal flow ──────────────────────────────
-  var selectedMethod = 'ideal';
-  var selectedMethodName = 'iDEAL';
-
-  function selectMethod(method, btn) {
-    selectedMethod = method;
-    document.querySelectorAll('.pay-method-btn').forEach(function(b) {
-      b.classList.remove('active');
-    });
-    btn.classList.add('active');
-    var names = {
-      ideal: 'iDEAL', creditcard: 'Creditcard',
-      paypal: 'PayPal', bancontact: 'Bancontact',
-      klarna: 'Klarna', applepay: 'Apple Pay'
-    };
-    selectedMethodName = names[method] || method;
-  }
-
-  function goToStepDetails() {
-    document.getElementById('stepMethod').style.display = 'none';
-    document.getElementById('stepDetails').style.display = 'block';
-    var summaryMethod = document.getElementById('modal-summary-method');
-    if (summaryMethod) summaryMethod.textContent = selectedMethodName;
-    // Sync samenvatting prijs
-    var subtitle = document.getElementById('modal-subtitle');
-    if (subtitle) {
-      var parts = subtitle.textContent.split('—');
-      var prod = parts[0].trim();
-      var price = parts[1] ? parts[1].trim() : '';
-      var sp = document.getElementById('modal-summary-product');
-      var sv = document.getElementById('modal-summary-price');
-      if (sp) sp.textContent = prod;
-      if (sv) sv.textContent = price;
-    }
-  }
-
-  function goToStepMethod() {
-    document.getElementById('stepDetails').style.display = 'none';
-    document.getElementById('stepMethod').style.display = 'block';
-  }
-
-  function openCheckout(name, price, method) {
-    var modal = document.getElementById('modal');
-    document.getElementById('modal-title').textContent = 'Afronden';
-    document.getElementById('modal-subtitle').textContent = name + ' — $' + price;
-    // Reset naar stap 1
-    document.getElementById('stepMethod').style.display = 'block';
-    document.getElementById('stepDetails').style.display = 'none';
-    document.getElementById('modalError').style.display = 'none';
-    // Reset active method
-    document.querySelectorAll('.pay-method-btn').forEach(function(b, i) {
-      b.classList.toggle('active', i === 0);
-    });
-    selectedMethod = 'ideal';
-    selectedMethodName = 'iDEAL';
-    modal.classList.add('open');
-    document.body.style.overflow = 'hidden';
-  }
-
-  function closeCheckout() {
-    var modal = document.getElementById('modal');
-    if (modal) modal.classList.remove('open');
-    document.body.style.overflow = '';
-  }
-
-
-  // ══════════════════════════════════════════════════
-  // MOLLIE BETAALINTEGRATIE
-  // Serverless function op Netlify verwerkt de betaling
-  // ══════════════════════════════════════════════════
-  var MOLLIE_FUNCTION_URL = '/.netlify/functions/create-payment';
-
-  var PACKAGE_PRICES = { basic: 29, medium: 65, premium: 95 };
-
-  function openCheckout(name, price, method) {
-    var modal = document.getElementById('modal');
-    document.getElementById('modal-title').textContent = name;
-    document.getElementById('modal-subtitle').textContent = name + ' — $' + price;
-    modal.classList.add('open');
-    document.body.style.overflow = 'hidden';
-    var tabs = document.querySelectorAll('.pay-tab');
-    tabs.forEach(function(t) { t.classList.remove('on'); });
-    if (method === 'paypal') {
-      if (tabs[1]) tabs[1].classList.add('on');
-      document.getElementById('cardPane').style.display = 'none';
-      document.getElementById('paypalPane').style.display = 'block';
-    } else {
-      if (tabs[0]) tabs[0].classList.add('on');
-      document.getElementById('cardPane').style.display = 'block';
-      document.getElementById('paypalPane').style.display = 'none';
-    }
-  }
-
-
-  // ── Mollie betaalintegratie ──────────────────────────
+// ── Email function endpoint (update after Netlify deploy) ──
 var EMAIL_FUNCTION_URL = '/.netlify/functions/send-confirmation';
 
+// ── Generate order number ──────────────────────────────
 function generateOrderNumber() {
-  return 'CCB-' + new Date().getFullYear() + '-' + (Math.floor(Math.random() * 90000) + 10000);
+  var now = new Date();
+  var y = now.getFullYear();
+  var rand = Math.floor(Math.random() * 90000) + 10000;
+  return 'CCB-' + y + '-' + rand;
 }
 
-var PACKAGE_MAP = {
-  'Starter Blueprint':              'basic',
-  'Growth System':                  'medium',
-  'Automation & Profit Blueprint':  'premium'
-};
-
-var pkgPrices = { basic: 29, medium: 65, premium: 95 };
-
-function processCheckout() {
-  var btn = event.currentTarget;
-  var orig = btn.innerHTML;
-  btn.innerHTML = '<span style="opacity:.6">Verwerken...</span>';
-  btn.disabled = true;
-
-  var subtitle = document.getElementById('modal-subtitle');
-  var pkgName = subtitle ? subtitle.textContent.split(' — ')[0].trim() : '';
-  var pkgKey = PACKAGE_MAP[pkgName] || 'basic';
-  var customerEmail = document.getElementById('checkout-email') ?
-    document.getElementById('checkout-email').value.trim() : '';
-  var customerName = document.getElementById('checkout-name') ?
-    document.getElementById('checkout-name').value.trim() : '';
-
-  if (!customerEmail || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(customerEmail)) {
-    var inp = document.getElementById('checkout-email');
-    if (inp) { inp.style.borderColor = 'rgba(255,80,80,0.6)'; inp.focus(); }
-    btn.innerHTML = orig; btn.disabled = false;
-    return;
-  }
-
-  // Roep Mollie serverless function aan
-  fetch(MOLLIE_FUNCTION_URL, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      packageKey: pkgKey,
-      customerEmail: customerEmail,
-      customerName: customerName,
-      paymentMethod: selectedMethod || 'ideal'
-    })
-  })
-  .then(function(r) { return r.json(); })
-  .then(function(data) {
-    btn.innerHTML = orig; btn.disabled = false;
-    if (data.checkoutUrl) {
-      // Sluit modal en stuur door naar Mollie checkout
-      var modal = document.getElementById('modal');
-      if (modal) modal.classList.remove('open');
-      document.body.style.overflow = '';
-
-      var toast = document.getElementById('toast');
-      if (toast) {
-        toast.textContent = 'Je wordt doorgestuurd naar de betaalpagina...';
-        toast.style.color = '#fbbf24';
-        toast.style.background = 'rgba(251,191,36,0.08)';
-        toast.style.borderColor = 'rgba(251,191,36,0.3)';
-        toast.classList.add('show');
-      }
-      setTimeout(function() { window.location.href = data.checkoutUrl; }, 800);
+// ── Send confirmation email ────────────────────────────
+async function sendConfirmationEmail(customerName, customerEmail, pkgKey, orderNumber) {
+  try {
+    var response = await fetch(EMAIL_FUNCTION_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ customerName, customerEmail, packageKey: pkgKey, orderNumber })
+    });
+    var result = await response.json();
+    if (result.success) {
+      console.log('Email sent:', result.messageId);
+      return result.downloadUrl;
     } else {
-      alert('Er ging iets mis. Probeer het opnieuw.');
+      console.warn('Email failed:', result.error);
+      return null;
     }
-  })
-  .catch(function(err) {
-    console.error('Mollie error:', err);
-    btn.innerHTML = orig; btn.disabled = false;
-
-    // Fallback: toon foutmelding
-    var toast = document.getElementById('toast');
-    if (toast) {
-      toast.textContent = '❌ Betaling tijdelijk niet beschikbaar. Probeer later opnieuw.';
-      toast.style.color = '#ff8080';
-      toast.style.background = 'rgba(255,80,80,0.08)';
-      toast.style.borderColor = 'rgba(255,80,80,0.3)';
-      toast.classList.add('show');
-      setTimeout(function() { toast.classList.remove('show'); }, 5000);
-    }
-  });
+  } catch (err) {
+    console.warn('Email error:', err.message);
+    return null;
+  }
 }
+
+
 
 // ── Input formatting ─────────────────────
 document.addEventListener('DOMContentLoaded', () => {
@@ -4493,7 +4201,7 @@ function dismissCookie(accepted) {
 const LEGAL = {
   privacy: {
     title: 'Privacy Policy',
-    body: '<p>Creator Cash Blueprint collects minimal data: your email (for order delivery) and payment info (processed securely by Stripe or PayPal — we never store card details).</p><p style="margin-top:12px">We use Google Fonts which may log your IP address on font load. By using this site you consent to this. We do not sell your data to third parties.</p><p style="margin-top:12px">To request data deletion: <a href="mailto:support@creatorcashblueprint.com" style="color:#ff6666">support@creatorcashblueprint.com</a></p>'
+    body: '<p>Creator Cash Blueprint collects minimal data: your email (for order delivery) and payment info (processed securely by Mollie — we never store card details).</p><p style="margin-top:12px">We use Google Fonts which may log your IP address on font load. By using this site you consent to this. We do not sell your data to third parties.</p><p style="margin-top:12px">To request data deletion: <a href="mailto:support@creatorcashblueprint.com" style="color:#ff6666">support@creatorcashblueprint.com</a></p>'
   },
   terms: {
     title: 'Terms of Service',
@@ -4588,6 +4296,136 @@ document.addEventListener('click', function(e) {
   if (popup && e.target === popup) closeExitPopup();
 });
 
+
+// ═══════════════════════════════════════════════════
+// MOLLIE BETAALINTEGRATIE
+// ═══════════════════════════════════════════════════
+var MOLLIE_FUNCTION_URL = '/.netlify/functions/create-payment';
+var selectedMethod = 'ideal';
+var selectedMethodName = 'iDEAL';
+var PACKAGE_KEYS = {
+  'Starter Blueprint': 'basic',
+  'Growth System': 'medium',
+  'Automation & Profit Blueprint': 'premium'
+};
+
+function selectMethod(method, btn) {
+  selectedMethod = method;
+  document.querySelectorAll('.pay-method-btn').forEach(function(b) {
+    b.classList.remove('active');
+  });
+  btn.classList.add('active');
+  var names = {
+    ideal: 'iDEAL', creditcard: 'Creditcard', paypal: 'PayPal',
+    bancontact: 'Bancontact', klarna: 'Klarna', applepay: 'Apple Pay'
+  };
+  selectedMethodName = names[method] || method;
+}
+
+function goToStepDetails() {
+  document.getElementById('stepMethod').style.display = 'none';
+  document.getElementById('stepDetails').style.display = 'block';
+  var sub = document.getElementById('modal-subtitle');
+  if (sub) {
+    var parts = sub.textContent.split('—');
+    var sp = document.getElementById('modal-summary-product');
+    var sv = document.getElementById('modal-summary-price');
+    var sm = document.getElementById('modal-summary-method');
+    if (sp) sp.textContent = parts[0].trim();
+    if (sv) sv.textContent = parts[1] ? parts[1].trim() : '';
+    if (sm) sm.textContent = selectedMethodName;
+  }
+}
+
+function goToStepMethod() {
+  document.getElementById('stepDetails').style.display = 'none';
+  document.getElementById('stepMethod').style.display = 'block';
+}
+
+function openCheckout(name, price, method) {
+  var modal = document.getElementById('modal');
+  if (!modal) return;
+  document.getElementById('modal-title').textContent = 'Afronden';
+  document.getElementById('modal-subtitle').textContent = name + ' — $' + price;
+  var s1 = document.getElementById('stepMethod');
+  var s2 = document.getElementById('stepDetails');
+  var er = document.getElementById('modalError');
+  if (s1) s1.style.display = 'block';
+  if (s2) s2.style.display = 'none';
+  if (er) er.style.display = 'none';
+  document.querySelectorAll('.pay-method-btn').forEach(function(b, i) {
+    b.classList.toggle('active', i === 0);
+  });
+  selectedMethod = 'ideal';
+  selectedMethodName = 'iDEAL';
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeCheckout() {
+  var modal = document.getElementById('modal');
+  if (modal) modal.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function processCheckout() {
+  var btn = document.getElementById('btnCheckout');
+  var orig = btn ? btn.innerHTML : '';
+  if (btn) { btn.innerHTML = '<span style="opacity:.6">Verwerken...</span>'; btn.disabled = true; }
+
+  var sub = document.getElementById('modal-subtitle');
+  var pkgName = sub ? sub.textContent.split('—')[0].trim() : '';
+  var pkgKey = PACKAGE_KEYS[pkgName] || 'basic';
+  var emailEl = document.getElementById('checkout-email');
+  var nameEl = document.getElementById('checkout-name');
+  var email = emailEl ? emailEl.value.trim() : '';
+  var name = nameEl ? nameEl.value.trim() : '';
+  var err = document.getElementById('modalError');
+
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    if (emailEl) { emailEl.style.borderColor = 'rgba(255,80,80,.6)'; emailEl.focus(); }
+    if (err) { err.textContent = 'Vul een geldig e-mailadres in.'; err.style.display = 'block'; }
+    if (btn) { btn.innerHTML = orig; btn.disabled = false; }
+    return;
+  }
+
+  fetch(MOLLIE_FUNCTION_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      packageKey: pkgKey,
+      customerEmail: email,
+      customerName: name,
+      paymentMethod: selectedMethod
+    })
+  })
+  .then(function(r) { return r.json(); })
+  .then(function(data) {
+    if (btn) { btn.innerHTML = orig; btn.disabled = false; }
+    if (data.checkoutUrl) {
+      closeCheckout();
+      var toast = document.getElementById('toast');
+      if (toast) {
+        toast.textContent = 'Je wordt doorgestuurd naar de betaalpagina...';
+        toast.style.color = '#fbbf24';
+        toast.classList.add('show');
+      }
+      setTimeout(function() { window.location.href = data.checkoutUrl; }, 800);
+    } else {
+      if (err) { err.textContent = 'Er ging iets mis. Probeer het opnieuw.'; err.style.display = 'block'; }
+    }
+  })
+  .catch(function() {
+    if (btn) { btn.innerHTML = orig; btn.disabled = false; }
+    if (err) { err.textContent = 'Betaling tijdelijk niet beschikbaar. Probeer later.'; err.style.display = 'block'; }
+  });
+}
+
+document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeCheckout(); });
+document.addEventListener('click', function(e) {
+  var m = document.getElementById('modal');
+  if (m && e.target === m) closeCheckout();
+});
 </script>
 
   <!-- Sticky bottom CTA bar -->
@@ -4595,7 +4433,7 @@ document.addEventListener('click', function(e) {
     <div class="sticky-cta-inner">
       <div class="sticky-left">
         <span class="sticky-title">Creator Cash Blueprint</span>
-        <span class="sticky-sub">3 Blueprints · From $29</span>
+        <span class="sticky-sub">3 PDF guides · From $29</span>
       </div>
       <div class="sticky-right">
         <a href="#products" class="sticky-btn">Get Instant Access →</a>
@@ -4637,11 +4475,12 @@ document.addEventListener('click', function(e) {
       <h3 class="exit-popup-h">Wait — before you go!</h3>
       <p class="exit-popup-p">Before you go — all three guides start at just <strong>$29</strong>.<br/>
       <em>Instant download, no subscription needed.</em></p>
-      <a href="#products" class="exit-popup-btn" onclick="closeExitPopup()" style="
-      <p class="exit-popup-fine">Starting from $29 · Instant Blueprint download</p>
+      <a href="#products" class="exit-popup-btn" onclick="closeExitPopup()" style="display:block;text-decoration:none;text-align:center;">
+        ▶ View All Guides →
+      </a>
+      <p class="exit-popup-fine">Starting from $29 · Instant PDF download</p>
       <button class="exit-popup-skip" onclick="closeExitPopup()">No thanks, I'll figure it out myself</button>
     </div>
   </div>
-
 </body>
 </html>
