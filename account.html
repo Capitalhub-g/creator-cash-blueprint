@@ -925,22 +925,29 @@
   }
 
   // ── ADD DEMO ORDERS (for testing) ───────────────
-  function addDemoOrders(email) {
+  
+
+
+  // ── Add order after confirmed payment ──────────────
+  // Call this from index.html after successful payment
+  function addOrderAfterPayment(email, packageKey, amount, orderNumber) {
     var users = getUsers();
-    if (!users[email]) return;
-    if (users[email].orders && users[email].orders.length > 0) return;
-    users[email].orders = [
-      {
-        id: 'CCB-2026-001',
-        date: '2026-03-15',
-        product: 'Premium Package',
-        packageKey: 'premium',
-        amount: 95,
-        status: 'completed'
-      }
-    ];
+    if (!users[email]) return false;
+    var pkgNames = { basic:'Basic Package', medium:'Medium Package', premium:'Premium Package' };
+    var order = {
+      id:         orderNumber || ('CCB-' + new Date().getFullYear() + '-' + (Math.floor(Math.random()*90000)+10000)),
+      date:       new Date().toISOString().split('T')[0],
+      product:    pkgNames[packageKey] || packageKey,
+      packageKey: packageKey,
+      amount:     amount,
+      status:     'completed'
+    };
+    if (!users[email].orders) users[email].orders = [];
+    users[email].orders.push(order);
     saveUsers(users);
+    return true;
   }
+  window.addOrderAfterPayment = addOrderAfterPayment;
 
   // ── RENDER DASHBOARD ────────────────────────────
   function renderDashboard(email) {
@@ -948,10 +955,7 @@
     var user = users[email];
     if (!user) return;
 
-    // For demo: add sample orders if none
-    addDemoOrders(email);
-    var users2 = getUsers();
-    var user2 = users2[email];
+    var user2 = user;
 
     // Header
     document.getElementById('dashName').textContent = user2.firstName + ' ' + user2.lastName;
