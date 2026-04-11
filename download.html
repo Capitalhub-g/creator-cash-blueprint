@@ -355,4 +355,18 @@
         // TOKEN MODE — production
         if (token && pkg && PACKAGES[pkg]) {
           if (validateToken(token, pkg)) {
-    
+                renderDownloads(pkg);
+          } else {
+            showState('stateDenied');
+          }
+          return;
+        }
+
+        // No valid params
+        showState('stateDenied');
+
+      }, 1200); // brief loading animation
+    });
+  </script>
+</body>
+</html>
