@@ -1149,21 +1149,11 @@
   
 // ── Smart back-to-store link ─────────────────────
 (function() {
+  // Back to store: simpel en betrouwbaar
+  // Altijd relatief naar index.html in dezelfde map
   var backBtn = document.getElementById('backToStore');
   if (!backBtn) return;
-  
-  // Haal het pad op van de huidige URL
-  var currentPath = window.location.pathname;
-  var currentDir = currentPath.substring(0, currentPath.lastIndexOf('/') + 1);
-  
-  // Stel de href in op basis van de huidige map
-  // Zo werkt het altijd, ongeacht hoe de bestanden zijn opgeslagen
-  backBtn.href = currentDir + 'index.html';
-  
-  // Als de gebruiker referrer heeft (terugkomen van store), gebruik die
-  if (document.referrer && document.referrer.includes('index')) {
-    backBtn.href = document.referrer;
-  }
+  backBtn.href = 'index.html';
 })();
 
 </script>
