@@ -2959,6 +2959,7 @@ h1, h2, h3, h4, h5 {
     ]
   }
   </script>
+  <script src="https://gumroad.com/js/gumroad.js"></script>
 </head>
 <body>
     <div id="scrollProgress" class="scroll-progress"></div>
@@ -4008,24 +4009,29 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 // ── Checkout Modal ───────────────────────
 const modal = document.getElementById('modal');
 
-function openCheckout(name, price, method = 'card') {
-  document.getElementById('modal-title').textContent = name;
-  document.getElementById('modal-subtitle').textContent = `${name} — $${price}`;
+function openCheckout(name, price, method) {
+  var link = GUMROAD_LINKS[name] || GUMROAD_LINKS[name.replace('&amp;', '&')];
 
-  modal.classList.add('open');
-  document.body.style.overflow = 'hidden';
-
-  // Set active tab
-  const tabs = document.querySelectorAll('.pay-tab');
-  tabs.forEach(t => t.classList.remove('on'));
-  if (method === 'paypal') {
-    tabs[1].classList.add('on');
-    document.getElementById('cardPane').style.display = 'none';
-    document.getElementById('paypalPane').style.display = 'block';
-  } else {
-    tabs[0].classList.add('on');
+  // Als Gumroad links nog niet ingesteld zijn (placeholder), toon info
+  if (!link || link.indexOf('YOUR_NAME') !== -1) {
+    var modal = document.getElementById('modal');
+    document.getElementById('modal-title').textContent = name;
+    document.getElementById('modal-subtitle').textContent = name + ' — $' + price;
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    var tabs = document.querySelectorAll('.pay-tab');
+    tabs.forEach(function(t) { t.classList.remove('on'); });
     document.getElementById('cardPane').style.display = 'block';
     document.getElementById('paypalPane').style.display = 'none';
+    if (tabs[0]) tabs[0].classList.add('on');
+    return;
+  }
+
+  // Gumroad overlay mode
+  if (GUMROAD_OVERLAY && window.GumroadOverlay) {
+    GumroadOverlay.show(link);
+  } else {
+    window.open(link, '_blank');
   }
 }
 
@@ -4062,7 +4068,23 @@ function generateDownloadToken(pkgKey) {
   return btoa(payload).replace(/=/g, '');
 }
 
-// ── Email function endpoint (update after Netlify deploy) ──
+
+  // ══════════════════════════════════════════════════
+  // GUMROAD BETAALLINKS — pas deze aan na registratie
+  // Vervang de placeholder URLs met jouw echte links
+  // van je Gumroad dashboard
+  // ══════════════════════════════════════════════════
+  var GUMROAD_LINKS = {
+    'Starter Blueprint':             'https://YOUR_NAME.gumroad.com/l/basic-blueprint',
+    'Growth System':                 'https://YOUR_NAME.gumroad.com/l/medium-blueprint',
+    'Automation & Profit Blueprint': 'https://YOUR_NAME.gumroad.com/l/premium-blueprint'
+  };
+
+  // Gumroad overlay modus (true = popup in dezelfde pagina)
+  // false = nieuwe tab opent
+  var GUMROAD_OVERLAY = true;
+
+  // ── Email function endpoint (update after Netlify deploy) ──
 var EMAIL_FUNCTION_URL = '/.netlify/functions/send-confirmation';
 
 // ── Generate order number ──────────────────────────────
