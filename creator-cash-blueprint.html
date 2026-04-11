@@ -2923,6 +2923,139 @@ h1, h2, h3, h4, h5 {
   .exit-popup-h { font-size: 22px; }
 }
 
+
+/* ══ Mollie betaalmodal ══ */
+.modal-step-label {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--red);
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+.pay-methods-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+.pay-method-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 12px 8px;
+  background: var(--bg-3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: var(--tr);
+  position: relative;
+}
+.pay-method-btn:hover {
+  border-color: var(--border-bright);
+  background: var(--surface-hover);
+}
+.pay-method-btn.active {
+  border-color: rgba(255,0,0,0.5);
+  background: var(--red-dim);
+}
+.pay-method-btn.active::after {
+  content: '✓';
+  position: absolute;
+  top: 4px; right: 6px;
+  font-size: 10px;
+  color: var(--red);
+  font-weight: 700;
+}
+.pay-method-icon { font-size: 20px; }
+.pay-method-name {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--white);
+  font-family: var(--f-display);
+}
+.pay-method-sub {
+  font-size: 10px;
+  color: var(--w30);
+  font-family: var(--f-mono);
+}
+.modal-back-btn {
+  font-size: 12px;
+  color: var(--w30);
+  font-family: var(--f-mono);
+  margin-bottom: 16px;
+  display: inline-block;
+  cursor: pointer;
+  transition: var(--tr);
+  padding: 4px 0;
+  background: none;
+  border: none;
+}
+.modal-back-btn:hover { color: var(--white); }
+.mfield-hint {
+  font-size: 11px;
+  color: var(--w30);
+  font-family: var(--f-mono);
+  margin-top: 4px;
+}
+.modal-summary {
+  background: var(--bg-3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 14px 16px;
+  margin: 16px 0;
+}
+.modal-summary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+#modal-summary-product {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--white);
+}
+#modal-summary-price {
+  font-size: 20px;
+  font-weight: 900;
+  color: var(--red);
+  font-family: var(--f-display);
+}
+.modal-summary-method {
+  font-size: 11px;
+  color: var(--w30);
+  font-family: var(--f-mono);
+}
+.modal-error-msg {
+  padding: 10px 14px;
+  background: rgba(255,80,80,0.08);
+  border: 1px solid rgba(255,80,80,0.25);
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  color: #ff8080;
+  margin-bottom: 14px;
+}
+.trust-mollie-badge {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  color: var(--w50);
+  padding: 3px 10px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+}
+@media (max-width: 480px) {
+  .pay-methods-grid { grid-template-columns: 1fr 1fr; }
+  .pay-method-name { font-size: 11px; }
+  .pay-method-icon { font-size: 18px; }
+}
+@media (max-width: 360px) {
+  .pay-methods-grid { grid-template-columns: 1fr 1fr 1fr; }
+  .pay-method-sub { display: none; }
+}
+
 </style>
 
   <!-- Schema.org structured data for Google rich results -->
@@ -3838,62 +3971,95 @@ h1, h2, h3, h4, h5 {
   <!-- ═══════════════ CHECKOUT MODAL ═══════════════ -->
   <div id="modal" class="modal-wrap">
     <div class="modal-box">
-      <button class="modal-x" onclick="closeCheckout()">✕</button>
+      <button class="modal-x" onclick="closeCheckout()">&#x2715;</button>
+
       <div class="modal-top">
-        <div class="modal-mark">✦</div>
+        <div class="modal-mark">&#x2726;</div>
         <h3 id="modal-title">Complete Purchase</h3>
-        <p id="modal-subtitle">Automation & Profit Blueprint · $95</p>
+        <p id="modal-subtitle">Blueprint &mdash; $29</p>
       </div>
 
-      <div class="pay-tabs">
-        <button class="pay-tab on" onclick="switchTab('card', this)">💳 Card</button>
-        <button class="pay-tab" onclick="switchTab('paypal', this)">🅿️ PayPal</button>
-      </div>
+      <!-- Stap 1: Betaalmethode kiezen -->
+      <div id="stepMethod">
+        <p class="modal-step-label">STAP 1 &mdash; KIES JE BETAALMETHODE</p>
 
-      <div id="cardPane">
-        <div class="mfield">
-          <label>Email</label>
-          <input type="email" id="checkout-email" placeholder="you@example.com" autocomplete="email" />
+        <div class="pay-methods-grid">
+          <button class="pay-method-btn active" onclick="selectMethod('ideal', this)">
+            <span class="pay-method-icon">🏦</span>
+            <span class="pay-method-name">iDEAL</span>
+            <span class="pay-method-sub">Meest gebruikt</span>
+          </button>
+          <button class="pay-method-btn" onclick="selectMethod('creditcard', this)">
+            <span class="pay-method-icon">💳</span>
+            <span class="pay-method-name">Creditcard</span>
+            <span class="pay-method-sub">Visa / Mastercard</span>
+          </button>
+          <button class="pay-method-btn" onclick="selectMethod('paypal', this)">
+            <span class="pay-method-icon">🅿️</span>
+            <span class="pay-method-name">PayPal</span>
+            <span class="pay-method-sub">Snel &amp; veilig</span>
+          </button>
+          <button class="pay-method-btn" onclick="selectMethod('bancontact', this)">
+            <span class="pay-method-icon">🇧🇪</span>
+            <span class="pay-method-name">Bancontact</span>
+            <span class="pay-method-sub">Belgi&euml;</span>
+          </button>
+          <button class="pay-method-btn" onclick="selectMethod('klarna', this)">
+            <span class="pay-method-icon">🌸</span>
+            <span class="pay-method-name">Klarna</span>
+            <span class="pay-method-sub">Achteraf betalen</span>
+          </button>
+          <button class="pay-method-btn" onclick="selectMethod('applepay', this)">
+            <span class="pay-method-icon"> </span>
+            <span class="pay-method-name">Apple Pay</span>
+            <span class="pay-method-sub">1-tap betalen</span>
+          </button>
         </div>
-        <div class="mfield">
-          <label>Card Number</label>
-          <input type="text" placeholder="4242 4242 4242 4242" id="cardNum" maxlength="19" />
-        </div>
-        <div class="mfield-row">
-          <div class="mfield">
-            <label>Expiry</label>
-            <input type="text" placeholder="MM / YY" id="expiry" maxlength="7" />
-          </div>
-          <div class="mfield">
-            <label>CVC</label>
-            <input type="text" placeholder="123" maxlength="4" />
-          </div>
-        </div>
-        <div class="mfield">
-          <label>Name on Card</label>
-          <input type="text" placeholder="Your Name" />
-        </div>
-        <button class="btn-checkout" onclick="processCheckout()">
-          🔒 Complete Purchase
+
+        <button class="btn-checkout" onclick="goToStepDetails()" style="margin-top:20px;">
+          Verder &rarr;
         </button>
-        <p class="secure-label">🔒 Secured by Stripe · 256-bit SSL · Instant access after payment</p>
-
-          <div class="payment-trust-row">
-            <svg height="20" viewBox="0 0 60 20" fill="none" xmlns="http://www.w3.org/2000/svg" title="Visa"><rect width="60" height="20" rx="3" fill="#1A1F71"/><text x="50%" y="14" text-anchor="middle" font-family="Arial" font-weight="bold" font-size="11" fill="white" letter-spacing="1">VISA</text></svg>
-            <svg height="20" viewBox="0 0 80 20" fill="none" xmlns="http://www.w3.org/2000/svg" title="Mastercard"><rect width="80" height="20" rx="3" fill="#252525"/><circle cx="27" cy="10" r="8" fill="#EB001B"/><circle cx="43" cy="10" r="8" fill="#F79E1B"/><path d="M35 4.8a8 8 0 010 10.4A8 8 0 0135 4.8z" fill="#FF5F00"/><text x="62" y="14" text-anchor="middle" font-family="Arial" font-size="8" fill="white">MC</text></svg>
-            <svg height="20" viewBox="0 0 80 20" fill="none" xmlns="http://www.w3.org/2000/svg" title="Stripe"><rect width="80" height="20" rx="3" fill="#635BFF"/><text x="50%" y="14" text-anchor="middle" font-family="Arial" font-weight="bold" font-size="10" fill="white">stripe</text></svg>
-            <svg height="20" viewBox="0 0 80 20" fill="none" xmlns="http://www.w3.org/2000/svg" title="PayPal"><rect width="80" height="20" rx="3" fill="#003087"/><text x="50%" y="14" text-anchor="middle" font-family="Arial" font-weight="bold" font-size="10" fill="white">PayPal</text></svg>
-            <div class="trust-ssl-badge">🔒 SSL</div>
-          </div>
       </div>
 
-      <div id="paypalPane" style="display:none">
-        <div class="paypal-box">
-          <p>You'll be securely redirected to PayPal to complete your purchase.</p>
+      <!-- Stap 2: Gegevens invullen -->
+      <div id="stepDetails" style="display:none;">
+        <button class="modal-back-btn" onclick="goToStepMethod()">&#8592; Terug</button>
+        <p class="modal-step-label">STAP 2 &mdash; JE GEGEVENS</p>
+
+        <div id="modalError" class="modal-error-msg" style="display:none;"></div>
+
+        <div class="mfield">
+          <label>Naam</label>
+          <input type="text" id="checkout-name" placeholder="Voor- en achternaam" autocomplete="name" />
         </div>
-        <button class="btn-paypal" onclick="processCheckout()">Pay with PayPal →</button>
-        <p class="secure-label">Protected by PayPal Buyer Protection</p>
+        <div class="mfield">
+          <label>E-mailadres</label>
+          <input type="email" id="checkout-email" placeholder="jij@voorbeeld.nl" autocomplete="email" />
+          <div class="mfield-hint">Downloadlink wordt hierheen gestuurd</div>
+        </div>
+
+        <div class="modal-summary">
+          <div class="modal-summary-row">
+            <span id="modal-summary-product">Blueprint</span>
+            <span id="modal-summary-price">$29</span>
+          </div>
+          <div class="modal-summary-method">
+            Betaalmethode: <strong id="modal-summary-method">iDEAL</strong>
+          </div>
+        </div>
+
+        <button class="btn-checkout" id="btnCheckout" onclick="processCheckout()">
+          &#x1F512;&nbsp; Veilig betalen via Mollie
+        </button>
+
+        <div class="payment-trust-row" style="margin-top:16px;">
+          <div class="trust-mollie-badge">Betaling via <strong>Mollie</strong></div>
+          <svg height="20" viewBox="0 0 60 20" xmlns="http://www.w3.org/2000/svg" title="Visa"><rect width="60" height="20" rx="3" fill="#1A1F71"/><text x="50%" y="14" text-anchor="middle" font-family="Arial" font-weight="bold" font-size="11" fill="white" letter-spacing="1">VISA</text></svg>
+          <svg height="20" viewBox="0 0 80 20" xmlns="http://www.w3.org/2000/svg" title="Mastercard"><rect width="80" height="20" rx="3" fill="#252525"/><circle cx="27" cy="10" r="8" fill="#EB001B"/><circle cx="43" cy="10" r="8" fill="#F79E1B"/><path d="M35 4.8a8 8 0 010 10.4A8 8 0 0135 4.8z" fill="#FF5F00"/></svg>
+          <div class="trust-ssl-badge">&#x1F512; SSL</div>
+        </div>
       </div>
+
     </div>
   </div>
 
@@ -4008,31 +4174,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 // ── Checkout Modal ───────────────────────
 const modal = document.getElementById('modal');
 
-function openCheckout(name, price, method) {
-  var link = GUMROAD_LINKS[name] || GUMROAD_LINKS[name.replace('&amp;', '&')];
-
-  // Als Gumroad links nog niet ingesteld zijn (placeholder), toon info
-  if (!link || link.indexOf('YOUR_NAME') !== -1) {
-    var modal = document.getElementById('modal');
-    document.getElementById('modal-title').textContent = name;
-    document.getElementById('modal-subtitle').textContent = name + ' — $' + price;
-    modal.classList.add('open');
-    document.body.style.overflow = 'hidden';
-    var tabs = document.querySelectorAll('.pay-tab');
-    tabs.forEach(function(t) { t.classList.remove('on'); });
-    document.getElementById('cardPane').style.display = 'block';
-    document.getElementById('paypalPane').style.display = 'none';
-    if (tabs[0]) tabs[0].classList.add('on');
-    return;
-  }
-
-  // Gumroad overlay mode
-  if (GUMROAD_OVERLAY && window.GumroadOverlay) {
-    GumroadOverlay.show(link);
-  } else {
-    window.open(link, '_blank');
-  }
-}
+// openCheckout: zie modal flow hierboven
 
 function closeCheckout() {
   modal.classList.remove('open');
@@ -4069,6 +4211,73 @@ function generateDownloadToken(pkgKey) {
 
 
   
+
+  // ── Mollie modal flow ──────────────────────────────
+  var selectedMethod = 'ideal';
+  var selectedMethodName = 'iDEAL';
+
+  function selectMethod(method, btn) {
+    selectedMethod = method;
+    document.querySelectorAll('.pay-method-btn').forEach(function(b) {
+      b.classList.remove('active');
+    });
+    btn.classList.add('active');
+    var names = {
+      ideal: 'iDEAL', creditcard: 'Creditcard',
+      paypal: 'PayPal', bancontact: 'Bancontact',
+      klarna: 'Klarna', applepay: 'Apple Pay'
+    };
+    selectedMethodName = names[method] || method;
+  }
+
+  function goToStepDetails() {
+    document.getElementById('stepMethod').style.display = 'none';
+    document.getElementById('stepDetails').style.display = 'block';
+    var summaryMethod = document.getElementById('modal-summary-method');
+    if (summaryMethod) summaryMethod.textContent = selectedMethodName;
+    // Sync samenvatting prijs
+    var subtitle = document.getElementById('modal-subtitle');
+    if (subtitle) {
+      var parts = subtitle.textContent.split('—');
+      var prod = parts[0].trim();
+      var price = parts[1] ? parts[1].trim() : '';
+      var sp = document.getElementById('modal-summary-product');
+      var sv = document.getElementById('modal-summary-price');
+      if (sp) sp.textContent = prod;
+      if (sv) sv.textContent = price;
+    }
+  }
+
+  function goToStepMethod() {
+    document.getElementById('stepDetails').style.display = 'none';
+    document.getElementById('stepMethod').style.display = 'block';
+  }
+
+  function openCheckout(name, price, method) {
+    var modal = document.getElementById('modal');
+    document.getElementById('modal-title').textContent = 'Afronden';
+    document.getElementById('modal-subtitle').textContent = name + ' — $' + price;
+    // Reset naar stap 1
+    document.getElementById('stepMethod').style.display = 'block';
+    document.getElementById('stepDetails').style.display = 'none';
+    document.getElementById('modalError').style.display = 'none';
+    // Reset active method
+    document.querySelectorAll('.pay-method-btn').forEach(function(b, i) {
+      b.classList.toggle('active', i === 0);
+    });
+    selectedMethod = 'ideal';
+    selectedMethodName = 'iDEAL';
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeCheckout() {
+    var modal = document.getElementById('modal');
+    if (modal) modal.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+
   // ══════════════════════════════════════════════════
   // MOLLIE BETAALINTEGRATIE
   // Serverless function op Netlify verwerkt de betaling
@@ -4137,7 +4346,12 @@ function processCheckout() {
   fetch(MOLLIE_FUNCTION_URL, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ packageKey: pkgKey, customerEmail: customerEmail, customerName: customerName })
+    body: JSON.stringify({
+      packageKey: pkgKey,
+      customerEmail: customerEmail,
+      customerName: customerName,
+      paymentMethod: selectedMethod || 'ideal'
+    })
   })
   .then(function(r) { return r.json(); })
   .then(function(data) {
