@@ -924,34 +924,87 @@
     }
   }
 
-  // ── ADD DEMO ORDERS (for testing) ───────────────
-  function addDemoOrders(email) {
+    // addDemoOrders verwijderd — orders alleen na echte betaling
+
+  
+  // ── Voeg order toe na bevestigde betaling ────────────
+  function addOrderAfterPayment(email, packageKey, amount, orderNumber, paymentId) {
     var users = getUsers();
-    if (!users[email]) return;
-    if (users[email].orders && users[email].orders.length > 0) return;
-    users[email].orders = [
-      {
-        id: 'CCB-2026-001',
-        date: '2026-03-15',
-        product: 'Premium Package',
-        packageKey: 'premium',
-        amount: 95,
-        status: 'completed'
-      }
-    ];
+    if (!users[email]) return false;
+
+    var existing = (users[email].orders || []);
+    if (orderNumber && existing.some(function(o) { return o.id === orderNumber; })) {
+      return true; // al verwerkt
+    }
+
+    var pkgNames = {
+      basic:   'Starter Blueprint',
+      medium:  'Growth System',
+      premium: 'Automation & Profit Blueprint'
+    };
+
+    var order = {
+      id:         orderNumber || ('CCB-' + new Date().getFullYear() + '-' + (Math.floor(Math.random()*90000)+10000)),
+      date:       new Date().toISOString().split('T')[0],
+      product:    pkgNames[packageKey] || packageKey,
+      packageKey: packageKey,
+      amount:     amount,
+      status:     'completed',
+      paymentId:  paymentId || '',
+      addedAt:    new Date().toISOString()
+    };
+
+    users[email].orders = existing.concat([order]);
     saveUsers(users);
+    return true;
+  }
+  window.addOrderAfterPayment = addOrderAfterPayment;
+
+  // ── Verwerk terugkeer van Mollie betaalpagina ────────
+  // Mollie stuurt klant terug met ?order=XXX&pkg=YYY&status=paid
+  function processPaymentReturn() {
+    var params = new URLSearchParams(window.location.search);
+    var status = params.get('status');
+    var orderNumber = params.get('order');
+    var pkgKey = params.get('pkg');
+    var paymentId = params.get('payment_id') || '';
+
+    if (status !== 'paid' || !orderNumber || !pkgKey) return;
+
+    var pkgPrices = { basic: 29, medium: 65, premium: 95 };
+    var currentUser = getCurrentUser();
+
+    if (!currentUser) {
+      // Geen sessie — sla op als pending order
+      var pending = JSON.parse(localStorage.getItem('ccb_pending_orders') || '[]');
+      var pkgNames = { basic:'Starter Blueprint', medium:'Growth System', premium:'Automation & Profit Blueprint' };
+      pending.push({
+        id: orderNumber, email: '',
+        date: new Date().toISOString().split('T')[0],
+        product: pkgNames[pkgKey] || pkgKey,
+        packageKey: pkgKey,
+        amount: pkgPrices[pkgKey] || 0,
+        status: 'completed',
+        paymentId: paymentId
+      });
+      localStorage.setItem('ccb_pending_orders', JSON.stringify(pending));
+      return;
+    }
+
+    // Koppel direct aan ingelogde gebruiker
+    if (addOrderAfterPayment(currentUser.email, pkgKey, pkgPrices[pkgKey] || 0, orderNumber, paymentId)) {
+      window.history.replaceState({}, '', window.location.pathname);
+      showToast('\u2705 Aankoop bevestigd! Je Blueprint is beschikbaar.', 'success');
+    }
   }
 
-  // ── RENDER DASHBOARD ────────────────────────────
-  function renderDashboard(email) {
+
+function renderDashboard(email) {
     var users = getUsers();
     var user = users[email];
     if (!user) return;
 
-    // For demo: add sample orders if none
-    addDemoOrders(email);
-    var users2 = getUsers();
-    var user2 = users2[email];
+    var user2 = user; // gebruik user direct, geen demo orders
 
     // Header
     document.getElementById('dashName').textContent = user2.firstName + ' ' + user2.lastName;
@@ -974,7 +1027,12 @@
 
     var listEl = document.getElementById('ordersList');
     if (orders.length === 0) {
-      listEl.innerHTML = '<div class="empty-orders"><div class="icon">📦</div><h3>No orders yet</h3><p>Purchase a guide to get started. All your downloads will appear here.</p><a href="index.html#products" class="btn-shop">Browse Guides →</a></div>';
+      listEl.innerHTML = '<div class="empty-orders">' +
+        '<div class="icon">📋</div>' +
+        '<h3>No blueprints purchased yet</h3>' +
+        '<p>You have not purchased any blueprint. After your purchase, your downloads will appear here automatically.</p>' +
+        '<a href="index.html#products" class="btn-shop">Browse Blueprints →</a>' +
+        '</div>';
       return;
     }
 
@@ -1009,7 +1067,7 @@
                 return '<div class="pdf-item">' +
                   '<div class="pdf-cover ' + pdf.cover + '">' + pdf.icon + '</div>' +
                   '<div class="pdf-info"><strong>' + pdf.title + '</strong><span>' + pdf.pages + ' · PDF · ' + pdf.size + '</span></div>' +
-                  '<button class="btn-download-pdf" onclick="downloadPdf(this, \'' + pdf.file + '\', \'' + pdf.filename + '\')">↓ Download</button>' +
+                  '<button class="btn-download-pdf" onclick="downloadPdf(this, \'' + pdf.file + '\', \'' + pdf.filename + '\', \'' + pdf.id + '\', \'' + order.id + '\')">↓ Download</button>' +
                 '</div>';
               }).join('') +
             '</div>' +
@@ -1033,12 +1091,40 @@
   }
 
   // ── DOWNLOAD PDF ─────────────────────────────────
-  function downloadPdf(btn, file, filename) {
+  function downloadPdf(btn, file, filename, packageKey, orderId) {
+    // Controleer: heeft deze gebruiker dit pakket echt gekocht?
+    var currentUser = getCurrentUser();
+    if (!currentUser) {
+      showToast('Log in om je blueprints te downloaden.', 'error');
+      return;
+    }
+
+    var users = getUsers();
+    var user = users[currentUser.email];
+    var orders = user ? (user.orders || []) : [];
+
+    // Controleer of er een geldige bestelling is voor dit pakket
+    var hasAccess = orders.some(function(o) {
+      return o.status === 'completed' && (
+        o.packageKey === packageKey ||
+        (packageKey === 'pdf1' && ['basic','medium','premium'].includes(o.packageKey)) ||
+        (packageKey === 'pdf2' && ['medium','premium'].includes(o.packageKey)) ||
+        (packageKey === 'pdf3' && o.packageKey === 'premium')
+      );
+    });
+
+    if (!hasAccess) {
+      showToast('\u26A0\uFE0F Je hebt dit blueprint niet gekocht.', 'error');
+      return;
+    }
+
     var orig = btn.innerHTML;
-    btn.innerHTML = '⏳ Preparing...';
+    btn.innerHTML = '\u23F3 Preparing...';
     btn.disabled = true;
+
     setTimeout(function() {
-      // Create download link
+      // Genereer een tijdelijk download token (client-side, voor productie: serverside)
+      var token = btoa(currentUser.email + ':' + packageKey + ':' + Date.now()).replace(/=/g, '');
       var a = document.createElement('a');
       a.href = file;
       a.download = filename;
@@ -1046,15 +1132,16 @@
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
-      btn.innerHTML = '✓ Downloaded!';
+
+      btn.innerHTML = '\u2713 Downloaded!';
       btn.classList.add('done');
       setTimeout(function() {
         btn.innerHTML = orig;
         btn.classList.remove('done');
         btn.disabled = false;
       }, 3000);
-      showToast('✅ ' + filename + ' download started!', 'success');
-    }, 800);
+      showToast('\u2705 ' + filename + ' download gestart!', 'success');
+    }, 600);
   }
 
   // ── EDIT NAME ────────────────────────────────────
@@ -1096,6 +1183,8 @@
 
   // ── INIT ─────────────────────────────────────────
   (function init() {
+    processPaymentReturn();
+
     var user = getCurrentUser();
     if (user) {
       renderDashboard(user.email);
