@@ -2924,7 +2924,7 @@ h1, h2, h3, h4, h5 {
 }
 
 
-/* ══ Mollie betaalmodal ══ */
+/* ══ Mollie payment modal ══ */
 .modal-step-label{font-family:var(--f-mono);font-size:10px;letter-spacing:2px;color:var(--red);font-weight:700;margin-bottom:16px}
 .pay-methods-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:4px}
 .pay-method-btn{display:flex;flex-direction:column;align-items:center;gap:4px;padding:12px 8px;background:var(--bg-3);border:1px solid var(--border);border-radius:var(--radius-sm);cursor:pointer;transition:var(--tr);position:relative}
@@ -3851,18 +3851,18 @@ h1, h2, h3, h4, h5 {
       <button class="modal-x" onclick="closeCheckout()">&#x2715;</button>
       <div class="modal-top">
         <div class="modal-mark">&#x2726;</div>
-        <h3 id="modal-title">Afronden</h3>
+        <h3 id="modal-title">Checkout</h3>
         <p id="modal-subtitle">Blueprint &mdash; $29</p>
       </div>
 
       <!-- Stap 1: Betaalmethode -->
       <div id="stepMethod">
-        <p class="modal-step-label">STAP 1 &mdash; KIES JE BETAALMETHODE</p>
+        <p class="modal-step-label">STEP 1 &mdash; SELECT PAYMENT METHOD</p>
         <div class="pay-methods-grid">
           <button class="pay-method-btn active" onclick="selectMethod('ideal',this)">
             <span class="pay-method-icon">🏦</span>
             <span class="pay-method-name">iDEAL</span>
-            <span class="pay-method-sub">Meest gebruikt</span>
+            <span class="pay-method-sub">Most popular</span>
           </button>
           <button class="pay-method-btn" onclick="selectMethod('creditcard',this)">
             <span class="pay-method-icon">💳</span>
@@ -3872,42 +3872,42 @@ h1, h2, h3, h4, h5 {
           <button class="pay-method-btn" onclick="selectMethod('paypal',this)">
             <span class="pay-method-icon">🅿️</span>
             <span class="pay-method-name">PayPal</span>
-            <span class="pay-method-sub">Snel &amp; veilig</span>
+            <span class="pay-method-sub">Fast &amp; secure</span>
           </button>
           <button class="pay-method-btn" onclick="selectMethod('bancontact',this)">
             <span class="pay-method-icon">🇧🇪</span>
             <span class="pay-method-name">Bancontact</span>
-            <span class="pay-method-sub">Belgi&euml;</span>
+            <span class="pay-method-sub">Belgium</span>
           </button>
           <button class="pay-method-btn" onclick="selectMethod('klarna',this)">
             <span class="pay-method-icon">🌸</span>
             <span class="pay-method-name">Klarna</span>
-            <span class="pay-method-sub">Achteraf betalen</span>
+            <span class="pay-method-sub">Pay later</span>
           </button>
           <button class="pay-method-btn" onclick="selectMethod('applepay',this)">
             <span class="pay-method-icon">&#xf8ff;</span>
             <span class="pay-method-name">Apple Pay</span>
-            <span class="pay-method-sub">1-tap betalen</span>
+            <span class="pay-method-sub">1-tap payment</span>
           </button>
         </div>
         <button class="btn-checkout" onclick="goToStepDetails()" style="margin-top:20px;">
-          Verder &rarr;
+          Continue &rarr;
         </button>
       </div>
 
       <!-- Stap 2: Gegevens -->
       <div id="stepDetails" style="display:none;">
-        <button class="modal-back-btn" onclick="goToStepMethod()">&#8592; Terug</button>
-        <p class="modal-step-label">STAP 2 &mdash; JE GEGEVENS</p>
+        <button class="modal-back-btn" onclick="goToStepMethod()">&#8592; Back</button>
+        <p class="modal-step-label">STEP 2 &mdash; YOUR DETAILS</p>
         <div id="modalError" class="modal-error-msg" style="display:none;"></div>
         <div class="mfield">
-          <label>Naam</label>
-          <input type="text" id="checkout-name" placeholder="Voor- en achternaam" autocomplete="name" />
+          <label>Full Name</label>
+          <input type="text" id="checkout-name" placeholder="First and last name" autocomplete="name" />
         </div>
         <div class="mfield">
-          <label>E-mailadres</label>
-          <input type="email" id="checkout-email" placeholder="jij@voorbeeld.nl" autocomplete="email" />
-          <div class="mfield-hint">Je downloadlink wordt hierheen gestuurd</div>
+          <label>Email Address</label>
+          <input type="email" id="checkout-email" placeholder="you@example.com" autocomplete="email" />
+          <div class="mfield-hint">Your download link will be sent here</div>
         </div>
         <div class="modal-summary">
           <div class="modal-summary-row">
@@ -3919,10 +3919,10 @@ h1, h2, h3, h4, h5 {
           </div>
         </div>
         <button class="btn-checkout" id="btnCheckout" onclick="processCheckout()">
-          &#x1F512; Veilig betalen via Mollie
+          &#x1F512; Pay securely via Mollie
         </button>
         <div class="payment-trust-row" style="margin-top:16px;">
-          <div class="trust-mollie-badge">Betaling via <strong>Mollie</strong></div>
+          <div class="trust-mollie-badge">Payment via <strong>Mollie</strong></div>
           <svg height="18" viewBox="0 0 60 20" xmlns="http://www.w3.org/2000/svg"><rect width="60" height="20" rx="3" fill="#1A1F71"/><text x="50%" y="14" text-anchor="middle" font-family="Arial" font-weight="bold" font-size="11" fill="white">VISA</text></svg>
           <svg height="18" viewBox="0 0 50 20" xmlns="http://www.w3.org/2000/svg"><rect width="50" height="20" rx="3" fill="#252525"/><circle cx="18" cy="10" r="7" fill="#EB001B"/><circle cx="32" cy="10" r="7" fill="#F79E1B"/></svg>
           <div class="trust-ssl-badge">&#x1F512; SSL</div>
@@ -4298,7 +4298,7 @@ document.addEventListener('click', function(e) {
 
 
 // ═══════════════════════════════════════════════════
-// MOLLIE BETAALINTEGRATIE
+// MOLLIE PAYMENT INTEGRATION
 // ═══════════════════════════════════════════════════
 var MOLLIE_FUNCTION_URL = '/.netlify/functions/create-payment';
 var selectedMethod = 'ideal';
@@ -4345,7 +4345,7 @@ function goToStepMethod() {
 function openCheckout(name, price, method) {
   var modal = document.getElementById('modal');
   if (!modal) return;
-  document.getElementById('modal-title').textContent = 'Afronden';
+  document.getElementById('modal-title').textContent = 'Checkout';
   document.getElementById('modal-subtitle').textContent = name + ' — $' + price;
   var s1 = document.getElementById('stepMethod');
   var s2 = document.getElementById('stepDetails');
@@ -4371,7 +4371,7 @@ function closeCheckout() {
 function processCheckout() {
   var btn = document.getElementById('btnCheckout');
   var orig = btn ? btn.innerHTML : '';
-  if (btn) { btn.innerHTML = '<span style="opacity:.6">Verwerken...</span>'; btn.disabled = true; }
+  if (btn) { btn.innerHTML = '<span style="opacity:.6">Processing...</span>'; btn.disabled = true; }
 
   var sub = document.getElementById('modal-subtitle');
   var pkgName = sub ? sub.textContent.split('—')[0].trim() : '';
@@ -4384,7 +4384,7 @@ function processCheckout() {
 
   if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     if (emailEl) { emailEl.style.borderColor = 'rgba(255,80,80,.6)'; emailEl.focus(); }
-    if (err) { err.textContent = 'Vul een geldig e-mailadres in.'; err.style.display = 'block'; }
+    if (err) { err.textContent = 'Please enter a valid email address.'; err.style.display = 'block'; }
     if (btn) { btn.innerHTML = orig; btn.disabled = false; }
     return;
   }
@@ -4406,18 +4406,18 @@ function processCheckout() {
       closeCheckout();
       var toast = document.getElementById('toast');
       if (toast) {
-        toast.textContent = 'Je wordt doorgestuurd naar de betaalpagina...';
+        toast.textContent = 'Redirecting to payment page...';
         toast.style.color = '#fbbf24';
         toast.classList.add('show');
       }
       setTimeout(function() { window.location.href = data.checkoutUrl; }, 800);
     } else {
-      if (err) { err.textContent = 'Er ging iets mis. Probeer het opnieuw.'; err.style.display = 'block'; }
+      if (err) { err.textContent = 'Something went wrong. Please try again.'; err.style.display = 'block'; }
     }
   })
   .catch(function() {
     if (btn) { btn.innerHTML = orig; btn.disabled = false; }
-    if (err) { err.textContent = 'Betaling tijdelijk niet beschikbaar. Probeer later.'; err.style.display = 'block'; }
+    if (err) { err.textContent = 'Payment temporarily unavailable. Please try again later.'; err.style.display = 'block'; }
   });
 }
 

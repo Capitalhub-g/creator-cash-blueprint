@@ -927,10 +927,10 @@
     }
   }
 
-    // addDemoOrders verwijderd — orders alleen na echte betaling
+    // addDemoOrders removed — orders only added after real payment
 
   
-  // ── Voeg order toe na bevestigde betaling ────────────
+  // ── Add order after confirmed payment ────────────
   function addOrderAfterPayment(email, packageKey, amount, orderNumber, paymentId) {
     var users = getUsers();
     if (!users[email]) return false;
@@ -963,8 +963,8 @@
   }
   window.addOrderAfterPayment = addOrderAfterPayment;
 
-  // ── Verwerk terugkeer van Mollie betaalpagina ────────
-  // Mollie stuurt klant terug met ?order=XXX&pkg=YYY&status=paid
+  // ── Process return from Mollie payment page ────────
+  // Mollie redirects customer back with ?order=XXX&pkg=YYY&status=paid
   function processPaymentReturn() {
     var params = new URLSearchParams(window.location.search);
     var status = params.get('status');
@@ -978,7 +978,7 @@
     var currentUser = getCurrentUser();
 
     if (!currentUser) {
-      // Geen sessie — sla op als pending order
+      // No session — save as pending order
       var pending = JSON.parse(localStorage.getItem('ccb_pending_orders') || '[]');
       var pkgNames = { basic:'Starter Blueprint', medium:'Growth System', premium:'Automation & Profit Blueprint' };
       pending.push({
@@ -994,10 +994,10 @@
       return;
     }
 
-    // Koppel direct aan ingelogde gebruiker
+    // Link directly to logged-in user
     if (addOrderAfterPayment(currentUser.email, pkgKey, pkgPrices[pkgKey] || 0, orderNumber, paymentId)) {
       window.history.replaceState({}, '', window.location.pathname);
-      showToast('\u2705 Aankoop bevestigd! Je Blueprint is beschikbaar.', 'success');
+      showToast('\u2705 Purchase confirmed! Your Blueprint is now available.', 'success');
     }
   }
 
@@ -1095,10 +1095,10 @@ function renderDashboard(email) {
 
   // ── DOWNLOAD PDF ─────────────────────────────────
   function downloadPdf(btn, file, filename, packageKey, orderId) {
-    // Controleer: heeft deze gebruiker dit pakket echt gekocht?
+    // Check: has this user actually purchased this package?
     var currentUser = getCurrentUser();
     if (!currentUser) {
-      showToast('Log in om je blueprints te downloaden.', 'error');
+      showToast('Please log in to download your blueprints.', 'error');
       return;
     }
 
@@ -1106,7 +1106,7 @@ function renderDashboard(email) {
     var user = users[currentUser.email];
     var orders = user ? (user.orders || []) : [];
 
-    // Controleer of er een geldige bestelling is voor dit pakket
+    // Check if there is a valid order for this package
     var hasAccess = orders.some(function(o) {
       return o.status === 'completed' && (
         o.packageKey === packageKey ||
@@ -1117,7 +1117,7 @@ function renderDashboard(email) {
     });
 
     if (!hasAccess) {
-      showToast('\u26A0\uFE0F Je hebt dit blueprint niet gekocht.', 'error');
+      showToast('\u26A0\uFE0F You have not purchased this blueprint.', 'error');
       return;
     }
 
@@ -1126,7 +1126,7 @@ function renderDashboard(email) {
     btn.disabled = true;
 
     setTimeout(function() {
-      // Genereer een tijdelijk download token (client-side, voor productie: serverside)
+      // Generate a temporary download token (client-side; use server-side in production)
       var token = btoa(currentUser.email + ':' + packageKey + ':' + Date.now()).replace(/=/g, '');
       var a = document.createElement('a');
       a.href = file;
@@ -1198,7 +1198,7 @@ function renderDashboard(email) {
 
 (function init() {
 
-    // ── Data migratie: verwijder placeholder orders uit eerdere versies ──
+    // ── Data migration: remove placeholder orders from earlier versions ──
     (function migrateData() {
       try {
         var users = JSON.parse(localStorage.getItem('ccb_users') || '{}');

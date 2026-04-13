@@ -12,7 +12,7 @@ const PDF_CATALOG = {
 exports.handler = async (event) => {
   if (event.httpMethod !== 'POST') return { statusCode: 405, body: 'Method not allowed' };
 
-  // Mollie stuurt de payment ID als form data
+  // Mollie sends the payment ID as form data
   let paymentId;
   try {
     const params = new URLSearchParams(event.body);
@@ -24,13 +24,13 @@ exports.handler = async (event) => {
   if (!paymentId) return { statusCode: 400, body: 'No payment ID' };
 
   try {
-    // Haal betaalstatus op bij Mollie
+    // Fetch payment status from Mollie
     const res = await fetch('https://api.mollie.com/v2/payments/' + paymentId, {
       headers: { 'Authorization': 'Bearer ' + process.env.MOLLIE_API_KEY }
     });
     const payment = await res.json();
 
-    // Alleen verwerken als betaling echt geslaagd is
+    // Only process if payment is truly successful
     if (payment.status !== 'paid') {
       return { statusCode: 200, body: 'Status: ' + payment.status };
     }
@@ -51,56 +51,56 @@ exports.handler = async (event) => {
 <tr><td style="background:linear-gradient(135deg,#0e0e1a,#1a0000);border-radius:14px 14px 0 0;padding:36px 40px;text-align:center;border:1px solid rgba(255,0,0,0.2);border-bottom:none;">
 <div style="font-size:28px;margin-bottom:8px;">▶</div>
 <h1 style="margin:0;font-size:20px;font-weight:800;color:#fff;">Creator<span style="color:#ff0000;">Cash</span> Blueprint</h1>
-<p style="margin:6px 0 0;font-size:12px;color:rgba(255,255,255,0.4);font-family:monospace;letter-spacing:1px;">BETALING BEVESTIGD</p>
+<p style="margin:6px 0 0;font-size:12px;color:rgba(255,255,255,0.4);font-family:monospace;letter-spacing:1px;">PAYMENT CONFIRMED</p>
 </td></tr>
 <tr><td style="background:#0a2e12;padding:14px 40px;text-align:center;border-left:1px solid rgba(255,0,0,0.2);border-right:1px solid rgba(255,0,0,0.2);">
-<p style="margin:0;font-size:14px;color:#4ade80;font-weight:600;">✅ &nbsp;Betaling geslaagd — jouw Blueprints zijn klaar!</p>
+<p style="margin:0;font-size:14px;color:#4ade80;font-weight:600;">✅ &nbsp;Payment successful — your Blueprints are ready to download!</p>
 </td></tr>
 <tr><td style="background:#0e0e1a;border-radius:0 0 14px 14px;padding:36px 40px;border:1px solid rgba(255,0,0,0.2);border-top:none;">
 <p style="margin:0 0 24px;font-size:16px;color:#e0e0e0;line-height:1.6;">Hey ${firstName} 👋,</p>
-<p style="margin:0 0 28px;font-size:15px;color:rgba(255,255,255,0.7);line-height:1.7;">Bedankt voor je aankoop! Je Blueprints staan klaar om te downloaden.</p>
+<p style="margin:0 0 28px;font-size:15px;color:rgba(255,255,255,0.7);line-height:1.7;">Thank you for your purchase! Your Blueprints are ready to download.</p>
 <table width="100%" cellpadding="0" cellspacing="0" style="background:#13131f;border:1px solid rgba(255,255,255,0.08);border-radius:10px;margin-bottom:28px;">
-<tr><td style="padding:16px 20px;border-bottom:1px solid rgba(255,255,255,0.06);"><p style="margin:0;font-size:10px;color:rgba(255,255,255,0.3);font-family:monospace;letter-spacing:2px;font-weight:700;">BESTELLINGSOVERZICHT</p></td></tr>
+<tr><td style="padding:16px 20px;border-bottom:1px solid rgba(255,255,255,0.06);"><p style="margin:0;font-size:10px;color:rgba(255,255,255,0.3);font-family:monospace;letter-spacing:2px;font-weight:700;">ORDER SUMMARY</p></td></tr>
 <tr><td style="padding:16px 20px;">
 <table width="100%" cellpadding="0" cellspacing="0">
-<tr><td style="font-size:12px;color:rgba(255,255,255,0.4);font-family:monospace;padding-bottom:4px;">BESTELNUMMER</td><td style="font-size:12px;color:rgba(255,255,255,0.4);font-family:monospace;padding-bottom:4px;text-align:right;">DATUM</td></tr>
-<tr><td style="font-size:14px;color:#ff6666;font-weight:700;font-family:monospace;">${orderNumber}</td><td style="font-size:14px;color:#e0e0e0;font-weight:600;text-align:right;">${new Date().toLocaleDateString('nl-NL', {year:'numeric',month:'long',day:'numeric'})}</td></tr>
+<tr><td style="font-size:12px;color:rgba(255,255,255,0.4);font-family:monospace;padding-bottom:4px;">ORDER NUMBER</td><td style="font-size:12px;color:rgba(255,255,255,0.4);font-family:monospace;padding-bottom:4px;text-align:right;">DATE</td></tr>
+<tr><td style="font-size:14px;color:#ff6666;font-weight:700;font-family:monospace;">${orderNumber}</td><td style="font-size:14px;color:#e0e0e0;font-weight:600;text-align:right;">${new Date().toLocaleDateString('en-US', {year:'numeric',month:'long',day:'numeric'})}</td></tr>
 </table></td></tr>
 <tr><td style="padding:0 20px 16px;">
 <table width="100%" cellpadding="0" cellspacing="0">
-<tr><td style="font-size:12px;color:rgba(255,255,255,0.4);font-family:monospace;padding-bottom:8px;">PRODUCT</td><td style="font-size:12px;color:rgba(255,255,255,0.4);font-family:monospace;padding-bottom:8px;text-align:right;">TOTAAL</td></tr>
+<tr><td style="font-size:12px;color:rgba(255,255,255,0.4);font-family:monospace;padding-bottom:8px;">PRODUCT</td><td style="font-size:12px;color:rgba(255,255,255,0.4);font-family:monospace;padding-bottom:8px;text-align:right;">TOTAL</td></tr>
 <tr><td style="font-size:15px;color:#fff;font-weight:700;">${packageName}</td><td style="font-size:20px;color:#ff0000;font-weight:900;font-family:monospace;text-align:right;">$${payment.amount.value}</td></tr>
 </table></td></tr></table>
-<p style="margin:0 0 12px;font-size:12px;color:rgba(255,255,255,0.4);font-family:monospace;letter-spacing:2px;font-weight:700;">INBEGREPEN BLUEPRINTS</p>
+<p style="margin:0 0 12px;font-size:12px;color:rgba(255,255,255,0.4);font-family:monospace;letter-spacing:2px;font-weight:700;">INCLUDED BLUEPRINTS</p>
 <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:32px;">${pdfListHtml}</table>
 <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:32px;">
-<tr><td align="center"><a href="${downloadUrl}" style="display:inline-block;background:#ff0000;color:#fff;text-decoration:none;font-size:15px;font-weight:800;padding:16px 36px;border-radius:10px;letter-spacing:-0.2px;box-shadow:0 4px 20px rgba(255,0,0,0.3);">↓ &nbsp;Download jouw Blueprints</a></td></tr>
-<tr><td align="center" style="padding-top:10px;"><p style="margin:0;font-size:11px;color:rgba(255,255,255,0.3);font-family:monospace;">Link is altijd beschikbaar via jouw account</p></td></tr>
+<tr><td align="center"><a href="${downloadUrl}" style="display:inline-block;background:#ff0000;color:#fff;text-decoration:none;font-size:15px;font-weight:800;padding:16px 36px;border-radius:10px;letter-spacing:-0.2px;box-shadow:0 4px 20px rgba(255,0,0,0.3);">↓ &nbsp;Download your Blueprints</a></td></tr>
+<tr><td align="center" style="padding-top:10px;"><p style="margin:0;font-size:11px;color:rgba(255,255,255,0.3);font-family:monospace;">Link is altijd available in your account</p></td></tr>
 </table>
 <hr style="border:none;border-top:1px solid rgba(255,255,255,0.07);margin:28px 0;"/>
-<p style="margin:0;font-size:14px;color:rgba(255,255,255,0.6);line-height:1.7;">Vragen? Stuur een mail naar <a href="mailto:support@creatorcashblueprint.com" style="color:#ff6666;text-decoration:none;">support@creatorcashblueprint.com</a></p>
-<p style="margin:16px 0 0;font-size:14px;color:rgba(255,255,255,0.6);">— Het Creator Cash Blueprint Team</p>
+<p style="margin:0;font-size:14px;color:rgba(255,255,255,0.6);line-height:1.7;">Questions? Email us at <a href="mailto:support@creatorcashblueprint.com" style="color:#ff6666;text-decoration:none;">support@creatorcashblueprint.com</a></p>
+<p style="margin:16px 0 0;font-size:14px;color:rgba(255,255,255,0.6);">— The Creator Cash Blueprint Team</p>
 </td></tr>
 <tr><td style="padding:24px 0;text-align:center;">
-<p style="margin:0;font-size:11px;color:rgba(255,255,255,0.2);font-family:monospace;">© 2026 Creator Cash Blueprint. Alle rechten voorbehouden.</p>
+<p style="margin:0;font-size:11px;color:rgba(255,255,255,0.2);font-family:monospace;">© 2026 Creator Cash Blueprint. All rights reserved.</p>
 </td></tr>
 </table></td></tr></table>
 </body></html>`;
 
-    // Stuur bevestigingsmail via Resend
+    // Send confirmation email via Resend
     await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: { 'Authorization': 'Bearer ' + process.env.RESEND_API_KEY, 'Content-Type': 'application/json' },
       body: JSON.stringify({
         from: process.env.FROM_EMAIL || 'Creator Cash Blueprint <orders@creatorcashblueprint.com>',
         to: [customerEmail],
-        subject: '✅ Bestelling bevestigd — ' + packageName + ' | ' + orderNumber,
+        subject: '✅ Order confirmed — ' + packageName + ' | ' + orderNumber,
         html: emailHtml,
-        text: 'Bedankt voor je aankoop! Bestelnummer: ' + orderNumber + '. Download je Blueprints via: ' + downloadUrl
+        text: 'Thank you for your purchase! ORDER NUMBER: ' + orderNumber + '. Download je Blueprints via: ' + downloadUrl
       })
     });
 
-    // Stuur notificatie aan eigenaar
+    // Send notification to owner
     await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: { 'Authorization': 'Bearer ' + process.env.RESEND_API_KEY, 'Content-Type': 'application/json' },
@@ -108,7 +108,7 @@ exports.handler = async (event) => {
         from: process.env.FROM_EMAIL || 'Creator Cash Blueprint <orders@creatorcashblueprint.com>',
         to: [process.env.OWNER_EMAIL || 'support@creatorcashblueprint.com'],
         subject: '💰 Nieuwe verkoop: ' + packageName + ' — $' + payment.amount.value,
-        text: 'Nieuwe betaling!\n\nKlant: ' + customerName + '\nEmail: ' + customerEmail + '\nPakket: ' + packageName + '\nBedrag: $' + payment.amount.value + '\nBestelnummer: ' + orderNumber + '\nMollie ID: ' + paymentId
+        text: 'New payment!\n\nCustomer: ' + customerName + '\nEmail: ' + customerEmail + '\nPackage: ' + packageName + '\nAmount: $' + payment.amount.value + '\nORDER NUMBER: ' + orderNumber + '\nMollie ID: ' + paymentId
       })
     });
 
