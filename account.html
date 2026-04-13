@@ -522,6 +522,9 @@
             Don't have an account?
             <a href="#" onclick="switchTabByName('register'); return false;" style="color:var(--red);">Create one →</a>
           </p>
+          <p class="terms-note" style="margin-top:8px;">
+            <a href="#" onclick="window.resetAccountData(); return false;" style="color:var(--w30);font-size:10px;">Having trouble? Reset local data</a>
+          </p>
         </div>
 
         <!-- ── REGISTER PANEL ── -->
@@ -1182,7 +1185,40 @@ function renderDashboard(email) {
   }
 
   // ── INIT ─────────────────────────────────────────
-  (function init() {
+  
+  // ── Debug helper: reset localStorage (alleen voor support) ──
+  window.resetAccountData = function() {
+    if (confirm('This will clear all local account data. Continue?')) {
+      localStorage.removeItem('ccb_users');
+      localStorage.removeItem('ccb_current');
+      localStorage.removeItem('ccb_pending_orders');
+      location.reload();
+    }
+  };
+
+(function init() {
+
+    // ── Data migratie: verwijder placeholder orders uit eerdere versies ──
+    (function migrateData() {
+      try {
+        var users = JSON.parse(localStorage.getItem('ccb_users') || '{}');
+        var changed = false;
+        Object.keys(users).forEach(function(email) {
+          var u = users[email];
+          if (!u.orders) { u.orders = []; changed = true; return; }
+          // Verwijder de CCB-2026-001 demo order
+          var filtered = u.orders.filter(function(o) {
+            return o.id !== 'CCB-2026-001' && o.packageKey !== 'demo';
+          });
+          if (filtered.length !== u.orders.length) {
+            u.orders = filtered;
+            changed = true;
+          }
+        });
+        if (changed) localStorage.setItem('ccb_users', JSON.stringify(users));
+      } catch(e) { /* stille fout */ }
+    })();
+
     processPaymentReturn();
 
     var user = getCurrentUser();
