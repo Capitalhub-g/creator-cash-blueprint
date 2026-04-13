@@ -1122,7 +1122,7 @@ function renderDashboard(email) {
     }
 
     var orig = btn.innerHTML;
-    btn.innerHTML = '\u23F3 Preparing...';
+    btn.innerHTML = '⏳ Preparing...';
     btn.disabled = true;
 
     setTimeout(function() {
@@ -1206,7 +1206,7 @@ function renderDashboard(email) {
         Object.keys(users).forEach(function(email) {
           var u = users[email];
           if (!u.orders) { u.orders = []; changed = true; return; }
-          // Verwijder de CCB-2026-001 demo order
+          // Remove the CCB-2026-001 demo/placeholder order
           var filtered = u.orders.filter(function(o) {
             return o.id !== 'CCB-2026-001' && o.packageKey !== 'demo';
           });
