@@ -466,7 +466,15 @@
       .btn-download-pdf { padding: 7px 10px; font-size: 11px; }
       .pdf-item { flex-wrap: wrap; }
     }
-  </style>
+  
+    /* ── Reset password view ── */
+    #resetView .auth-card { max-width: 420px; }
+    .strength-bar-wrap { display: flex; align-items: center; gap: 10px; }
+    .strength-bar { flex: 1; height: 4px; background: rgba(255,255,255,0.08); border-radius: 3px; overflow: hidden; }
+    #resetStrengthLabel { font-size: 11px; color: rgba(255,255,255,0.3); font-family: var(--f-mono); min-width: 70px; }
+    #resetDoneWrap .btn-primary { display: inline-block; text-decoration: none; padding: 12px 28px; }
+
+    </style>
 </head>
 <body>
 
@@ -580,28 +588,72 @@
     </div>
 
     <!-- ═══ FORGOT PASSWORD VIEW ═══════════════ -->
-    <div id="forgotView" class="auth-view" style="display:none;flex-direction:column;align-items:center;justify-content:center;min-height:calc(100vh - 64px);padding:48px 24px;">
-      <div class="auth-card">
-        <div class="auth-header">
-          <div class="auth-icon">🔑</div>
-          <div class="auth-title">Reset Password</div>
-          <div class="auth-sub">Enter your email and we'll send you a reset link.</div>
+      <div id="forgotView" class="auth-view" style="display:none;flex-direction:column;align-items:center;justify-content:center;min-height:calc(100vh - 64px);padding:48px 24px;">
+    <div class="auth-card">
+      <div class="auth-logo"><span class="logo-mark"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect width="22" height="22" rx="4" fill="#ff0000"/><polygon points="8,5 18,11 8,17" fill="white"/></svg></span><strong>Creator</strong>Cash Blueprint</div>
+
+      <h2 class="auth-h2">Reset Password</h2>
+      <p class="auth-sub">Enter your email and we&apos;ll send you a reset link.</p>
+
+      <div id="forgotError" class="auth-error"></div>
+      <div id="forgotSuccess" class="auth-success"></div>
+
+      <div class="field-wrap">
+        <label class="field-label">Email Address</label>
+        <input type="email" id="forgotEmail" class="auth-input" placeholder="you@example.com" autocomplete="email" />
+        <div id="forgotEmailErr" class="field-error" style="display:none">Please enter a valid email address.</div>
+      </div>
+
+      <button class="btn-primary" id="forgotBtn" onclick="doForgot()">Send Reset Link &rarr;</button>
+
+      <p style="text-align:center;margin-top:16px;">
+        <a href="#" onclick="switchTabByName('login');return false;" style="font-size:13px;color:rgba(255,255,255,0.3);font-family:var(--f-mono);">&larr; Back to Sign In</a>
+      </p>
+    </div>
+  </div>
+
+  <!-- Reset Password View -->
+  <div id="resetView" class="auth-view" style="display:none;flex-direction:column;align-items:center;justify-content:center;min-height:calc(100vh - 64px);padding:48px 24px;">
+    <div class="auth-card">
+      <div class="auth-logo"><span class="logo-mark"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect width="22" height="22" rx="4" fill="#ff0000"/><polygon points="8,5 18,11 8,17" fill="white"/></svg></span><strong>Creator</strong>Cash Blueprint</div>
+
+      <div id="resetFormWrap">
+        <h2 class="auth-h2">Set new password</h2>
+        <p class="auth-sub">Choose a strong password for your account.</p>
+
+        <div id="resetError" class="auth-error"></div>
+        <div id="resetSuccess" class="auth-success"></div>
+
+        <div class="field-wrap">
+          <label class="field-label">New Password</label>
+          <input type="password" id="resetPw" class="auth-input" placeholder="Min. 8 characters" />
+          <div id="resetPwErr" class="field-error" style="display:none">Please enter a password (min. 8 characters).</div>
         </div>
-        <div class="auth-body">
-          <div id="forgotSuccess" class="auth-success"></div>
-          <div id="forgotError" class="auth-error"></div>
-          <div class="field">
-            <label>Email Address</label>
-            <input type="email" id="forgotEmail" placeholder="you@example.com" />
-            <div class="error-msg" id="forgotEmailErr">Please enter a valid email.</div>
-          </div>
-          <button class="btn-primary" onclick="doForgot()">Send Reset Link →</button>
-          <p class="terms-note" style="margin-top:14px;">
-            <a href="#" onclick="showView('authView'); return false;" style="color:var(--red);">← Back to Sign In</a>
-          </p>
+        <div class="field-wrap">
+          <label class="field-label">Confirm Password</label>
+          <input type="password" id="resetPw2" class="auth-input" placeholder="Repeat your password" />
+          <div id="resetPw2Err" class="field-error" style="display:none">Passwords do not match.</div>
         </div>
+
+        <div class="strength-bar-wrap" style="margin-bottom:16px;">
+          <div class="strength-bar"><div id="resetStrengthFill" style="height:100%;width:0%;border-radius:3px;transition:all .3s;"></div></div>
+          <span id="resetStrengthLabel" style="font-size:11px;color:rgba(255,255,255,0.3);font-family:var(--f-mono);"></span>
+        </div>
+
+        <button class="btn-primary" id="resetBtn" onclick="doResetPassword()">Set New Password →</button>
+        <p style="text-align:center;margin-top:16px;">
+          <a href="account.html" style="font-size:13px;color:rgba(255,255,255,0.3);font-family:var(--f-mono);">← Back to Sign In</a>
+        </p>
+      </div>
+
+      <div id="resetDoneWrap" style="display:none;text-align:center;padding:20px 0;">
+        <div style="font-size:48px;margin-bottom:16px;">✅</div>
+        <h3 style="color:#fff;margin-bottom:8px;">Password updated!</h3>
+        <p style="color:rgba(255,255,255,0.5);font-size:14px;margin-bottom:24px;">Your password has been changed successfully.</p>
+        <a href="account.html" class="btn-primary" style="display:inline-block;text-decoration:none;">Sign In Now →</a>
       </div>
     </div>
+  </div>
 
     <!-- ═══ DASHBOARD VIEW ══════════════════════ -->
     <div id="dashView" class="dashboard-view">
@@ -714,7 +766,7 @@
 
   // ── View management ──────────────────────────────
   function showView(id) {
-    document.querySelectorAll('.auth-view, .dashboard-view').forEach(function(el) {
+    document.querySelectorAll('.auth-view, .dashboard-view, #resetView').forEach(function(el) {
       el.classList.remove('active');
       el.style.display = '';
     });
@@ -890,22 +942,7 @@
   }
 
   // ── FORGOT PASSWORD ──────────────────────────────
-  function doForgot() {
-    clearErrors();
-    var email = document.getElementById('forgotEmail').value.trim().toLowerCase();
-    if (!isValidEmail(email)) { showError('forgotEmailErr','forgotEmail'); return; }
-
-    var btn = document.querySelector('#forgotView .btn-primary');
-    if (btn) { btn.disabled = true; btn.innerHTML = '<span class="spinner"></span>'; }
-
-    setTimeout(function() {
-      var succ = document.getElementById('forgotSuccess');
-      succ.textContent = '✅ If an account exists for ' + email + ', a reset link has been sent. Check your inbox.';
-      succ.classList.add('show');
-      if (btn) { btn.disabled = false; btn.innerHTML = 'Send Reset Link →'; }
-      // Production: send actual reset email via your backend
-    }, 1000);
-  }
+  
 
   // ── LOGOUT ──────────────────────────────────────
   function doLogout() {
@@ -1195,6 +1232,212 @@ function renderDashboard(email) {
       location.reload();
     }
   };
+
+
+  // ═══════════════════════════════════════════════════
+  // WACHTWOORD VERGETEN + RESET FLOW
+  // ═══════════════════════════════════════════════════
+
+  // Rate limiting client-side (extra bescherming)
+  var forgotAttempts = 0;
+  var forgotLastAttempt = 0;
+
+  function doForgot() {
+    var email = document.getElementById('forgotEmail').value.trim().toLowerCase();
+    var emailErr = document.getElementById('forgotEmailErr');
+    var successEl = document.getElementById('forgotSuccess');
+    var errorEl = document.getElementById('forgotError');
+    var btn = document.getElementById('forgotBtn');
+
+    // Reset messages
+    if (emailErr) emailErr.style.display = 'none';
+    if (successEl) { successEl.textContent = ''; successEl.classList.remove('show'); }
+    if (errorEl) { errorEl.textContent = ''; errorEl.classList.remove('show'); }
+
+    if (!isValidEmail(email)) {
+      if (emailErr) emailErr.style.display = 'block';
+      return;
+    }
+
+    // Client-side rate limit: max 3 per 5 min
+    var now = Date.now();
+    if (now - forgotLastAttempt < 5 * 60 * 1000) {
+      forgotAttempts++;
+    } else {
+      forgotAttempts = 1;
+    }
+    forgotLastAttempt = now;
+    if (forgotAttempts > 3) {
+      if (errorEl) {
+        errorEl.textContent = 'Too many attempts. Please wait 5 minutes.';
+        errorEl.classList.add('show');
+      }
+      return;
+    }
+
+    if (btn) { btn.disabled = true; btn.textContent = 'Sending...'; }
+
+    // Stuur reset verzoek naar API
+    fetch('/api/forgot-password', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: email })
+    })
+    .then(function(r) { return r.json(); })
+    .then(function() {
+      // Altijd succes tonen (security: niet verraden of account bestaat)
+      if (successEl) {
+        successEl.textContent = '✅ If an account exists for ' + email + ', a reset link has been sent. Check your inbox.';
+        successEl.classList.add('show');
+      }
+      if (btn) { btn.disabled = false; btn.textContent = 'Send Reset Link →'; }
+      document.getElementById('forgotEmail').value = '';
+    })
+    .catch(function() {
+      // Fallback: ook bij network error zelfde bericht (security)
+      if (successEl) {
+        successEl.textContent = '✅ If an account exists for ' + email + ', a reset link has been sent.';
+        successEl.classList.add('show');
+      }
+      if (btn) { btn.disabled = false; btn.textContent = 'Send Reset Link →'; }
+    });
+  }
+
+  // ── Wachtwoord sterkte meter (reset form) ──────────
+  function updateResetStrength() {
+    var pw = document.getElementById('resetPw') ? document.getElementById('resetPw').value : '';
+    var fill = document.getElementById('resetStrengthFill');
+    var label = document.getElementById('resetStrengthLabel');
+    if (!fill || !label) return;
+    var score = 0;
+    if (pw.length >= 8) score++;
+    if (pw.length >= 12) score++;
+    if (/[A-Z]/.test(pw)) score++;
+    if (/[0-9]/.test(pw)) score++;
+    if (/[^A-Za-z0-9]/.test(pw)) score++;
+    var colors = ['#ef4444','#f97316','#eab308','#22c55e','#16a34a'];
+    var labels = ['','Weak','Fair','Good','Strong','Very Strong'];
+    fill.style.width = (score * 20) + '%';
+    fill.style.background = colors[Math.max(0, score-1)] || '#ef4444';
+    label.textContent = labels[score] || '';
+  }
+
+  // ── Verwerk reset token uit URL ─────────────────────
+  function processResetToken() {
+    var params = new URLSearchParams(window.location.search);
+    var action = params.get('action');
+    var token = params.get('token');
+    var email = params.get('email');
+    var expires = parseInt(params.get('expires') || '0');
+
+    if (action !== 'reset' || !token || !email) return;
+
+    // Token verlopen?
+    if (Date.now() > expires) {
+      showView('authView');
+      setTimeout(function() {
+        var err = document.getElementById('loginError');
+        if (err) {
+          err.textContent = '⚠️ This reset link has expired. Please request a new one.';
+          err.classList.add('show');
+        }
+      }, 100);
+      window.history.replaceState({}, '', window.location.pathname);
+      return;
+    }
+
+    // Toon reset view
+    showView('resetView');
+
+    // Sla token + email tijdelijk op voor gebruik bij submit
+    sessionStorage.setItem('reset_token', token);
+    sessionStorage.setItem('reset_email', email);
+    sessionStorage.setItem('reset_expires', expires);
+
+    // Wachtwoord sterkte listener
+    var pwInput = document.getElementById('resetPw');
+    if (pwInput) pwInput.addEventListener('input', updateResetStrength);
+
+    // Verwijder params uit URL
+    window.history.replaceState({}, '', window.location.pathname);
+  }
+
+  // ── Voer wachtwoord reset uit ───────────────────────
+  function doResetPassword() {
+    var pw = document.getElementById('resetPw') ? document.getElementById('resetPw').value : '';
+    var pw2 = document.getElementById('resetPw2') ? document.getElementById('resetPw2').value : '';
+    var pwErr = document.getElementById('resetPwErr');
+    var pw2Err = document.getElementById('resetPw2Err');
+    var errorEl = document.getElementById('resetError');
+    var btn = document.getElementById('resetBtn');
+
+    // Reset errors
+    if (pwErr) pwErr.style.display = 'none';
+    if (pw2Err) pw2Err.style.display = 'none';
+    if (errorEl) { errorEl.textContent = ''; errorEl.classList.remove('show'); }
+
+    var valid = true;
+    if (!pw || pw.length < 8) {
+      if (pwErr) pwErr.style.display = 'block';
+      valid = false;
+    }
+    if (pw !== pw2) {
+      if (pw2Err) pw2Err.style.display = 'block';
+      valid = false;
+    }
+    if (!valid) return;
+
+    // Haal token en email op
+    var token = sessionStorage.getItem('reset_token');
+    var email = sessionStorage.getItem('reset_email');
+    var expires = parseInt(sessionStorage.getItem('reset_expires') || '0');
+
+    if (!token || !email) {
+      if (errorEl) {
+        errorEl.textContent = 'Invalid or expired reset link. Please request a new one.';
+        errorEl.classList.add('show');
+      }
+      return;
+    }
+
+    if (Date.now() > expires) {
+      if (errorEl) {
+        errorEl.textContent = '⚠️ This reset link has expired. Please request a new one.';
+        errorEl.classList.add('show');
+      }
+      return;
+    }
+
+    if (btn) { btn.disabled = true; btn.textContent = 'Saving...'; }
+
+    // Update het wachtwoord in localStorage
+    setTimeout(function() {
+      var users = getUsers();
+      var emailLow = email.toLowerCase();
+
+      if (users[emailLow]) {
+        users[emailLow].password = hashPassword(pw);
+        saveUsers(users);
+
+        // Verwijder token
+        sessionStorage.removeItem('reset_token');
+        sessionStorage.removeItem('reset_email');
+        sessionStorage.removeItem('reset_expires');
+
+        // Toon succes
+        var formWrap = document.getElementById('resetFormWrap');
+        var doneWrap = document.getElementById('resetDoneWrap');
+        if (formWrap) formWrap.style.display = 'none';
+        if (doneWrap) doneWrap.style.display = 'block';
+      } else {
+        if (errorEl) {
+          errorEl.textContent = 'Account not found. Please check your email.';
+          errorEl.classList.add('show');
+        }
+        if (btn) { btn.disabled = false; btn.textContent = 'Set New Password →'; }
+      }
+    }, 800);
+  }
 
 (function init() {
 
